@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sihir Akademisi | Arcanum</title>
+    <!-- Mistik Fontlar -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SABİT MENÜ -->
+    <header class="sabit-menu">
+        <h1>Arcanum Akademisi</h1>
+        <nav>
+            <a href="#bolumler">Bölümler</a>
+            <a href="javascript:void(0)" onclick="openModal('modal-kutuphane')">Kütüphane</a>
+            <a href="javascript:void(0)" onclick="openModal('modal-kayit')" class="kayit-link">Kayıt Ol</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO GİRİŞ ALANI -->
+        <section class="giris-alani">
+            <h2>İçindeki Büyüyü Uyandır</h2>
+            <p>Sıradan dünyayı geride bırak. Binlerce yıllık sırlar seni bekliyor.</p>
+        </section>
+
+        <!-- KATEGORİ GRID ALANI -->
+        <section class="kategori-grid" id="bolumler">
+            
+            <!-- KART 1: Geniş Kart (Ana Kampüs) -->
+            <article class="buyu-karti genis-kart" onclick="openModal('modal-kampus')">
+                <img src="gorseller/sato.jpg" alt="Akademi Şatosu" class="kart-img" onerror="this.onerror=null; this.src='gorseller/ana_kampus.jpg';">
+                <div class="karti-karart"></div>
+                <div class="kart-yazisi">
+                    <h3>Ana Kampüs</h3>
+                    <p>Uçuş dersleri ve büyük salon etkinlikleri.</p>
+                </div>
+            </article>
+
+            <!-- KART 2: Rozetli Kart (Karanlık Sanatlar) -->
+            <article class="buyu-karti" onclick="openModal('modal-karanlik')">
+                <span class="rozet yeni">YENİ</span>
+                <img src="gorseller/buyucu.jpg" alt="Karanlık Sanatlar" class="kart-img" onerror="this.onerror=null; this.src='gorseller/karanlik_sanatlar.jpg';">
+                <div class="karti-karart"></div>
+                <div class="kart-yazisi">
+                    <h3>Karanlık Sanatlar</h3>
+                    <p>Kendini korumayı öğren.</p>
+                </div>
+            </article>
+
+            <!-- KART 3: (Yaratık Bakımı) -->
+            <article class="buyu-karti" onclick="openModal('modal-yaratik')">
+                <span class="rozet tehlike">DİKKAT</span>
+                <img src="gorseller/ejderha.jpg" alt="Sihirli Yaratıklar" class="kart-img" onerror="this.onerror=null; this.src='gorseller/yaratik_bakimi.jpg';">
+                <div class="karti-karart"></div>
+                <div class="kart-yazisi">
+                    <h3>Yaratık Bakımı</h3>
+                    <p>Ejderhalara fısıldayanlar aranıyor.</p>
+                </div>
+            </article>
+
+            <!-- KART 4: Uzun Kart (İksir Yapımı) -->
+            <article class="buyu-karti uzun-kart" onclick="openModal('modal-iksir')">
+                <img src="gorseller/iksir.jpg" alt="İksir Dersi" class="kart-img" onerror="this.onerror=null; this.src='gorseller/iksir_yapimi.jpg';">
+                <div class="karti-karart"></div>
+                <div class="kart-yazisi">
+                    <h3>İksir Yapımı</h3>
+                    <p>Şişelenmiş şöhret, kaynatılmış ihtişam.</p>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- ================= MODAL / POPUP PENCERELERİ ================= -->
+
+    <!-- Modal: Kütüphane -->
+    <div id="modal-kutuphane" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-kutuphane')">&times;</span>
+            <h2>📜 Kadim Kütüphane</h2>
+            <p>Arcanum Akademisi Kütüphanesi'nde 100.000'den fazla büyülü el yazması ve kadim parşömen bulunmaktadır.</p>
+            <ul>
+                <li>✨ <strong>Sihirli Sözlükler:</strong> Unutulmuş diller ve büyülü kelimeler.</li>
+                <li>🐉 <strong>Yaratık Atlası:</strong> Dünyanın dört bir yanındaki efsanevi yaratıklar.</li>
+                <li>🧪 <strong>Gözetmen:</strong> Başkütüphaneci Üstat Balthazar.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal: Kayıt Ol -->
+    <div id="modal-kayit" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-kayit')">&times;</span>
+            <h2>🪄 Akademiye Başvur</h2>
+            <p>İçindeki büyüyü serbest bırakmaya hazır mısın?</p>
+            <form onsubmit="event.preventDefault(); alert('Başvurunuz baykuş ile gönderildi! 🦉'); closeModal('modal-kayit');">
+                <input type="text" placeholder="Adınız Soyadınız" required class="form-input">
+                <input type="email" placeholder="E-posta Adresiniz" required class="form-input">
+                <select class="form-input">
+                    <option>Hangi alanda uzmandınız?</option>
+                    <option>İksir Sanatı</option>
+                    <option>Karanlık Sanatlar</option>
+                    <option>Yaratık Bakımı</option>
+                </select>
+                <button type="submit" class="form-btn">BAŞVURU GÖNDER</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Ana Kampüs -->
+    <div id="modal-kampus" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-kampus')">&times;</span>
+            <h2>🏰 Ana Kampüs Detayları</h2>
+            <p>Yüksek kuleler, canlı tablolar ve hareket eden merdivenlerle dolu devasa şato. Öğrencilerimiz burada uçuş eğitimi alır ve büyük salon şölenlerine katılır.</p>
+        </div>
+    </div>
+
+    <!-- Modal: Karanlık Sanatlar -->
+    <div id="modal-karanlik" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-karanlik')">&times;</span>
+            <h2>🔮 Karanlık Sanatlara Karşı Savunma</h2>
+            <p>Gölge büyülerine, lanetlere ve karanlık yaratıklara karşı kendinizi nasıl koruyacağınızı öğrenin. Sadece cesur büyücüler için!</p>
+        </div>
+    </div>
+
+    <!-- Modal: Yaratık Bakımı -->
+    <div id="modal-yaratik" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-yaratik')">&times;</span>
+            <h2>🐉 Yaratık Bakımı Dersliği</h2>
+            <p>Yasak Orman sınırında gerçekleşen derslerde Hipogrifler, Anka Kuşları ve Ejderhalarla doğrudan etkileşime geçin.</p>
+        </div>
+    </div>
+
+    <!-- Modal: İksir Yapımı -->
+    <div id="modal-iksir" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-iksir')">&times;</span>
+            <h2>🧪 İksir Laboratuvarı</h2>
+            <p>Zindandaki özel laboratuvarlarda sıvı şans (Felix Felicis), gençlik iksirleri ve görünmezlik iksirleri demlemeyi öğrenin.</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT KODLARI -->
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = "flex";
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
