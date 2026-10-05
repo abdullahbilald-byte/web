@@ -8,7 +8,7 @@
 <body style="margin: 0; min-height: 100vh; background: radial-gradient(circle at center, #1e293b, #0f172a); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
 
     <!-- Üst Başlık & Dönüş Butonu -->
-    <header style="width: 100%; max-width: 440px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+    <header style="width: 100%; max-width: 460px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
         <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: bold; background: rgba(56, 189, 248, 0.1); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">&larr; Ana Sayfa</a>
         <h1 style="margin: 0; font-size: 1.8rem; color: #eab308; text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); letter-spacing: 2px;">PAC-MAN</h1>
     </header>
@@ -18,7 +18,7 @@
         
         <!-- Tuval (Canvas) -->
         <div style="position: relative;">
-            <canvas id="pacmanCanvas" width="400" height="400" style="background: #000; border: 3px solid #1d4ed8; border-radius: 12px; display: block; box-shadow: 0 0 15px rgba(29, 78, 216, 0.4);"></canvas>
+            <canvas id="pacmanCanvas" width="420" height="420" style="background: #000; border: 3px solid #1d4ed8; border-radius: 12px; display: block; box-shadow: 0 0 15px rgba(29, 78, 216, 0.4);"></canvas>
             
             <!-- Overlay Ekranı -->
             <div id="overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(4px); border-radius: 12px; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
@@ -37,7 +37,7 @@
     </div>
 
     <!-- Kontroller -->
-    <div style="margin-top: 15px; text-align: center; color: #64748b; font-size: 0.85rem; max-width: 400px;">
+    <div style="margin-top: 15px; text-align: center; color: #64748b; font-size: 0.85rem; max-width: 420px;">
         <p style="margin: 0;"><strong>Kontroller:</strong> Klavyedeki Ok Tuşları ile yön verin.</p>
     </div>
 
@@ -81,16 +81,36 @@
             }
         }
 
+        const tileSize = 30;
+        // 1: Duvar, 0: Normal Yem, 2: Büyük Güç Yemi, 3: Boş Yol
+        const map = [
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,2,0,0,0,0,1,1,0,0,0,0,2,1],
+            [1,0,1,1,1,0,1,1,0,1,1,1,0,1],
+            [1,0,1,1,1,0,1,1,0,1,1,1,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,1,1,0,1,1,1,1,0,1,1,0,1],
+            [1,0,0,0,0,0,1,1,0,0,0,0,0,1],
+            [1,1,1,1,1,0,1,1,0,1,1,1,1,1],
+            [1,3,3,3,1,0,3,3,0,1,3,3,3,1],
+            [1,1,1,1,1,0,1,1,0,1,1,1,1,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,0,1,1,0,1,1,1,1,0,1,1,0,1],
+            [1,0,1,1,0,1,1,1,1,0,1,1,0,1],
+            [1,2,0,0,0,0,0,0,0,0,0,0,2,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        ];
+
         let score = 0;
         let lives = 3;
         let isGameOver = false;
         let scaredTimer = 0;
 
-        // Pacman
+        // Pac-Man
         const pacman = {
-            x: 200,
-            y: 280,
-            radius: 13,
+            x: 1 * tileSize + tileSize/2,
+            y: 1 * tileSize + tileSize/2,
+            radius: 11,
             dirX: 0,
             dirY: 0,
             nextDirX: 0,
@@ -102,29 +122,10 @@
 
         // Hayaletler
         const ghosts = [
-            { x: 180, y: 180, color: '#ef4444', dirX: 1, dirY: 0, speed: 1.5, name: 'Blinky' },
-            { x: 220, y: 180, color: '#38bdf8', dirX: -1, dirY: 0, speed: 1.5, name: 'Inky' }
+            { x: 6 * tileSize + tileSize/2, y: 8 * tileSize + tileSize/2, color: '#ef4444', dirX: 0, dirY: -1, speed: 1.5, name: 'Blinky' },
+            { x: 7 * tileSize + tileSize/2, y: 8 * tileSize + tileSize/2, color: '#38bdf8', dirX: 0, dirY: -1, speed: 1.5, name: 'Inky' },
+            { x: 6 * tileSize + tileSize/2, y: 6 * tileSize + tileSize/2, color: '#f472b6', dirX: 1, dirY: 0, speed: 1.5, name: 'Pinky' }
         ];
-
-        // Harita Noktaları & Güç Yemleri
-        let dots = [];
-        let powerPellets = [
-            { x: 30, y: 30, active: true },
-            { x: 370, y: 30, active: true },
-            { x: 30, y: 370, active: true },
-            { x: 370, y: 370, active: true }
-        ];
-
-        function initDots() {
-            dots = [];
-            for (let x = 30; x <= 370; x += 25) {
-                for (let y = 30; y <= 370; y += 25) {
-                    if (!(x >= 140 && x <= 260 && y >= 140 && y <= 220)) {
-                        dots.push({ x, y, active: true });
-                    }
-                }
-            }
-        }
 
         // Kontroller
         document.addEventListener('keydown', e => {
@@ -134,79 +135,103 @@
             if (e.key === 'ArrowDown') { pacman.nextDirX = 0; pacman.nextDirY = 1; }
         });
 
+        function isWall(x, y) {
+            const col = Math.floor(x / tileSize);
+            const row = Math.floor(y / tileSize);
+            if (row < 0 || row >= map.length || col < 0 || col >= map[0].length) return true;
+            return map[row][col] === 1;
+        }
+
+        function canMove(x, y, radius, dirX, dirY) {
+            const nextX = x + dirX * pacman.speed;
+            const nextY = y + dirY * pacman.speed;
+            const checkR = radius - 2;
+
+            return !isWall(nextX - checkR, nextY - checkR) &&
+                   !isWall(nextX + checkR, nextY - checkR) &&
+                   !isWall(nextX - checkR, nextY + checkR) &&
+                   !isWall(nextX + checkR, nextY + checkR);
+        }
+
         function update() {
             if (isGameOver) return;
 
-            // Yön Değiştirme
-            pacman.dirX = pacman.nextDirX;
-            pacman.dirY = pacman.nextDirY;
+            // Tampon Yön Değiştirme Mantığı
+            if (pacman.nextDirX !== 0 || pacman.nextDirY !== 0) {
+                if (canMove(pacman.x, pacman.y, pacman.radius, pacman.nextDirX, pacman.nextDirY)) {
+                    pacman.dirX = pacman.nextDirX;
+                    pacman.dirY = pacman.nextDirY;
+                }
+            }
 
-            pacman.x += pacman.dirX * pacman.speed;
-            pacman.y += pacman.dirY * pacman.speed;
+            // Hareket Ettir
+            if (canMove(pacman.x, pacman.y, pacman.radius, pacman.dirX, pacman.dirY)) {
+                pacman.x += pacman.dirX * pacman.speed;
+                pacman.y += pacman.dirY * pacman.speed;
+            }
 
-            // Sınırlar
-            if (pacman.x < 15) pacman.x = 15;
-            if (pacman.x > 385) pacman.x = 385;
-            if (pacman.y < 15) pacman.y = 15;
-            if (pacman.y > 385) pacman.y = 385;
-
-            // Ağız Açma/Kapama Animasyonu
+            // Ağız Aç/Kapa
             pacman.mouthAngle += pacman.mouthSpeed;
             if (pacman.mouthAngle > 0.4 || pacman.mouthAngle < 0.05) {
                 pacman.mouthSpeed = -pacman.mouthSpeed;
             }
 
-            // Normal Yem Yeme
-            dots.forEach(d => {
-                if (d.active && Math.hypot(pacman.x - d.x, pacman.y - d.y) < pacman.radius) {
-                    d.active = false;
-                    score += 10;
-                    playSound('eat');
-                }
-            });
+            // Yem Yeme Kontrolü
+            const col = Math.floor(pacman.x / tileSize);
+            const row = Math.floor(pacman.y / tileSize);
 
-            // Büyük Güç Yemi Yeme
-            powerPellets.forEach(p => {
-                if (p.active && Math.hypot(pacman.x - p.x, pacman.y - p.y) < pacman.radius) {
-                    p.active = false;
-                    score += 50;
-                    scaredTimer = 300; // 5 saniye hayaletler korkar
-                    playSound('power');
-                }
-            });
+            if (map[row][col] === 0) {
+                map[row][col] = 3;
+                score += 10;
+                playSound('eat');
+            } else if (map[row][col] === 2) {
+                map[row][col] = 3;
+                score += 50;
+                scaredTimer = 350;
+                playSound('power');
+            }
 
             if (scaredTimer > 0) scaredTimer--;
 
-            // Hayalet Hareketi & Çarpışma
+            // Hayalet Mantığı
             ghosts.forEach(g => {
-                g.x += g.dirX * g.speed;
-                g.y += g.dirY * g.speed;
+                const nextX = g.x + g.dirX * g.speed;
+                const nextY = g.y + g.dirY * g.speed;
 
-                // Rastgele Yön Değişimi
-                if (Math.random() < 0.02 || g.x <= 20 || g.x >= 380 || g.y <= 20 || g.y >= 380) {
-                    const dirs = [{x: 1, y: 0}, {x: -1, y: 0}, {x: 0, y: 1}, {x: 0, y: -1}];
-                    const randomDir = dirs[Math.floor(Math.random() * dirs.length)];
-                    g.dirX = randomDir.x;
-                    g.dirY = randomDir.y;
+                if (!canMove(g.x, g.y, 10, g.dirX, g.dirY) || Math.random() < 0.02) {
+                    const possibleDirs = [
+                        {x: 1, y: 0}, {x: -1, y: 0}, {x: 0, y: 1}, {x: 0, y: -1}
+                    ].filter(d => canMove(g.x, g.y, 10, d.x, d.y));
+
+                    if (possibleDirs.length > 0) {
+                        const randomDir = possibleDirs[Math.floor(Math.random() * possibleDirs.length)];
+                        g.dirX = randomDir.x;
+                        g.dirY = randomDir.y;
+                    }
+                } else {
+                    g.x = nextX;
+                    g.y = nextY;
                 }
 
-                // Pacman ile Temas
-                if (Math.hypot(pacman.x - g.x, pacman.y - g.y) < pacman.radius + 10) {
+                // Çarpışma Kontrolü
+                if (Math.hypot(pacman.x - g.x, pacman.y - g.y) < pacman.radius + 8) {
                     if (scaredTimer > 0) {
-                        // Hayalet Yenir
-                        g.x = 200;
-                        g.y = 180;
+                        g.x = 6 * tileSize + tileSize/2;
+                        g.y = 8 * tileSize + tileSize/2;
                         score += 200;
                         playSound('eat');
                     } else {
-                        // Pacman Yanar
                         lives--;
                         playSound('die');
                         if (lives <= 0) {
                             endGame(false);
                         } else {
-                            pacman.x = 200;
-                            pacman.y = 280;
+                            pacman.x = 1 * tileSize + tileSize/2;
+                            pacman.y = 1 * tileSize + tileSize/2;
+                            pacman.dirX = 0;
+                            pacman.dirY = 0;
+                            pacman.nextDirX = 0;
+                            pacman.nextDirY = 0;
                         }
                     }
                 }
@@ -219,27 +244,36 @@
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Küçük Yemler
-            ctx.fillStyle = '#fbbf24';
-            dots.forEach(d => {
-                if (d.active) {
-                    ctx.beginPath();
-                    ctx.arc(d.x, d.y, 3, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            });
+            // Labirent & Yem Çizimi
+            for (let r = 0; r < map.length; r++) {
+                for (let c = 0; c < map[r].length; c++) {
+                    const x = c * tileSize;
+                    const y = r * tileSize;
 
-            // Büyük Güç Yemleri
-            powerPellets.forEach(p => {
-                if (p.active) {
-                    ctx.fillStyle = '#f59e0b';
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
-                    ctx.fill();
+                    if (map[r][c] === 1) {
+                        // Mavi Neon Duvarlar
+                        ctx.fillStyle = '#0f172a';
+                        ctx.fillRect(x, y, tileSize, tileSize);
+                        ctx.strokeStyle = '#2563eb';
+                        ctx.lineWidth = 2;
+                        ctx.strokeRect(x + 2, y + 2, tileSize - 4, tileSize - 4);
+                    } else if (map[r][c] === 0) {
+                        // Normal Yem
+                        ctx.fillStyle = '#fbbf24';
+                        ctx.beginPath();
+                        ctx.arc(x + tileSize/2, y + tileSize/2, 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    } else if (map[r][c] === 2) {
+                        // Büyük Güç Yemi
+                        ctx.fillStyle = '#f59e0b';
+                        ctx.beginPath();
+                        ctx.arc(x + tileSize/2, y + tileSize/2, 7, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
                 }
-            });
+            }
 
-            // Pacman Çizimi
+            // Pac-Man Çizimi
             let rotation = 0;
             if (pacman.dirX === 1) rotation = 0;
             if (pacman.dirX === -1) rotation = Math.PI;
@@ -256,13 +290,13 @@
             ctx.lineTo(pacman.x, pacman.y);
             ctx.fill();
 
-            // Hayalet Çizimi
+            // Hayaletler
             ghosts.forEach(g => {
                 ctx.fillStyle = scaredTimer > 0 ? '#1e3a8a' : g.color;
                 ctx.beginPath();
-                ctx.arc(g.x, g.y, 12, Math.PI, 0, false);
-                ctx.lineTo(g.x + 12, g.y + 12);
-                ctx.lineTo(g.x - 12, g.y + 12);
+                ctx.arc(g.x, g.y, 11, Math.PI, 0, false);
+                ctx.lineTo(g.x + 11, g.y + 11);
+                ctx.lineTo(g.x - 11, g.y + 11);
                 ctx.closePath();
                 ctx.fill();
 
@@ -293,14 +327,19 @@
             lives = 3;
             isGameOver = false;
             scaredTimer = 0;
-            pacman.x = 200;
-            pacman.y = 280;
+            pacman.x = 1 * tileSize + tileSize/2;
+            pacman.y = 1 * tileSize + tileSize/2;
             pacman.dirX = 0;
             pacman.dirY = 0;
             pacman.nextDirX = 0;
             pacman.nextDirY = 0;
-            initDots();
-            powerPellets.forEach(p => p.active = true);
+            
+            // Yemleri sıfırla
+            for (let r = 0; r < map.length; r++) {
+                for (let c = 0; c < map[r].length; c++) {
+                    if (map[r][c] === 3) map[r][c] = 0;
+                }
+            }
             document.getElementById('overlay').style.display = 'none';
         }
 
@@ -310,7 +349,6 @@
             requestAnimationFrame(loop);
         }
 
-        initDots();
         loop();
     </script>
 </body>
