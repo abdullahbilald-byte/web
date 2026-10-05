@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renk Eşleştirme Hafıza Oyunu</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f0f4f8; margin-top: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(4, 80px); gap: 10px; justify-content: center; margin-top: 20px; }
+        .card { width: 80px; height: 80px; background-color: #333; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; user-select: none; }
+        #status { font-size: 18px; font-weight: bold; margin-top: 20px; color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Renk / Simge Eşleştirme Oyunu</h1>
+    <p>Kartları çevirerek eşlerini bulun!</p>
+    <div class="grid" id="gameBoard"></div>
+    <div id="status">Eşleşme bekleniyor...</div>
+
+    <script>
+        const symbols = ['🍎', '🍎', '🍌', '🍌', '🎮', '🎮', '⭐', '⭐', '🚗', '🚗', '🎈', '🎈', '🐶', '🐶', '🍕', '🍕'];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        // Kartları karıştır (Fisher-Yates Shuffle)
+        symbols.sort(() => Math.random() - 0.5);
+
+        const board = document.getElementById('gameBoard');
+
+        symbols.forEach((symbol, index) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.symbol = symbol;
+            card.dataset.index = index;
+            card.innerText = '?';
+            card.addEventListener('click', flipCard);
+            board.appendChild(card);
+        });
+
+        function flipCard() {
+            if (flippedCards.length < 2 && !this.classList.contains('flipped')) {
+                this.innerText = this.dataset.symbol;
+                this.style.backgroundColor = '#fff';
+                this.style.border = '2px solid #333';
+                this.classList.add('flipped');
+                flippedCards.push(this);
+
+                if (flippedCards.length === 2) {
+                    checkMatch();
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+
+            if (card1.dataset.symbol === card2.dataset.symbol) {
+                matchedPairs++;
+                flippedCards = [];
+                if (matchedPairs === symbols.length / 2) {
+                    document.getElementById('status').innerText = "Tebrikler! Tüm eşleşmeleri buldunuz! 🎉";
+                }
+            } else {
+                setTimeout(() => {
+                    card1.innerText = '?';
+                    card1.style.backgroundColor = '#333';
+                    card1.style.border = 'none';
+                    card1.classList.remove('flipped');
+
+                    card2.innerText = '?';
+                    card2.style.backgroundColor = '#333';
+                    card2.style.border = 'none';
+                    card2.classList.remove('flipped');
+
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayı Tahmin Oyunu</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #eef2f5; }
+        .card { background: white; padding: 30px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        input { font-size: 18px; padding: 8px; width: 80px; text-align: center; }
+        button { font-size: 18px; padding: 8px 15px; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; }
+        button:hover { background-color: #45a049; }
+        #message { margin-top: 20px; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Sayı Tahmin Oyunu</h1>
+        <p>1 ile 100 arasında bir sayı tuttum. Tahmin et!</p>
+        <input type="number" id="guessInput" min="1" max="100">
+        <button onclick="checkGuess()">Tahmin Et</button>
+        <div id="message"></div>
+        <p id="attempts">Tahmin Sayısı: 0</p>
+    </div>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('guessInput').value);
+            const message = document.getElementById('message');
+            const attemptsText = document.getElementById('attempts');
+
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                message.innerText = "Lütfen 1 ile 100 arasında geçerli bir sayı girin!";
+                message.style.color = "orange";
+                return;
+            }
+
+            attempts++;
+
+            if (userGuess === randomNumber) {
+                message.innerText = `Tebrikler! ${randomNumber} sayısını ${attempts}. denemede bildiniz!`;
+                message.style.color = "green";
+            } else if (userGuess < randomNumber) {
+                message.innerText = "Daha BÜYÜK bir sayı girin! ⬆️";
+                message.style.color = "red";
+            } else {
+                message.innerText = "Daha KÜÇÜK bir sayı girin! ⬇️";
+                message.style.color = "red";
+            }
+
+            attemptsText.innerText = `Tahmin Sayısı: ${attempts}`;
+        }
+    </script>
+</body>
+</html>

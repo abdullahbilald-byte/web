@@ -1,0 +1,78 @@
+/* GENEL AYARLAR */
+body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* HEADER (ÜST BİLGİ) TASARIMI */
+header {
+    background-color: #1a237e;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+nav a {
+    color: #ffd54f;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0 10px;
+}
+nav a:hover { color: #ffffff; }
+
+/* MAIN (ANA İÇERİK) TASARIMI - Flexbox ile yan yana getirme */
+main {
+    display: flex; /* İçindeki article ve aside'ı yan yana dizer! */
+    max-width: 1000px;
+    margin: 30px auto; /* Sayfayı ortalar */
+    gap: 20px; /* Kutular arası boşluk */
+    padding: 0 20px;
+}
+
+/* ARTICLE (MAKALE) TASARIMI */
+article {
+    flex: 3; /* Ekranın 3 birimini kaplar */
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* FIGURE VE RESİM TASARIMI */
+figure {
+    margin: 0;
+    padding: 0;
+}
+img {
+    border-radius: 8px;
+}
+figcaption {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* ASIDE (YAN ÇUBUK) TASARIMI */
+aside {
+    flex: 1; /* Ekranın 1 birimini kaplar (Daha dar olur) */
+    background-color: #e3f2fd;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #1a237e;
+    height: fit-content;
+}
+
+/* FOOTER (ALT BİLGİ) TASARIMI */
+footer {
+    background-color: #1a237e;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}

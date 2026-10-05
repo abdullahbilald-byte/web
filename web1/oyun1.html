@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taş - Kağıt - Makas</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f4f4f9; }
+        .card { background: white; padding: 20px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        button { font-size: 18px; margin: 10px; padding: 10px 20px; cursor: pointer; border: none; border-radius: 5px; background-color: #008CBA; color: white; }
+        button:hover { background-color: #005f73; }
+        #result { font-size: 20px; font-weight: bold; margin-top: 20px; }
+        #score { font-size: 16px; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Taş - Kağıt - Makas</h1>
+        <p>Seçiminizi yapın:</p>
+        <button onclick="play('Taş')">Taş ✊</button>
+        <button onclick="play('Kağıt')">Kağıt ✋</button>
+        <button onclick="play('Makas')">Makas ✌️</button>
+        <div id="result"></div>
+        <div id="score">Oyuncu: 0 | Bilgisayar: 0</div>
+    </div>
+
+    <script>
+        let playerScore = 0;
+        let computerScore = 0;
+
+        function play(playerChoice) {
+            const choices = ['Taş', 'Kağıt', 'Makas'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let resultText = "";
+
+            if (playerChoice === computerChoice) {
+                resultText = `Berabere! İkiniz de **${playerChoice}** seçtiniz.`;
+            } else if (
+                (playerChoice === 'Taş' && computerChoice === 'Makas') ||
+                (playerChoice === 'Kağıt' && computerChoice === 'Taş') ||
+                (playerChoice === 'Makas' && computerChoice === 'Kağıt')
+            ) {
+                playerScore++;
+                resultText = `Kazandınız! ${playerChoice}, ${computerChoice} seçimini yener.`;
+            } else {
+                computerScore++;
+                resultText = `Kaybettiniz! ${computerChoice}, ${playerChoice} seçimini yener.`;
+            }
+
+            document.getElementById('result').innerHTML = resultText;
+            document.getElementById('score').innerText = `Oyuncu: ${playerScore} | Bilgisayar: ${computerScore}`;
+        }
+    </script>
+</body>
+</html>
