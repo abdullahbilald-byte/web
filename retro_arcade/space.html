@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Arcade | Space Invaders</title>
+</head>
+<body style="margin: 0; min-height: 100vh; background: radial-gradient(circle at center, #1e293b, #0f172a); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
+
+    <!-- Üst Başlık & Dönüş Butonu -->
+    <header style="width: 100%; max-width: 500px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: bold; background: rgba(56, 189, 248, 0.1); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">&larr; Ana Sayfa</a>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #22c55e; text-shadow: 0 0 10px rgba(34, 197, 94, 0.5); letter-spacing: 2px;">SPACE INVADERS</h1>
+    </header>
+
+    <!-- Oyun Alanı Container -->
+    <div style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); padding: 20px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6); position: relative;">
+        
+        <!-- Oyun Tuvali -->
+        <div style="position: relative;">
+            <canvas id="spaceCanvas" width="480" height="380" style="background: #050811; border: 2px solid #22c55e; border-radius: 12px; display: block; box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);"></canvas>
+            
+            <!-- Overlay Ekranı -->
+            <div id="overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(4px); border-radius: 12px; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <h2 id="overlay-title" style="color: #ef4444; margin: 0 0 10px; font-size: 2.2rem;">OYUN BİTTİ</h2>
+                <p id="overlay-sub" style="color: #94a3b8; margin: 0 0 20px; font-size: 1.1rem;">Skor: 0</p>
+                <button onclick="resetGame()" style="padding: 12px 24px; background: #22c55e; color: #050811; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.2s;">Tekrar Oyna</button>
+            </div>
+        </div>
+
+        <!-- Alt Bilgi Paneli -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: rgba(15, 23, 42, 0.6); padding: 10px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
+            <div><span style="color: #94a3b8; font-size: 0.8rem;">SKOR: </span><strong id="score" style="color: #22c55e; font-size: 1.2rem;">00000</strong></div>
+            <div><span style="color: #94a3b8; font-size: 0.8rem;">CAN: </span><strong id="lives" style="color: #ef4444; font-size: 1.2rem;">🚀 x3</strong></div>
+        </div>
+
+    </div>
+
+    <!-- Kontroller -->
+    <div style="margin-top: 15px; text-align: center; color: #64748b; font-size: 0.85rem; max-width: 480px;">
+        <p style="margin: 0;"><strong>Kontroller:</strong> Sol/Sağ Ok Tuşları: Hareket | <strong>Space (Boşluk):</strong> Ateş Et</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('spaceCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ses Efektleri (Web Audio API)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'shoot') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'hit') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.15);
+            }
+        }
+
+        let score = 0;
+        let lives = 3;
+        let isGameOver = false;
+
+        // Oyuncu Gemisi
+        const player = {
+            x: 220,
+            y: 340,
+            w: 40,
+            h: 18,
+            speed: 5
+        };
+
+        let bullets = [];
+        let enemyBullets = [];
+        let invaders = [];
+        let keys = {};
+        let invaderDirection = 1;
+        let invaderSpeed = 1;
+
+        // Yıldızlı Arka Plan
+        const stars = [];
+        for (let i = 0; i < 40; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2
+            });
+        }
+
+        // Uzaylıları Oluştur
+        function initInvaders() {
+            invaders = [];
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 8; col++) {
+                    invaders.push({
+                        x: 40 + col * 50,
+                        y: 40 + row * 35,
+                        w: 30,
+                        h: 20,
+                        alive: true,
+                        type: row
+                    });
+                }
+            }
+        }
+
+        // Klavye Dinleyicileri
+        document.addEventListener('keydown', e => {
+            keys[e.code] = true;
+            if (e.code === 'Space' && !isGameOver) {
+                if (bullets.length < 3) {
+                    bullets.push({ x: player.x + player.w / 2 - 2, y: player.y, w: 4, h: 10 });
+                    playSound('shoot');
+                }
+            }
+        });
+
+        document.addEventListener('keyup', e => keys[e.code] = false);
+
+        function update() {
+            if (isGameOver) return;
+
+            // Oyuncu Hareketi
+            if (keys['ArrowLeft'] && player.x > 10) player.x -= player.speed;
+            if (keys['ArrowRight'] && player.x < canvas.width - player.w - 10) player.x += player.speed;
+
+            // Oyuncu Mermileri
+            bullets.forEach((b, index) => {
+                b.y -= 7;
+                if (b.y < 0) bullets.splice(index, 1);
+
+                // Mermi-Uzaylı Çarpışması
+                invaders.forEach(inv => {
+                    if (inv.alive && b.x > inv.x && b.x < inv.x + inv.w && b.y > inv.y && b.y < inv.y + inv.h) {
+                        inv.alive = false;
+                        bullets.splice(index, 1);
+                        score += 20;
+                        playSound('hit');
+                    }
+                });
+            });
+
+            // Uzaylıların Toplu Hareketi
+            let edgeReached = false;
+            let activeInvaders = invaders.filter(i => i.alive);
+
+            if (activeInvaders.length === 0) {
+                endGame(true);
+                return;
+            }
+
+            activeInvaders.forEach(inv => {
+                inv.x += invaderDirection * invaderSpeed;
+                if (inv.x + inv.w >= canvas.width - 10 || inv.x <= 10) {
+                    edgeReached = true;
+                }
+                // Uzaylılar aşağı indiyse
+                if (inv.y + inv.h >= player.y) {
+                    endGame(false);
+                }
+            });
+
+            if (edgeReached) {
+                invaderDirection *= -1;
+                activeInvaders.forEach(inv => inv.y += 12);
+            }
+
+            // Rastgele Düşman Ateşi
+            if (Math.random() < 0.02 && activeInvaders.length > 0) {
+                const shooter = activeInvaders[Math.floor(Math.random() * activeInvaders.length)];
+                enemyBullets.push({ x: shooter.x + shooter.w / 2, y: shooter.y + shooter.h, w: 4, h: 8 });
+            }
+
+            // Düşman Mermileri Hareketi
+            enemyBullets.forEach((eb, index) => {
+                eb.y += 4;
+                if (eb.y > canvas.height) enemyBullets.splice(index, 1);
+
+                // Mermi-Oyuncu Çarpışması
+                if (eb.x > player.x && eb.x < player.x + player.w && eb.y > player.y && eb.y < player.y + player.h) {
+                    enemyBullets.splice(index, 1);
+                    lives--;
+                    playSound('hit');
+                    if (lives <= 0) endGame(false);
+                }
+            });
+
+            document.getElementById('score').innerText = String(score).padStart(5, '0');
+            document.getElementById('lives').innerText = `🚀 x${lives}`;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Yıldızlar
+            ctx.fillStyle = '#ffffff';
+            stars.forEach(s => ctx.fillRect(s.x, s.y, s.size, s.size));
+
+            // Oyuncu Gemisi
+            ctx.fillStyle = '#22c55e';
+            ctx.fillRect(player.x, player.y + 6, player.w, player.h - 6);
+            ctx.fillRect(player.x + player.w / 2 - 4, player.y, 8, 6);
+
+            // Oyuncu Mermileri
+            ctx.fillStyle = '#38bdf8';
+            bullets.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
+
+            // Düşman Mermileri
+            ctx.fillStyle = '#ef4444';
+            enemyBullets.forEach(eb => ctx.fillRect(eb.x, eb.y, eb.w, eb.h));
+
+            // Uzaylılar
+            invaders.forEach(inv => {
+                if (inv.alive) {
+                    ctx.fillStyle = inv.type === 0 ? '#a855f7' : (inv.type === 1 ? '#ec4899' : '#eab308');
+                    ctx.fillRect(inv.x, inv.y, inv.w, inv.h);
+                    
+                    // Gözler
+                    ctx.fillStyle = '#050811';
+                    ctx.fillRect(inv.x + 5, inv.y + 5, 5, 5);
+                    ctx.fillRect(inv.x + inv.w - 10, inv.y + 5, 5, 5);
+                }
+            });
+        }
+
+        function endGame(won) {
+            isGameOver = true;
+            document.getElementById('overlay-title').innerText = won ? 'TEBRİKLER!' : 'OYUN BİTTİ';
+            document.getElementById('overlay-sub').innerText = 'Skorunuz: ' + score;
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        function resetGame() {
+            score = 0;
+            lives = 3;
+            isGameOver = false;
+            bullets = [];
+            enemyBullets = [];
+            player.x = 220;
+            invaderDirection = 1;
+            initInvaders();
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function loop() {
+            update();
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        initInvaders();
+        loop();
+    </script>
+</body>
+</html>

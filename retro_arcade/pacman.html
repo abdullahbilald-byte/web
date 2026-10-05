@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Arcade | Pac-Man</title>
+</head>
+<body style="margin: 0; min-height: 100vh; background: radial-gradient(circle at center, #1e293b, #0f172a); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
+
+    <!-- Üst Başlık & Dönüş Butonu -->
+    <header style="width: 100%; max-width: 440px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: bold; background: rgba(56, 189, 248, 0.1); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">&larr; Ana Sayfa</a>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #eab308; text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); letter-spacing: 2px;">PAC-MAN</h1>
+    </header>
+
+    <!-- Oyun Alanı Container -->
+    <div style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); padding: 20px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6); position: relative;">
+        
+        <!-- Tuval (Canvas) -->
+        <div style="position: relative;">
+            <canvas id="pacmanCanvas" width="400" height="400" style="background: #000; border: 3px solid #1d4ed8; border-radius: 12px; display: block; box-shadow: 0 0 15px rgba(29, 78, 216, 0.4);"></canvas>
+            
+            <!-- Overlay Ekranı -->
+            <div id="overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(4px); border-radius: 12px; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <h2 id="overlay-title" style="color: #ef4444; margin: 0 0 10px; font-size: 2.2rem;">OYUN BİTTİ</h2>
+                <p id="overlay-sub" style="color: #94a3b8; margin: 0 0 20px; font-size: 1.1rem;">Skor: 0</p>
+                <button onclick="resetGame()" style="padding: 12px 24px; background: #eab308; color: #0f172a; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.2s;">Tekrar Oyna</button>
+            </div>
+        </div>
+
+        <!-- Alt Bilgi Paneli -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: rgba(15, 23, 42, 0.6); padding: 10px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
+            <div><span style="color: #94a3b8; font-size: 0.8rem;">SKOR: </span><strong id="score" style="color: #eab308; font-size: 1.2rem;">00000</strong></div>
+            <div><span style="color: #94a3b8; font-size: 0.8rem;">CAN: </span><strong id="lives" style="color: #ef4444; font-size: 1.2rem;">🟡 x3</strong></div>
+        </div>
+
+    </div>
+
+    <!-- Kontroller -->
+    <div style="margin-top: 15px; text-align: center; color: #64748b; font-size: 0.85rem; max-width: 400px;">
+        <p style="margin: 0;"><strong>Kontroller:</strong> Klavyedeki Ok Tuşları ile yön verin.</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('pacmanCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ses Efektleri (Web Audio API)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'eat') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.05);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } else if (type === 'power') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.2);
+            } else if (type === 'die') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(500, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            }
+        }
+
+        let score = 0;
+        let lives = 3;
+        let isGameOver = false;
+        let scaredTimer = 0;
+
+        // Pacman
+        const pacman = {
+            x: 200,
+            y: 280,
+            radius: 13,
+            dirX: 0,
+            dirY: 0,
+            nextDirX: 0,
+            nextDirY: 0,
+            speed: 2,
+            mouthAngle: 0.2,
+            mouthSpeed: 0.02
+        };
+
+        // Hayaletler
+        const ghosts = [
+            { x: 180, y: 180, color: '#ef4444', dirX: 1, dirY: 0, speed: 1.5, name: 'Blinky' },
+            { x: 220, y: 180, color: '#38bdf8', dirX: -1, dirY: 0, speed: 1.5, name: 'Inky' }
+        ];
+
+        // Harita Noktaları & Güç Yemleri
+        let dots = [];
+        let powerPellets = [
+            { x: 30, y: 30, active: true },
+            { x: 370, y: 30, active: true },
+            { x: 30, y: 370, active: true },
+            { x: 370, y: 370, active: true }
+        ];
+
+        function initDots() {
+            dots = [];
+            for (let x = 30; x <= 370; x += 25) {
+                for (let y = 30; y <= 370; y += 25) {
+                    if (!(x >= 140 && x <= 260 && y >= 140 && y <= 220)) {
+                        dots.push({ x, y, active: true });
+                    }
+                }
+            }
+        }
+
+        // Kontroller
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft') { pacman.nextDirX = -1; pacman.nextDirY = 0; }
+            if (e.key === 'ArrowRight') { pacman.nextDirX = 1; pacman.nextDirY = 0; }
+            if (e.key === 'ArrowUp') { pacman.nextDirX = 0; pacman.nextDirY = -1; }
+            if (e.key === 'ArrowDown') { pacman.nextDirX = 0; pacman.nextDirY = 1; }
+        });
+
+        function update() {
+            if (isGameOver) return;
+
+            // Yön Değiştirme
+            pacman.dirX = pacman.nextDirX;
+            pacman.dirY = pacman.nextDirY;
+
+            pacman.x += pacman.dirX * pacman.speed;
+            pacman.y += pacman.dirY * pacman.speed;
+
+            // Sınırlar
+            if (pacman.x < 15) pacman.x = 15;
+            if (pacman.x > 385) pacman.x = 385;
+            if (pacman.y < 15) pacman.y = 15;
+            if (pacman.y > 385) pacman.y = 385;
+
+            // Ağız Açma/Kapama Animasyonu
+            pacman.mouthAngle += pacman.mouthSpeed;
+            if (pacman.mouthAngle > 0.4 || pacman.mouthAngle < 0.05) {
+                pacman.mouthSpeed = -pacman.mouthSpeed;
+            }
+
+            // Normal Yem Yeme
+            dots.forEach(d => {
+                if (d.active && Math.hypot(pacman.x - d.x, pacman.y - d.y) < pacman.radius) {
+                    d.active = false;
+                    score += 10;
+                    playSound('eat');
+                }
+            });
+
+            // Büyük Güç Yemi Yeme
+            powerPellets.forEach(p => {
+                if (p.active && Math.hypot(pacman.x - p.x, pacman.y - p.y) < pacman.radius) {
+                    p.active = false;
+                    score += 50;
+                    scaredTimer = 300; // 5 saniye hayaletler korkar
+                    playSound('power');
+                }
+            });
+
+            if (scaredTimer > 0) scaredTimer--;
+
+            // Hayalet Hareketi & Çarpışma
+            ghosts.forEach(g => {
+                g.x += g.dirX * g.speed;
+                g.y += g.dirY * g.speed;
+
+                // Rastgele Yön Değişimi
+                if (Math.random() < 0.02 || g.x <= 20 || g.x >= 380 || g.y <= 20 || g.y >= 380) {
+                    const dirs = [{x: 1, y: 0}, {x: -1, y: 0}, {x: 0, y: 1}, {x: 0, y: -1}];
+                    const randomDir = dirs[Math.floor(Math.random() * dirs.length)];
+                    g.dirX = randomDir.x;
+                    g.dirY = randomDir.y;
+                }
+
+                // Pacman ile Temas
+                if (Math.hypot(pacman.x - g.x, pacman.y - g.y) < pacman.radius + 10) {
+                    if (scaredTimer > 0) {
+                        // Hayalet Yenir
+                        g.x = 200;
+                        g.y = 180;
+                        score += 200;
+                        playSound('eat');
+                    } else {
+                        // Pacman Yanar
+                        lives--;
+                        playSound('die');
+                        if (lives <= 0) {
+                            endGame(false);
+                        } else {
+                            pacman.x = 200;
+                            pacman.y = 280;
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('score').innerText = String(score).padStart(5, '0');
+            document.getElementById('lives').innerText = `🟡 x${lives}`;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Küçük Yemler
+            ctx.fillStyle = '#fbbf24';
+            dots.forEach(d => {
+                if (d.active) {
+                    ctx.beginPath();
+                    ctx.arc(d.x, d.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+
+            // Büyük Güç Yemleri
+            powerPellets.forEach(p => {
+                if (p.active) {
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+
+            // Pacman Çizimi
+            let rotation = 0;
+            if (pacman.dirX === 1) rotation = 0;
+            if (pacman.dirX === -1) rotation = Math.PI;
+            if (pacman.dirY === 1) rotation = Math.PI / 2;
+            if (pacman.dirY === -1) rotation = -Math.PI / 2;
+
+            ctx.fillStyle = '#eab308';
+            ctx.beginPath();
+            ctx.arc(
+                pacman.x, pacman.y, pacman.radius,
+                rotation + pacman.mouthAngle,
+                rotation + Math.PI * 2 - pacman.mouthAngle
+            );
+            ctx.lineTo(pacman.x, pacman.y);
+            ctx.fill();
+
+            // Hayalet Çizimi
+            ghosts.forEach(g => {
+                ctx.fillStyle = scaredTimer > 0 ? '#1e3a8a' : g.color;
+                ctx.beginPath();
+                ctx.arc(g.x, g.y, 12, Math.PI, 0, false);
+                ctx.lineTo(g.x + 12, g.y + 12);
+                ctx.lineTo(g.x - 12, g.y + 12);
+                ctx.closePath();
+                ctx.fill();
+
+                // Gözler
+                ctx.fillStyle = '#fff';
+                ctx.beginPath();
+                ctx.arc(g.x - 4, g.y - 2, 3, 0, Math.PI * 2);
+                ctx.arc(g.x + 4, g.y - 2, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = '#000';
+                ctx.beginPath();
+                ctx.arc(g.x - 4, g.y - 2, 1.5, 0, Math.PI * 2);
+                ctx.arc(g.x + 4, g.y - 2, 1.5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        function endGame(won) {
+            isGameOver = true;
+            document.getElementById('overlay-title').innerText = won ? 'TEBRİKLER!' : 'OYUN BİTTİ';
+            document.getElementById('overlay-sub').innerText = 'Skorunuz: ' + score;
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        function resetGame() {
+            score = 0;
+            lives = 3;
+            isGameOver = false;
+            scaredTimer = 0;
+            pacman.x = 200;
+            pacman.y = 280;
+            pacman.dirX = 0;
+            pacman.dirY = 0;
+            pacman.nextDirX = 0;
+            pacman.nextDirY = 0;
+            initDots();
+            powerPellets.forEach(p => p.active = true);
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function loop() {
+            update();
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        initDots();
+        loop();
+    </script>
+</body>
+</html>

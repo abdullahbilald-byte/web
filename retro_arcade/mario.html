@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Arcade | Super Mario Bros</title>
+</head>
+<body style="margin: 0; min-height: 100vh; background: radial-gradient(circle at center, #1e293b, #0f172a); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
+
+    <!-- Üst Başlık & Dönüş Butonu -->
+    <header style="width: 100%; max-width: 640px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: bold; background: rgba(56, 189, 248, 0.1); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">&larr; Ana Sayfaya Dön</a>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); letter-spacing: 2px;">SUPER MARIO</h1>
+    </header>
+
+    <!-- Oyun Alanı Container -->
+    <div style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); padding: 20px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6); position: relative;">
+        
+        <!-- Oyun Tuvali -->
+        <div style="position: relative;">
+            <canvas id="marioCanvas" width="640" height="360" style="background: #5c94fc; border: 3px solid #334155; border-radius: 12px; display: block; box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);"></canvas>
+            
+            <!-- Oyun Bitti / Kazanıldı Overlay -->
+            <div id="overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(4px); border-radius: 12px; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <h2 id="overlay-title" style="color: #ef4444; margin: 0 0 10px; font-size: 2.2rem;">OYUN BİTTİ</h2>
+                <p id="overlay-sub" style="color: #94a3b8; margin: 0 0 20px; font-size: 1.1rem;">Skor: 0</p>
+                <button onclick="resetGame()" style="padding: 12px 24px; background: #ef4444; color: #fff; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.2s;">Tekrar Oyna</button>
+            </div>
+        </div>
+
+        <!-- Alt Bilgi Paneli -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: rgba(15, 23, 42, 0.6); padding: 10px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
+            <div><span style="color: #94a3b8; font-size: 0.8rem;">SKOR: </span><strong id="score" style="color: #eab308; font-size: 1.2rem;">000000</strong></div>
+            <div><span style="color: #94a3b8; font-size: 0.8rem;">ALTIN: </span><strong id="coins" style="color: #f59e0b; font-size: 1.2rem;">🪙 x00</strong></div>
+            <div><span style="color: #94a3b8; font-size: 0.8rem;">CAN: </span><strong id="lives" style="color: #ef4444; font-size: 1.2rem;">❤️ x3</strong></div>
+        </div>
+
+    </div>
+
+    <!-- Kontroller -->
+    <div style="margin-top: 15px; text-align: center; color: #64748b; font-size: 0.85rem; max-width: 500px;">
+        <p style="margin: 0;"><strong>Kontroller:</strong> Sol/Sağ Ok Tuşları (Yürü) | <strong>Yukarı Ok / Space:</strong> Zıpla | <strong>F / Shift:</strong> Ateş Et</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('marioCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ses Efektleri Oluşturucu (Web Audio API)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'jump') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.15);
+            } else if (type === 'coin') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(987.77, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(1318.51, audioCtx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.25);
+            } else if (type === 'stomp') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'fire') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.linearRampToValueAtTime(200, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            }
+        }
+
+        // Oyun Değişkenleri
+        let score = 0;
+        let coinsCount = 0;
+        let lives = 3;
+        let isGameOver = false;
+        let cameraX = 0;
+
+        const keys = {};
+
+        // Mario Karakteri
+        const mario = {
+            x: 50,
+            y: 200,
+            w: 24,
+            h: 32,
+            dx: 0,
+            dy: 0,
+            speed: 3.8,
+            gravity: 0.5,
+            jumping: false,
+            facing: 'right',
+            isPoweredUp: true // Ateş Çiçeği Gücü Açık
+        };
+
+        // Ateş Topları
+        let fireballs = [];
+
+        // Harita Nesneleri (Bloklar, Borular)
+        const floorY = 300;
+        const blocks = [
+            { x: 200, y: 200, w: 32, h: 32, type: 'question', hit: false },
+            { x: 232, y: 200, w: 32, h: 32, type: 'brick' },
+            { x: 264, y: 200, w: 32, h: 32, type: 'question', hit: false },
+            { x: 296, y: 200, w: 32, h: 32, type: 'brick' },
+            { x: 248, y: 100, w: 32, h: 32, type: 'question', hit: false },
+
+            { x: 550, y: 200, w: 32, h: 32, type: 'brick' },
+            { x: 582, y: 200, w: 32, h: 32, type: 'question', hit: false },
+            { x: 614, y: 200, w: 32, h: 32, type: 'brick' },
+
+            // Borular
+            { x: 400, y: 236, w: 48, h: 64, type: 'pipe' },
+            { x: 750, y: 220, w: 48, h: 80, type: 'pipe' },
+            { x: 1100, y: 236, w: 48, h: 64, type: 'pipe' }
+        ];
+
+        // Düşmanlar (Goomba)
+        let goombas = [
+            { x: 320, y: 276, w: 24, h: 24, dx: -1, alive: true },
+            { x: 680, y: 276, w: 24, h: 24, dx: -1, alive: true },
+            { x: 900, y: 276, w: 24, h: 24, dx: -1.2, alive: true },
+            { x: 1200, y: 276, w: 24, h: 24, dx: -1.5, alive: true }
+        ];
+
+        // Altınlar
+        let coins = [
+            { x: 208, y: 160, collected: false },
+            { x: 272, y: 160, collected: false },
+            { x: 600, y: 160, collected: false }
+        ];
+
+        // Tuş Dinleyicileri
+        document.addEventListener('keydown', e => {
+            keys[e.code] = true;
+            if ((e.code === 'ArrowUp' || e.code === 'Space') && !mario.jumping && !isGameOver) {
+                mario.dy = -10.5;
+                mario.jumping = true;
+                playSound('jump');
+            }
+            if ((e.code === 'KeyF' || e.code === 'ShiftLeft' || e.code === 'ShiftRight') && !isGameOver) {
+                shootFireball();
+            }
+        });
+
+        document.addEventListener('keyup', e => keys[e.code] = false);
+
+        function shootFireball() {
+            if (fireballs.length < 3) {
+                fireballs.push({
+                    x: mario.facing === 'right' ? mario.x + mario.w : mario.x - 8,
+                    y: mario.y + 10,
+                    r: 6,
+                    dx: mario.facing === 'right' ? 7 : -7,
+                    dy: 2
+                });
+                playSound('fire');
+            }
+        }
+
+        // Fizik ve Güncelleme Mantığı
+        function update() {
+            if (isGameOver) return;
+
+            // Hareket Kontrolü
+            if (keys['ArrowLeft']) {
+                mario.dx = -mario.speed;
+                mario.facing = 'left';
+            } else if (keys['ArrowRight']) {
+                mario.dx = mario.speed;
+                mario.facing = 'right';
+            } else {
+                mario.dx = 0;
+            }
+
+            mario.x += mario.dx;
+
+            // Blok ve Boru Yatay Çarpışması
+            blocks.forEach(b => {
+                if (checkCollision(mario, b)) {
+                    if (mario.dx > 0) mario.x = b.x - mario.w;
+                    else if (mario.dx < 0) mario.x = b.x + b.w;
+                }
+            });
+
+            // Yerçekimi & Dikey Hareket
+            mario.dy += mario.gravity;
+            mario.y += mario.dy;
+
+            // Dikey Çarpışma ve Platform Üstü Mantığı
+            mario.jumping = true;
+
+            // Zemin Çarpışması
+            if (mario.y + mario.h >= floorY) {
+                mario.y = floorY - mario.h;
+                mario.dy = 0;
+                mario.jumping = false;
+            }
+
+            // Blok ve Boru Dikey Çarpışması
+            blocks.forEach(b => {
+                if (checkCollision(mario, b)) {
+                    // Yukarıdan düşerken basma
+                    if (mario.dy > 0 && mario.y + mario.h - mario.dy <= b.y) {
+                        mario.y = b.y - mario.h;
+                        mario.dy = 0;
+                        mario.jumping = false;
+                    } 
+                    // Aşağıdan alttan kafa atma
+                    else if (mario.dy < 0 && mario.y - mario.dy >= b.y + b.h) {
+                        mario.y = b.y + b.h;
+                        mario.dy = 0;
+                        if (b.type === 'question' && !b.hit) {
+                            b.hit = true;
+                            score += 100;
+                            coinsCount++;
+                            playSound('coin');
+                        } else if (b.type === 'brick') {
+                            score += 50;
+                            playSound('stomp');
+                        }
+                    }
+                }
+            });
+
+            // Kamera Takibi
+            if (mario.x - cameraX > 300) cameraX = mario.x - 300;
+            if (mario.x - cameraX < 100 && cameraX > 0) cameraX = mario.x - 100;
+
+            // Ateş Topları Mantığı
+            fireballs.forEach((f, index) => {
+                f.x += f.dx;
+                f.y += f.dy;
+                f.dy += 0.3;
+
+                // Sekme
+                if (f.y >= floorY - f.r) {
+                    f.y = floorY - f.r;
+                    f.dy = -4;
+                }
+
+                // Düşman Vurma Mantığı
+                goombas.forEach(g => {
+                    if (g.alive && f.x + f.r > g.x && f.x - f.r < g.x + g.w && f.y + f.r > g.y && f.y - f.r < g.y + g.h) {
+                        g.alive = false;
+                        fireballs.splice(index, 1);
+                        score += 200;
+                        playSound('stomp');
+                    }
+                });
+
+                if (f.x > cameraX + canvas.width || f.x < cameraX) fireballs.splice(index, 1);
+            });
+
+            // Goomba (Düşman) Mantığı
+            goombas.forEach(g => {
+                if (!g.alive) return;
+                g.x += g.dx;
+
+                // Borulardan Dönme
+                blocks.forEach(b => {
+                    if (checkCollision(g, b)) {
+                        g.dx *= -1;
+                    }
+                });
+
+                // Mario - Goomba Çarpışması
+                if (checkCollision(mario, g)) {
+                    // Üstüne zıplayarak ezme
+                    if (mario.dy > 0 && mario.y + mario.h - mario.dy <= g.y + 10) {
+                        g.alive = false;
+                        mario.dy = -7;
+                        score += 200;
+                        playSound('stomp');
+                    } else {
+                        // Can Kaybı
+                        lives--;
+                        playSound('stomp');
+                        if (lives <= 0) {
+                            endGame(false);
+                        } else {
+                            mario.x = Math.max(50, cameraX);
+                            mario.y = 200;
+                        }
+                    }
+                }
+            });
+
+            // Altın Toplama
+            coins.forEach(c => {
+                if (!c.collected && mario.x < c.x + 16 && mario.x + mario.w > c.x && mario.y < c.y + 16 && mario.y + mario.h > c.y) {
+                    c.collected = true;
+                    score += 100;
+                    coinsCount++;
+                    playSound('coin');
+                }
+            });
+
+            // Düşme Kontrolü
+            if (mario.y > canvas.height) {
+                lives--;
+                if (lives <= 0) endGame(false);
+                else {
+                    mario.x = Math.max(50, cameraX);
+                    mario.y = 100;
+                }
+            }
+
+            // Arayüzü Güncelle
+            document.getElementById('score').innerText = String(score).padStart(6, '0');
+            document.getElementById('coins').innerText = `🪙 x${String(coinsCount).padStart(2, '0')}`;
+            document.getElementById('lives').innerText = `❤️ x${lives}`;
+        }
+
+        function checkCollision(r1, r2) {
+            return !(r1.x + r1.w <= r2.x || r1.x >= r2.x + r2.w || r1.y + r1.h <= r2.y || r1.y >= r2.y + r2.h);
+        }
+
+        // Çizim Fonksiyonları
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.save();
+            ctx.translate(-cameraX, 0);
+
+            // Arka Plan Bulutlar & Tepeler
+            drawBackground();
+
+            // Zemin
+            ctx.fillStyle = '#c84c0c';
+            ctx.fillRect(-200, floorY, 2000, canvas.height - floorY);
+            ctx.fillStyle = '#00a800';
+            ctx.fillRect(-200, floorY, 2000, 6);
+
+            // Bloklar & Borular
+            blocks.forEach(b => {
+                if (b.type === 'pipe') {
+                    ctx.fillStyle = '#00a800';
+                    ctx.fillRect(b.x, b.y, b.w, b.h);
+                    ctx.strokeStyle = '#005800';
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(b.x, b.y, b.w, b.h);
+                    ctx.fillRect(b.x - 4, b.y, b.w + 8, 16);
+                } else if (b.type === 'question') {
+                    ctx.fillStyle = b.hit ? '#8b5cf6' : '#eab308';
+                    ctx.fillRect(b.x, b.y, b.w, b.h);
+                    ctx.strokeStyle = '#000';
+                    ctx.strokeRect(b.x, b.y, b.w, b.h);
+                    if (!b.hit) {
+                        ctx.fillStyle = '#000';
+                        ctx.font = 'bold 20px monospace';
+                        ctx.fillText('?', b.x + 10, b.y + 24);
+                    }
+                } else if (b.type === 'brick') {
+                    ctx.fillStyle = '#b45309';
+                    ctx.fillRect(b.x, b.y, b.w, b.h);
+                    ctx.strokeStyle = '#78350f';
+                    ctx.strokeRect(b.x, b.y, b.w, b.h);
+                }
+            });
+
+            // Altınlar
+            coins.forEach(c => {
+                if (!c.collected) {
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.beginPath();
+                    ctx.arc(c.x + 8, c.y + 8, 7, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#fff';
+                    ctx.stroke();
+                }
+            });
+
+            // Düşmanlar (Goomba)
+            goombas.forEach(g => {
+                if (g.alive) {
+                    ctx.fillStyle = '#78350f';
+                    ctx.fillRect(g.x, g.y, g.w, g.h);
+                    // Gözler
+                    ctx.fillStyle = '#fff';
+                    ctx.fillRect(g.x + 3, g.y + 4, 5, 6);
+                    ctx.fillRect(g.x + 15, g.y + 4, 5, 6);
+                    ctx.fillStyle = '#000';
+                    ctx.fillRect(g.x + 5, g.y + 6, 2, 3);
+                    ctx.fillRect(g.x + 15, g.y + 6, 2, 3);
+                }
+            });
+
+            // Ateş Topları
+            ctx.fillStyle = '#f97316';
+            fireballs.forEach(f => {
+                ctx.beginPath();
+                ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // MARIO Çizimi
+            drawMario();
+
+            ctx.restore();
+        }
+
+        function drawMario() {
+            // Şapka & Elbise Kırmızı/Mavi
+            ctx.fillStyle = '#ef4444'; // Şapka / Tişört
+            ctx.fillRect(mario.x, mario.y, mario.w, 10);
+            
+            // Yüz
+            ctx.fillStyle = '#ffedd5';
+            ctx.fillRect(mario.x + 4, mario.y + 8, 16, 10);
+
+            // Bıyık & Göz
+            ctx.fillStyle = '#000';
+            ctx.fillRect(mario.facing === 'right' ? mario.x + 14 : mario.x + 4, mario.y + 12, 6, 3);
+
+            // Tulum
+            ctx.fillStyle = '#2563eb';
+            ctx.fillRect(mario.x + 2, mario.y + 18, 20, 14);
+
+            // Ayakkabılar
+            ctx.fillStyle = '#78350f';
+            ctx.fillRect(mario.x, mario.y + 28, 10, 4);
+            ctx.fillRect(mario.x + 14, mario.y + 28, 10, 4);
+        }
+
+        function drawBackground() {
+            // Bulutlar
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.beginPath();
+            ctx.arc(100, 80, 20, 0, Math.PI * 2);
+            ctx.arc(125, 70, 28, 0, Math.PI * 2);
+            ctx.arc(150, 80, 20, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(500, 100, 20, 0, Math.PI * 2);
+            ctx.arc(525, 90, 28, 0, Math.PI * 2);
+            ctx.arc(550, 100, 20, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Yeşil Tepeler
+            ctx.fillStyle = '#059669';
+            ctx.beginPath();
+            ctx.arc(80, floorY, 60, Math.PI, 0);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(680, floorY, 80, Math.PI, 0);
+            ctx.fill();
+        }
+
+        function endGame(won) {
+            isGameOver = true;
+            document.getElementById('overlay-title').innerText = won ? 'TEBRİKLER!' : 'OYUN BİTTİ';
+            document.getElementById('overlay-sub').innerText = 'Toplam Skorunuz: ' + score;
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        function resetGame() {
+            score = 0;
+            coinsCount = 0;
+            lives = 3;
+            cameraX = 0;
+            isGameOver = false;
+
+            mario.x = 50;
+            mario.y = 200;
+            mario.dy = 0;
+
+            goombas.forEach(g => g.alive = true);
+            coins.forEach(c => c.collected = false);
+            blocks.forEach(b => { if(b.type === 'question') b.hit = false; });
+
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Ana Oyun Döngüsü
+        function loop() {
+            update();
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        loop();
+    </script>
+</body>
+</html>
