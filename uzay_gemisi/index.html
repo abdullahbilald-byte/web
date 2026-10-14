@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemi Ana Bilgisayarı | Giriş</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="panel">
+        <h1 id="baslik">GÜVENLİK DUVARI AÇIK</h1>
+        <p>Lütfen kaptan erişim kodunu giriniz:</p>
+        
+        <!-- JAVASCRIPT İÇİN HEDEF TAHTALARI: ID'ler çok önemli! -->
+        <input type="password" id="sifreKutusu" placeholder="Kod: 2025">
+        
+        <!-- OLAY (EVENT): Butona tıklanınca (onclick) JS'deki 'girisYap()' fonksiyonu çalışacak -->
+        <button onclick="girisYap()">SİSTEME GİRİŞ YAP</button>
+        
+        <p id="mesajAlani" class="uyari-mesaji"></p>
+
+        <!-- BAŞARILI GİRİŞTE GÖRÜNECEK GİZLİ MENÜ -->
+        <nav id="gizliMenu" style="display: none;">
+            <a href="kontrol.html">Sistem Kontrol</a> | 
+            <a href="personel.html">Personel Verileri</a>
+        </nav>
+    </div>
+
+    <!-- HARİCİ JAVASCRIPT BAĞLANTISI (Sayfanın en altında olur) -->
+    <script src="js/app.js"></script>
+</body>
+</html>

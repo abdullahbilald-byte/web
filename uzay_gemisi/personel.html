@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Personel | Oksijen</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="panel">
+        <h1>GÜNLÜK OKSİJEN HESAPLAYICI</h1>
+        <nav>
+            <a href="kontrol.html">Sistem Kontrol</a> |
+            <a href="index.html">Çıkış Yap</a>
+        </nav>
+        <hr>
+        <p>Personel Rütbesini Seçin:</p>
+        <select id="rutbeSecim">
+            <optgroup label="Komuta ve Operasyon">
+                <option value="kaptan">Kaptan (Yoğun Stres)</option>
+                <option value="astronot">Astronot (Uzay Yürüyüşü / Aktif Görev)</option>
+            </optgroup>
+            <optgroup label="Mühendislik Kadrosu">
+                <option value="sistemMuhendisi">Sistem Mühendisi</option>
+                <option value="makineMuhendisi">Makine Mühendisi (Fiziksel Efor)</option>
+                <option value="yazilimMuhendisi">Yazılım / Yapay Zeka Mühendisi</option>
+            </optgroup>
+            <optgroup label="Bilim İnsanları">
+                <option value="astrofizikci">Astrofizikçi (Uzay Araştırmaları)</option>
+                <option value="biyolog">Biyolog (Yaşam Bilimleri)</option>
+                <option value="kimyager">Kimyager (Madde ve Malzeme)</option>
+                <option value="jeolog">Jeolog (Gezegen Uzmanı)</option>
+                <option value="meteorolog">Meteorolog (Atmosfer Uzmanı)</option>
+                <option value="genetikci">Genetik Uzmanı</option>
+                <option value="nanoteknolog">Nanoteknoloji Uzmanı</option>
+                <option value="botanikci">Botanikçi (Flora Uzmanı)</option>
+            </optgroup>
+        </select>
+        <button onclick="oksijenHesapla()">Hesapla</button>
+        <h2 id="sonucAlani">Sonuç bekleniyor...</h2>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

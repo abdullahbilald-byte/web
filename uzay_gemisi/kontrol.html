@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistem Kontrol | Kalkanlar ve Savunma</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="panel genis-panel">
+        <h1>GELİŞMİŞ KALKAN KONTROLÜ</h1>
+        <nav>
+            <a href="index.html">Çıkış Yap</a> |
+            <a href="personel.html">Personel Verileri</a>
+        </nav>
+        <hr>
+        
+        <!-- Kalkan Durum Göstergesi -->
+        <div id="kalkanDurumu" class="durum-kutusu kirmizi">
+            KALKANLAR DEVRE DIŞI
+        </div>
+
+        <!-- YENİ: Enerji Seviyesi Ayarı -->
+        <div class="ayar-grubu">
+            <label>Kalkan Enerjisi: <span id="enerjiDegeri">%0</span></label>
+            <input type="range" id="enerjiSlider" min="0" max="100" value="0" oninput="enerjiGuncelle(this.value)">
+        </div>
+
+        <!-- YENİ: Kalkan Modu Seçimi -->
+        <div class="ayar-grubu">
+            <label for="kalkanModu">Kalkan Modu:</label>
+            <select id="kalkanModu" onchange="modDegistir()">
+                <option value="standart">Standart Savunma</option>
+                <option value="savas">Savaş Durumu (Aşırı Yük)</option>
+                <option value="tasarruf">Güç Tasarrufu</option>
+            </select>
+        </div>
+
+        <!-- YENİ: Reaktör Sıcaklığı ve Soğutma -->
+        <div class="ayar-grubu sicaklik-alani">
+            <label>Reaktör Sıcaklığı: <span id="sicaklikDegeri">32</span>°C</label>
+            <button onclick="sogutmaBaslat()" class="kucuk-btn">Soğutma Protokolünü Çalıştır</button>
+        </div>
+
+        <!-- YENİ: Canlı Log / Terminal Ekranı -->
+        <div id="terminalLog" class="terminal-ekran">
+            > Sistemler çevrim içi. Komut bekleniyor...
+        </div>
+        
+        <hr>
+
+        <!-- Kontrol Butonları (Görev 2 Fonksiyonu ile Uyumlu) -->
+        <div class="buton-grubu">
+            <button onclick="kalkanYonet('ac')">Kalkanları AÇ</button>
+            <button onclick="kalkanYonet('kapat')">Kalkanları KAPAT</button>
+            <button onclick="acilDurumSifirla()" class="tehlike-btn">Acil Durum Sıfırlama</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Fonksiyonları -->
+    <script>
+        // Görev 2: Kalkan Yönetimi (Parametreli Fonksiyon ve Class Değiştirme)
+        function kalkanYonet(durum) {
+            var kutu = document.getElementById("kalkanDurumu");
+
+            if (durum == "ac") {
+                kutu.innerHTML = "KALKANLAR AKTİF (Maksimum Koruma)";
+                kutu.className = "durum-kutusu mavi"; 
+                logYaz("Başarılı: Kalkan sistemleri devreye sokuldu.");
+            } 
+            else if (durum == "kapat") {
+                kutu.innerHTML = "KALKANLAR DEVRE DIŞI (Tehlike)";
+                kutu.className = "durum-kutusu kirmizi";
+                logYaz("UYARI: Kalkan sistemleri kapatıldı!");
+            }
+        }
+
+        // Enerji Seviyesi Güncelleyici
+        function enerjiGuncelle(deger) {
+            document.getElementById("enerjiDegeri").innerText = "%" + deger;
+        }
+
+        // Kalkan Modu Değiştirme
+        function modDegistir() {
+            var secilenMod = document.getElementById("kalkanModu").value;
+            logYaz("Kalkan modu değiştirildi: " + secilenMod.toUpperCase());
+        }
+
+        // Soğutma Protokolü
+        function sogutmaBaslat() {
+            document.getElementById("sicaklikDegeri").innerText = "28";
+            logYaz("Soğutma sıvısı pompalandı. Sıcaklık güvenli seviyede.");
+        }
+
+        // Acil Durum Sıfırlama
+        function acilDurumSifirla() {
+            document.getElementById("enerjiSlider").value = 0;
+            document.getElementById("enerjiDegeri").innerText = "%0";
+            document.getElementById("sicaklikDegeri").innerText = "32";
+            kalkanYonet('kapat');
+            logYaz("ACİL DURUM: Tüm sistemler sıfırlandı!");
+        }
+
+        // Terminal Log Yazdırma Yardımcısı
+        function logYaz(mesaj) {
+            var terminal = document.getElementById("terminalLog");
+            terminal.innerHTML = "> " + mesaj;
+        }
+    </script>
+</body>
+</html>
