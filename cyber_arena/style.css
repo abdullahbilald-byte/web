@@ -1,0 +1,135 @@
+/* GENEL AYARLAR */
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    background-color: #0d0d12;
+}
+
+h1, h2, legend, .siber-buton, th {
+    font-family: 'Orbitron', sans-serif; /* E-Spor Fontu */
+}
+
+/* 1. ARKA PLAN VİDEO AYARLARI (Çok Önemli!) */
+#arkaplan-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -2; /* En arkaya atar */
+    object-fit: cover;
+}
+
+.video-perde {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 10, 15, 0.75); /* Videoyu %75 karartır ki yazılar okunsun */
+    z-index: -1;
+}
+
+/* 2. ÜST MENÜ (HEADER) */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom: 2px solid #ff0055; /* Neon Pembe */
+}
+
+.logo { margin: 0; font-size: 28px; letter-spacing: 2px; }
+.logo span { color: #00ffcc; /* Neon Turkuaz */ }
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+    padding-bottom: 5px;
+}
+
+nav a:hover, nav a.aktif {
+    color: #00ffcc;
+    border-bottom: 2px solid #00ffcc;
+}
+
+/* 3. ANA SAYFA MERKEZ İÇERİK */
+.merkez-icerik {
+    text-align: center;
+    margin-top: 15vh;
+}
+.merkez-icerik h2 { font-size: 50px; text-shadow: 0 0 20px #ff0055; margin-bottom: 10px; }
+.merkez-icerik p { font-size: 20px; color: #ccc; }
+.ses-kutusu { margin: 30px auto; background: rgba(0,0,0,0.6); padding: 15px; width: 350px; border-radius: 10px; border: 1px solid #00ffcc; }
+
+/* 4. SİBER BUTON TASARIMI */
+.siber-buton {
+    display: inline-block;
+    background: #ff0055;
+    color: #fff;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
+    transition: 0.3s;
+}
+.siber-buton:hover {
+    background: #00ffcc;
+    color: #000;
+    box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
+}
+.tam-genislik { width: 100%; margin-top: 15px; }
+
+/* 5. FORM TASARIMI (kayit.html) */
+.form-kapsayici { max-width: 500px; margin: 40px auto; padding: 20px; }
+fieldset {
+    border: 2px solid #00ffcc;
+    border-radius: 10px;
+    padding: 30px;
+    background: #151520;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
+}
+legend { font-size: 22px; color: #00ffcc; padding: 0 10px; }
+.form-grup { margin-bottom: 20px; }
+.form-grup label { display: block; margin-bottom: 8px; font-weight: bold; color: #aaa; }
+.form-grup input[type="text"], .form-grup input[type="email"], .form-grup select {
+    width: 100%;
+    padding: 12px;
+    background: #0d0d12;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+/* Inputa tıklanınca (Focus) parlasın */
+.form-grup input:focus, .form-grup select:focus {
+    outline: none;
+    border-color: #ff0055;
+    box-shadow: 0 0 8px rgba(255, 0, 85, 0.5);
+}
+.radyo-grup label { display: inline; margin-right: 15px; color: #fff; font-weight: normal;}
+
+/* 6. TABLO TASARIMI (takimlar.html) */
+.tablo-kapsayici { max-width: 900px; margin: 40px auto; padding: 20px; text-align: center; }
+table {
+    width: 100%;
+    border-collapse: collapse; /* Çift çizgileri tek çizgiye düşürür (Çok Önemli!) */
+    margin-top: 20px;
+    background: #151520;
+    border-radius: 8px;
+    overflow: hidden;
+}
+th, td { padding: 15px; text-align: left; border-bottom: 1px solid #2a2a35; }
+th { background-color: #ff0055; color: #fff; text-transform: uppercase; font-size: 14px; }
+/* Sözde Sınıf: Tablo satırlarının üzerine gelince renk değiştirsin */
+tbody tr:hover { background-color: #222230; color: #00ffcc; }
+.sil-buton { background: #333; color: #aaa; border: 1px solid #555; padding: 10px 20px; margin-top: 20px; cursor: pointer; border-radius: 5px;}
+.sil-buton:hover { background: red; color: white; border-color: red;}

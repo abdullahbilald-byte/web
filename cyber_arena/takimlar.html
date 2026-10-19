@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıtlı Oyuncular | CyberArena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="diger-sayfalar">
+
+    <header>
+        <h1 class="logo">CYBER<span>ARENA</span></h1>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="kayit.html">Turnuvaya Katıl</a>
+            <a href="takimlar.html" class="aktif">Kayıtlı Oyuncular</a>
+        </nav>
+    </header>
+
+    <main class="tablo-kapsayici">
+        <h2>Turnuvaya Onaylanan Oyuncular</h2>
+        <p>Toplam Başvuru Sayısı: <strong id="oyuncuSayisi" style="color:#00ffcc;">0</strong></p>
+
+        <!-- HTML5 TABLO YAPISI -->
+        <table id="oyuncuTablosu">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nickname</th>
+                    <th>Ad Soyad</th>
+                    <th>Oyun</th>
+                    <th>Tür</th>
+                    <th>E-Posta</th>
+                </tr>
+            </thead>
+            <tbody id="tabloGövdesi">
+                <!-- JS İLE VERİLER BURAYA EKLENECEK -->
+            </tbody>
+        </table>
+
+        <button onclick="verileriTemizle()" class="sil-buton">Tüm Kayıtları Sil (Sıfırla)</button>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
