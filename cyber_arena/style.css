@@ -8,24 +8,24 @@ body {
 }
 
 h1, h2, legend, .siber-buton, th {
-    font-family: 'Orbitron', sans-serif; /* E-Spor Fontu */
+    font-family: 'Orbitron', sans-serif;
 }
 
-/* 1. ARKA PLAN VİDEO AYARLARI (Çok Önemli!) */
+/* 1. ARKA PLAN VİDEO AYARLARI */
 #arkaplan-video {
     position: fixed;
     right: 0;
     bottom: 0;
     min-width: 100%;
     min-height: 100%;
-    z-index: -2; /* En arkaya atar */
+    z-index: -2;
     object-fit: cover;
 }
 
 .video-perde {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 10, 15, 0.75); /* Videoyu %75 karartır ki yazılar okunsun */
+    background: rgba(10, 10, 15, 0.75);
     z-index: -1;
 }
 
@@ -36,11 +36,11 @@ header {
     align-items: center;
     padding: 20px 50px;
     background: rgba(0, 0, 0, 0.8);
-    border-bottom: 2px solid #ff0055; /* Neon Pembe */
+    border-bottom: 2px solid #ff0055;
 }
 
 .logo { margin: 0; font-size: 28px; letter-spacing: 2px; }
-.logo span { color: #00ffcc; /* Neon Turkuaz */ }
+.logo span { color: #00ffcc; }
 
 nav a {
     color: #fff;
@@ -100,7 +100,7 @@ fieldset {
 legend { font-size: 22px; color: #00ffcc; padding: 0 10px; }
 .form-grup { margin-bottom: 20px; }
 .form-grup label { display: block; margin-bottom: 8px; font-weight: bold; color: #aaa; }
-.form-grup input[type="text"], .form-grup input[type="email"], .form-grup select {
+.form-grup input[type="text"], .form-grup input[type="email"], .form-grup input[type="number"], .form-grup select {
     width: 100%;
     padding: 12px;
     background: #0d0d12;
@@ -109,7 +109,6 @@ legend { font-size: 22px; color: #00ffcc; padding: 0 10px; }
     border-radius: 5px;
     font-size: 16px;
 }
-/* Inputa tıklanınca (Focus) parlasın */
 .form-grup input:focus, .form-grup select:focus {
     outline: none;
     border-color: #ff0055;
@@ -118,10 +117,10 @@ legend { font-size: 22px; color: #00ffcc; padding: 0 10px; }
 .radyo-grup label { display: inline; margin-right: 15px; color: #fff; font-weight: normal;}
 
 /* 6. TABLO TASARIMI (takimlar.html) */
-.tablo-kapsayici { max-width: 900px; margin: 40px auto; padding: 20px; text-align: center; }
+.tablo-kapsayici { max-width: 1000px; margin: 40px auto; padding: 20px; text-align: center; }
 table {
     width: 100%;
-    border-collapse: collapse; /* Çift çizgileri tek çizgiye düşürür (Çok Önemli!) */
+    border-collapse: collapse; /* GÖREV 2: Çift çizgi felaketini engeller */
     margin-top: 20px;
     background: #151520;
     border-radius: 8px;
@@ -129,7 +128,28 @@ table {
 }
 th, td { padding: 15px; text-align: left; border-bottom: 1px solid #2a2a35; }
 th { background-color: #ff0055; color: #fff; text-transform: uppercase; font-size: 14px; }
-/* Sözde Sınıf: Tablo satırlarının üzerine gelince renk değiştirsin */
 tbody tr:hover { background-color: #222230; color: #00ffcc; }
+
+/* GÖREV 3: Zebra Tablo Tasarımı (Çift satırlar) */
+tbody tr:nth-child(even) {
+    background-color: #1a1a28;
+}
+
 .sil-buton { background: #333; color: #aaa; border: 1px solid #555; padding: 10px 20px; margin-top: 20px; cursor: pointer; border-radius: 5px;}
 .sil-buton:hover { background: red; color: white; border-color: red;}
+
+/* GÖREV 10: Tekil Silme X Buton Stili */
+.tekli-sil-btn {
+    background: #ff0055;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.tekli-sil-btn:hover {
+    background: #ff3366;
+    box-shadow: 0 0 8px rgba(255,0,85,0.8);
+}
