@@ -1,0 +1,29 @@
+.slider-kutu {
+    height: 380px;
+    background-size: cover;
+    background-position: center;
+}
+
+.slider-1 {
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/id/1071/1400/800');
+}
+
+.slider-2 {
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/id/111/1400/800');
+}
+
+.arac-karti {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.arac-karti:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(255, 193, 7, 0.25) !important;
+    border-color: #ffc107 !important;
+}
+
+.arac-karti img {
+    height: 200px;
+    object-fit: contain;
+    padding: 10px;
+}

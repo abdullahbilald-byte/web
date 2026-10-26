@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101114">
+    <title>Film Detayı | SineEvren</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="config.js" defer></script>
+    <script src="detay.js" defer></script>
+</head>
+<body id="detay-body">
+    <header class="site-header detay-header">
+        <a class="brand" href="index.html">🎬 SineEvren'e Dön</a>
+    </header>
+
+    <main class="detay-kapsayici">
+        <p id="detay-durumu" class="durum-mesaji" role="status" aria-live="polite">Film bilgileri yükleniyor...</p>
+        <article id="film-detayi" class="film-detayi" hidden>
+            <div class="detay-sol">
+                <img id="film-afisi" src="" alt="Film afişi">
+            </div>
+            <div class="detay-sag">
+                <h1 id="film-basligi"></h1>
+                <p class="tagline" id="film-slogani"></p>
+                <div class="bilgi-etiketleri">
+                    <span id="film-puani" class="rozet"></span>
+                    <span id="film-tarihi" class="rozet"></span>
+                    <span id="film-suresi" class="rozet"></span>
+                </div>
+                <h2>Özet</h2>
+                <p id="film-ozeti"></p>
+                <p id="film-butcesi" class="film-butcesi"></p>
+                <section class="kullanici-puanlama" aria-labelledby="puanlama-basligi">
+                    <h2 id="puanlama-basligi">Sen kaç puan verirsin?</h2>
+                    <form id="puanlama-formu">
+                        <fieldset class="yildiz-secimi">
+                            <legend class="gorunmez">Filme 1 ile 5 arasında puan ver</legend>
+                            <input id="puan-5" type="radio" name="kullanici-puani" value="5" required>
+                            <label for="puan-5" title="5 yıldız">★</label>
+                            <input id="puan-4" type="radio" name="kullanici-puani" value="4">
+                            <label for="puan-4" title="4 yıldız">★</label>
+                            <input id="puan-3" type="radio" name="kullanici-puani" value="3">
+                            <label for="puan-3" title="3 yıldız">★</label>
+                            <input id="puan-2" type="radio" name="kullanici-puani" value="2">
+                            <label for="puan-2" title="2 yıldız">★</label>
+                            <input id="puan-1" type="radio" name="kullanici-puani" value="1">
+                            <label for="puan-1" title="1 yıldız">★</label>
+                            <button type="submit">Puanımı kaydet</button>
+                        </fieldset>
+                    </form>
+                    <p id="puanlama-durumu" class="puanlama-durumu" role="status" aria-live="polite"></p>
+                </section>
+                <section id="fragman-bolumu" class="fragman-bolumu" aria-labelledby="fragman-basligi">
+                    <h2 id="fragman-basligi">Fragman</h2>
+                    <div class="video-kapsayici">
+                        <iframe
+                            id="film-fragmani"
+                            title="Film fragmanı"
+                            src=""
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
+                    </div>
+                </section>
+                <section id="oyuncu-bolumu" class="icerik-bolumu" aria-labelledby="oyuncu-basligi">
+                    <h2 id="oyuncu-basligi">Oyuncular</h2>
+                    <p id="oyuncu-durumu" class="icerik-durumu" role="status" aria-live="polite">Oyuncular yükleniyor...</p>
+                    <div id="oyuncu-listesi" class="oyuncu-listesi"></div>
+                </section>
+                <section id="benzer-bolumu" class="icerik-bolumu" aria-labelledby="benzer-basligi">
+                    <h2 id="benzer-basligi">Bunlar da Hoşunuza Gidebilir</h2>
+                    <p id="benzer-durumu" class="icerik-durumu" role="status" aria-live="polite">Benzer filmler yükleniyor...</p>
+                    <div id="benzer-film-listesi" class="benzer-film-listesi"></div>
+                </section>
+            </div>
+        </article>
+    </main>
+    <button id="yukari-cik" class="yukari-cik" type="button" aria-label="Sayfanın en üstüne çık">↑</button>
+</body>
+</html>

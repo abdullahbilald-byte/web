@@ -1,0 +1,257 @@
+/* =========================================
+   1. TEMEL DEĞİŞKENLER VE TİPOGRAFİ
+   ========================================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a24;
+    color: #e0e0e0;
+    font-family: 'Lora', serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 80px; 
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, .rozet {
+    font-family: 'Cinzel', serif;
+}
+
+/* =========================================
+   2. SABİT MENÜ (POSITION: FIXED)
+   ========================================= */
+.sabit-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(15, 15, 20, 0.95);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+}
+
+.sabit-menu h1 {
+    color: #d4af37;
+    font-size: 24px;
+}
+
+.sabit-menu a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s;
+}
+
+.sabit-menu a:hover, .kayit-link:hover {
+    color: #d4af37;
+}
+
+.kayit-link {
+    border: 1px solid #d4af37;
+    padding: 6px 14px;
+    border-radius: 4px;
+}
+
+/* =========================================
+   3. GİRİŞ ALANI (Hero Section)
+   ========================================= */
+.giris-alani {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.giris-alani h2 {
+    font-size: 40px;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
+/* =========================================
+   4. CSS GRID İLE ASİMETRİK IZGARA
+   ========================================= */
+.kategori-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .genis-kart {
+        grid-column: span 2;
+    }
+    .uzun-kart {
+        grid-row: span 2;
+    }
+}
+
+/* =========================================
+   5. KART İÇİ KONUMLANDIRMA
+   ========================================= */
+.buyu-karti {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 300px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    cursor: pointer;
+    background-color: #0f0f14;
+}
+
+.buyu-karti img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s, filter 0.5s;
+    filter: grayscale(80%) sepia(20%);
+}
+
+.buyu-karti:hover img {
+    transform: scale(1.1);
+    filter: grayscale(0%) sepia(0%);
+}
+
+/* =========================================
+   6. YAZILARI VE KARARTMAYI RESMİN ÜZERİNE BİNDİRME
+   ========================================= */
+.karti-karart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 100%);
+    pointer-events: none;
+}
+
+.kart-yazisi {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    color: white;
+    width: 100%;
+    z-index: 5;
+    transition: transform 0.3s ease;
+}
+
+.kart-yazisi h3 {
+    color: #d4af37;
+    margin: 0 0 5px 0;
+    font-size: 22px;
+}
+
+.kart-yazisi p {
+    margin: 0;
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+/* =========================================
+   7. ROZETLER
+   ========================================= */
+.rozet {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    z-index: 10;
+}
+
+.rozet.yeni { background-color: #27ae60; }
+.rozet.tehlike { background-color: #c0392b; }
+
+/* =========================================
+   8. AÇILIR PENCERE (MODAL) STİLLERİ
+   ========================================= */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: #1a1a24;
+    border: 1px solid #d4af37;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+    color: #e0e0e0;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #888;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #d4af37;
+}
+
+.modal-content h2 {
+    color: #d4af37;
+    margin-bottom: 15px;
+}
+
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-content li {
+    margin-bottom: 10px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    border: 1px solid #d4af37;
+    background-color: #0f0f14;
+    color: white;
+}
+
+.form-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #d4af37;
+    color: #1a1a24;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-btn:hover {
+    background-color: #f1c40f;
+}

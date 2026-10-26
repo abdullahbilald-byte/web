@@ -1,0 +1,197 @@
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f6f9;
+    color: #1e293b;
+}
+
+/* 1. HEADER VE SEPET ROZETİ */
+header {
+    background-color: #0f172a;
+    color: white;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logo { margin: 0; font-size: 26px; }
+.logo span { color: #38bdf8; }
+
+nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+nav a:hover, nav a.aktif { color: #ffffff; }
+
+.sepet-buton {
+    background-color: #2563eb;
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+}
+.sepet-buton:hover { background-color: #1d4ed8; }
+
+/* 2. KATEGORİ BUTONLARI */
+.kategori-bar {
+    text-align: center;
+    padding: 25px;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+}
+.kat-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #334155;
+    transition: 0.2s;
+}
+.kat-btn:hover { background: #0f172a; color: white; }
+
+/* 3. ÜRÜN VİTRİNİ (GRID) */
+.urun-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.urun-karti {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.urun-karti:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+    border-color: #38bdf8;
+}
+.urun-karti img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+.urun-fiyat {
+    font-size: 22px;
+    font-weight: 900;
+    color: #0f172a;
+    margin: 10px 0;
+}
+.ekle-btn {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.ekle-btn:hover { background-color: #059669; }
+
+/* 4. SEPET SAYFASI (İKİ SÜTUNLU YAPI) */
+.sepet-sayfasi-ikiye-bol {
+    display: flex;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+.sepet-tablo-alani { flex: 2; }
+.odeme-form-alani { flex: 1; }
+
+/* TABLO TASARIMI */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+th, td { padding: 15px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #0f172a; color: white; }
+td img { width: 60px; height: 60px; object-fit: contain; border-radius: 5px; border: 1px solid #eee; }
+.toplam-fiyat { font-size: 22px; font-weight: 900; color: #10b981; }
+.urun-sil-btn { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+.temizle-btn { margin-top: 15px; background: #64748b; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;}
+
+/* KUPON ALANI KODLARI */
+.kupon-kapsayici {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+.kupon-kapsayici input {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    flex: 1;
+}
+.kupon-btn {
+    background: #0f172a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.kupon-btn:hover { background: #1e293b; }
+
+/* ÖDEME FORMU TASARIMI */
+fieldset {
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+legend { font-weight: 900; font-size: 18px; color: #0f172a; padding: 0 10px; }
+.form-grup { margin-bottom: 15px; }
+.form-grup label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #475569; }
+.form-grup input, .form-grup textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: inherit;
+}
+.yan-yana-input { display: flex; gap: 10px; }
+.satinal-btn {
+    width: 100%;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.satinal-btn:hover { background: #1d4ed8; }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101114">
+    <title>SineEvren | Popüler Filmler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="SineEvren ana sayfa">🎬 SineEvren</a>
+        <p>Keşfetmeye değer hikâyeler</p>
+    </header>
+
+    <main class="ana-sayfa">
+        <section class="sayfa-basligi" aria-labelledby="sayfa-basligi">
+            <p class="ust-baslik">ŞİMDİ KEŞFET</p>
+            <h1 id="sayfa-basligi">Popüler Filmler</h1>
+            <p>Film ara, keşfet ve favorilerine puan ver.</p>
+        </section>
+        <form id="film-arama-formu" class="arama-formu" role="search">
+            <label class="gorunmez" for="film-arama">Film adı</label>
+            <input
+                id="film-arama"
+                name="query"
+                type="search"
+                placeholder="Film adı yaz..."
+                autocomplete="off"
+                required>
+            <button type="submit">Film Ara</button>
+            <button id="populerleri-goster" class="ikincil-buton" type="button" hidden>Popüler filmler</button>
+        </form>
+        <p id="film-durumu" class="durum-mesaji" role="status" aria-live="polite">Filmler yükleniyor...</p>
+        <section id="film-listesi" class="film-listesi" aria-label="Popüler filmler"></section>
+        <button id="daha-fazla-film" class="daha-fazla-buton" type="button" hidden>Daha Fazla Film Yükle</button>
+    </main>
+    <button id="yukari-cik" class="yukari-cik" type="button" aria-label="Sayfanın en üstüne çık">↑</button>
+</body>
+</html>

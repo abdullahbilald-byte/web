@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Arcade | Tetris</title>
+</head>
+<body style="margin: 0; min-height: 100vh; background: radial-gradient(circle at center, #1e293b, #0f172a); color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; padding: 20px;">
+
+    <!-- Üst Başlık & Geri Dön -->
+    <header style="width: 100%; max-width: 500px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: bold; font-size: 0.95rem; background: rgba(56, 189, 248, 0.1); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">&larr; Ana Sayfaya Dön</a>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); letter-spacing: 2px;">TETRIS</h1>
+    </header>
+
+    <!-- Oyun Alanı Container -->
+    <div style="display: flex; gap: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); padding: 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6); position: relative; flex-wrap: wrap; justify-content: center;">
+        
+        <!-- Oyun Tuvali (Canvas) -->
+        <div style="position: relative;">
+            <canvas id="tetris" width="240" height="400" style="background: #0f172a; border: 2px solid #334155; border-radius: 12px; display: block; box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);"></canvas>
+            
+            <!-- Durdurma / Oyun Bitti Overlay Ekranı -->
+            <div id="overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px); border-radius: 12px; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <h2 id="overlay-title" style="color: #38bdf8; margin: 0 0 10px; font-size: 1.8rem;">DURDURULDU</h2>
+                <p id="overlay-sub" style="color: #94a3b8; margin: 0; font-size: 0.9rem;">Devam etmek için P'ye basın</p>
+            </div>
+        </div>
+
+        <!-- Yan Panel (Skor & Sonraki Taş) -->
+        <div style="display: flex; flex-direction: column; justify-content: space-between; min-width: 140px;">
+            <div>
+                <!-- Skor Kutusu -->
+                <div style="background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); text-align: center; margin-bottom: 12px;">
+                    <span style="color: #94a3b8; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; display: block; margin-bottom: 4px;">SKOR</span>
+                    <strong id="score" style="color: #38bdf8; font-size: 1.6rem;">0</strong>
+                </div>
+
+                <!-- Seviye Kutusu -->
+                <div style="background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); text-align: center; margin-bottom: 12px;">
+                    <span style="color: #94a3b8; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; display: block; margin-bottom: 4px;">SEVİYE</span>
+                    <strong id="level" style="color: #f43f5e; font-size: 1.6rem;">1</strong>
+                </div>
+
+                <!-- Sonraki Taş Kutusu -->
+                <div style="background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                    <span style="color: #94a3b8; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; display: block; margin-bottom: 8px;">SONRAKİ</span>
+                    <canvas id="next" width="80" height="80" style="background: transparent; display: block; margin: 0 auto;"></canvas>
+                </div>
+            </div>
+
+            <!-- Kontrol Butonları -->
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 15px;">
+                <button id="pause-btn" onclick="togglePause()" style="padding: 10px; background: #eab308; color: #0f172a; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;">
+                    DURDUR (P)
+                </button>
+                <button onclick="resetGame()" style="padding: 10px; background: #38bdf8; color: #0f172a; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;">
+                    YENİDEN BAŞLAT
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Kontrol Bilgilendirmesi -->
+    <div style="margin-top: 20px; text-align: center; color: #64748b; font-size: 0.85rem; max-width: 400px;">
+        <p style="margin: 0;"><strong>Kontroller:</strong> Ok Tuşları (Sol/Sağ), **Yukarı:** Döndür, **Aşağı:** Hızlı İndir, **P / Space:** Durdur/Devam Et</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('tetris');
+        const context = canvas.getContext('2d');
+        context.scale(20, 20);
+
+        const nextCanvas = document.getElementById('next');
+        const nextContext = nextCanvas.getContext('2d');
+        nextContext.scale(20, 20);
+
+        let isPaused = false;
+        let isGameOver = false;
+        let nextPiece = null;
+
+        const colors = [
+            null,
+            '#38bdf8', // I - Açık Mavi
+            '#f97316', // L - Turuncu
+            '#3b82f6', // J - Koyu Mavi
+            '#eab308', // O - Sarı
+            '#ef4444', // Z - Kırmızı
+            '#22c55e', // S - Yeşil
+            '#a855f7'  // T - Mor
+        ];
+
+        function arenaSweep() {
+            let rowCount = 1;
+            outer: for (let y = arena.length - 1; y > 0; --y) {
+                for (let x = 0; x < arena[y].length; ++x) {
+                    if (arena[y][x] === 0) continue outer;
+                }
+                const row = arena.splice(y, 1)[0].fill(0);
+                arena.unshift(row);
+                ++y;
+
+                player.score += rowCount * 10;
+                rowCount *= 2;
+            }
+            updateScore();
+        }
+
+        function collide(arena, player) {
+            const [m, o] = [player.matrix, player.pos];
+            for (let y = 0; y < m.length; ++y) {
+                for (let x = 0; x < m[y].length; ++x) {
+                    if (m[y][x] !== 0 && (arena[y + o.y] && arena[y + o.y][x + o.x]) !== 0) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        function createMatrix(w, h) {
+            const matrix = [];
+            while (h--) matrix.push(new Array(w).fill(0));
+            return matrix;
+        }
+
+        function createPiece(type) {
+            if (type === 'I') return [[0, 1, 0, 0], [0, 1, 0, 0], [0, 1, 0, 0], [0, 1, 0, 0]];
+            if (type === 'L') return [[0, 2, 0], [0, 2, 0], [0, 2, 2]];
+            if (type === 'J') return [[0, 3, 0], [0, 3, 0], [3, 3, 0]];
+            if (type === 'O') return [[4, 4], [4, 4]];
+            if (type === 'Z') return [[5, 5, 0], [0, 5, 5], [0, 0, 0]];
+            if (type === 'S') return [[0, 6, 6], [6, 6, 0], [0, 0, 0]];
+            if (type === 'T') return [[0, 7, 0], [7, 7, 7], [0, 0, 0]];
+        }
+
+        function drawMatrix(matrix, offset, ctx) {
+            matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        ctx.fillStyle = colors[value];
+                        ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
+                        ctx.strokeStyle = '#0f172a';
+                        ctx.lineWidth = 0.08;
+                        ctx.strokeRect(x + offset.x, y + offset.y, 1, 1);
+                    }
+                });
+            });
+        }
+
+        function draw() {
+            context.fillStyle = '#0f172a';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            drawMatrix(arena, {x: 0, y: 0}, context);
+            drawMatrix(player.matrix, player.pos, context);
+        }
+
+        function drawNext() {
+            nextContext.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
+            if (nextPiece) {
+                drawMatrix(nextPiece, {x: 1, y: 1}, nextContext);
+            }
+        }
+
+        function merge(arena, player) {
+            player.matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        arena[y + player.pos.y][x + player.pos.x] = value;
+                    }
+                });
+            });
+        }
+
+        function rotate(matrix, dir) {
+            for (let y = 0; y < matrix.length; ++y) {
+                for (let x = 0; x < y; ++x) {
+                    [matrix[x][y], matrix[y][x]] = [matrix[y][x], matrix[x][y]];
+                }
+            }
+            if (dir > 0) matrix.forEach(row => row.reverse());
+            else matrix.reverse();
+        }
+
+        function playerDrop() {
+            if (isPaused || isGameOver) return;
+            player.pos.y++;
+            if (collide(arena, player)) {
+                player.pos.y--;
+                merge(arena, player);
+                playerReset();
+                arenaSweep();
+            }
+            dropCounter = 0;
+        }
+
+        function playerMove(offset) {
+            if (isPaused || isGameOver) return;
+            player.pos.x += offset;
+            if (collide(arena, player)) {
+                player.pos.x -= offset;
+            }
+        }
+
+        function getRandomPiece() {
+            const pieces = 'TJLOSZI';
+            return createPiece(pieces[pieces.length * Math.random() | 0]);
+        }
+
+        function playerReset() {
+            if (!nextPiece) nextPiece = getRandomPiece();
+            player.matrix = nextPiece;
+            nextPiece = getRandomPiece();
+            drawNext();
+
+            player.pos.y = 0;
+            player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
+
+            if (collide(arena, player)) {
+                isGameOver = true;
+                document.getElementById('overlay-title').innerText = 'OYUN BİTTİ';
+                document.getElementById('overlay-sub').innerText = 'Skorunuz: ' + player.score;
+                document.getElementById('overlay').style.display = 'flex';
+            }
+        }
+
+        function playerRotate(dir) {
+            if (isPaused || isGameOver) return;
+            const pos = player.pos.x;
+            let offset = 1;
+            rotate(player.matrix, dir);
+            while (collide(arena, player)) {
+                player.pos.x += offset;
+                offset = -(offset + (offset > 0 ? 1 : -1));
+                if (offset > player.matrix[0].length) {
+                    rotate(player.matrix, -dir);
+                    player.pos.x = pos;
+                    return;
+                }
+            }
+        }
+
+        function togglePause() {
+            if (isGameOver) return;
+            isPaused = !isPaused;
+            const overlay = document.getElementById('overlay');
+            const btn = document.getElementById('pause-btn');
+
+            if (isPaused) {
+                document.getElementById('overlay-title').innerText = 'DURDURULDU';
+                document.getElementById('overlay-sub').innerText = "Devam etmek için P'ye basın";
+                overlay.style.display = 'flex';
+                btn.innerText = 'DEVAM ET';
+                btn.style.background = '#22c55e';
+            } else {
+                overlay.style.display = 'none';
+                btn.innerText = 'DURDUR (P)';
+                btn.style.background = '#eab308';
+            }
+        }
+
+        let dropCounter = 0;
+        let dropInterval = 1000;
+        let lastTime = 0;
+
+        function update(time = 0) {
+            const deltaTime = time - lastTime;
+            lastTime = time;
+
+            if (!isPaused && !isGameOver) {
+                dropCounter += deltaTime;
+                if (dropCounter > dropInterval) {
+                    playerDrop();
+                }
+                draw();
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        function updateScore() {
+            document.getElementById('score').innerText = player.score;
+            document.getElementById('level').innerText = Math.floor(player.score / 100) + 1;
+            dropInterval = Math.max(100, 1000 - (Math.floor(player.score / 100) * 80));
+        }
+
+        function resetGame() {
+            arena.forEach(row => row.fill(0));
+            player.score = 0;
+            isGameOver = false;
+            isPaused = false;
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('pause-btn').innerText = 'DURDUR (P)';
+            document.getElementById('pause-btn').style.background = '#eab308';
+            updateScore();
+            playerReset();
+        }
+
+        const arena = createMatrix(12, 20);
+        const player = { pos: {x: 0, y: 0}, matrix: null, score: 0 };
+
+        document.addEventListener('keydown', event => {
+            if (event.keyCode === 37) playerMove(-1);        // Sol
+            else if (event.keyCode === 39) playerMove(1);     // Sağ
+            else if (event.keyCode === 40) playerDrop();      // Aşağı
+            else if (event.keyCode === 38) playerRotate(1);   // Yukarı (Döndür)
+            else if (event.keyCode === 80 || event.keyCode === 32) togglePause(); // P veya Space (Durdur)
+        });
+
+        resetGame();
+        update();
+    </script>
+</body>
+</html>

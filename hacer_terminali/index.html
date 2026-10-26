@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Girişi | KOD KIRICI</title>
+    <!-- Hacer temasına uygun font -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="terminal-kutusu">
+        <header>
+            <h1>> SİSTEME SIZILIYOR...</h1>
+            <p>Hedef: Ana Sunucu Veritabanı</p>
+        </header>
+
+        <section class="islem-alani">
+            <div id="ekran" class="sifre-ekrani">
+                0000-0000-0000-0000
+            </div>
+
+            <!-- YENİ ETİKET: İlerleme Çubuğu -->
+            <p>Sızma İlerlemesi:</p>
+            <progress id="yuklemeBari" value="0" max="100"></progress>
+            <p id="yuzdeYazi">%0 Tamamlandı</p>
+
+            <button id="baslatBtn" onclick="kodKirmayiBaslat()">[ SIZMAYI BAŞLAT ]</button>
+        </section>
+
+        <!-- Log kayıtlarının düşeceği liste (Başlangıçta boş) -->
+        <aside>
+            <ul id="logListesi">
+                <li>> Sistem dinleniyor...</li>
+            </ul>
+        </aside>
+    </main>
+
+    <script src="hacer.js"></script>
+</body>
+</html>

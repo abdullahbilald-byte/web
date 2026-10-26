@@ -1,0 +1,62 @@
+/* 1. TÜM SAYFA AYARLARI (TİPOGRAFİ VE ARKA PLAN) */
+body {
+    background-color: #f4f6f7; /* Açık gri, göz yormayan arka plan */
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif; /* Tırnaksız okunabilir yazı tipi */
+    color: #2c3e50; /* Tam siyah yerine koyu lacivert/gri daha şıktır */
+    margin: 0;
+    padding: 20px;
+}
+
+/* 2. ANA ÇERÇEVE TASARIMI */
+.site-cercevesi {
+    background-color: white;
+    max-width: 800px; /* Sitemiz çok genişlemesin, ortada dursun */
+    margin: 0 auto; /* Kutuyu ekranın tam ortasına hizalar */
+    border-radius: 15px; /* Köşeleri yumuşatır */
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1); /* Hafif, şık bir gölge ekler */
+    overflow: hidden; /* Dışan taşan resimleri keser */
+}
+
+/* 3. BAŞLIK ALANI BİÇİMSELLİĞİ */
+.baslik-alani {
+    background-color: #2980b9; /* Canlı bir mavi renk */
+    color: white; /* Kontrast (Zıtlık) İlkesi: Koyu arka plana beyaz yazı! */
+    text-align: center;
+    padding: 30px;
+}
+
+/* 4. İÇERİK ALANI VE RESİMLER */
+.icerik-alani {
+    padding: 30px;
+    line-height: 1.6; /* Satır aralığı: Okunabilirliği çok artırır */
+}
+
+.icerik-alani img {
+    width: 100%; /* Resim kutunun dışına taşmasın, %100'ünü kaplasın (Uyumluluk ilkesi) */
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+/* 5. ALT BİLGİ (FOOTER) */
+.alt-bilgi {
+    background-color: #34495e;
+    color: #bdc3c7;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+}
+/* İŞLEVSİL BUTON TASARIMI */
+.buton {
+    background-color: #e74c3c; /* Dikkat çekici kırmızı */
+    color: white;
+    text-decoration: none; /* Linkin altındaki çizgiyi kaldırır */
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s; /* Fare üzerine gelince animasyonlu geçiş yapar */
+}
+
+/* Fare butonun üzerine gelince ne olsun? (Hover Olayı) */
+.buton:hover {
+    background-color: #c0392b; /* Rengi biraz koyulaşsın */
+}

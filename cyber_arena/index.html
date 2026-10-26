@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberArena | E-Spor Turnuvası</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. ARKA PLAN VİDEOSU (HTML5 <video> Etiketi) -->
+    <!-- İnternetten hazır ücretsiz bir siber uzay videosu çekiyoruz -->
+    <video autoplay muted loop id="arkaplan-video">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-tunnel-of-neon-lights-42516-large.mp4" type="video/mp4">
+        Tarayıcınız video etiketini desteklemiyor.
+    </video>
+
+    <!-- Videonun üstüne siyah yarı saydam perde -->
+    <div class="video-perde"></div>
+
+    <!-- 2. ÜST MENÜ -->
+    <header>
+        <h1 class="logo">CYBER<span>ARENA</span></h1>
+        <nav>
+            <a href="index.html" class="aktif">Ana Sayfa</a>
+            <a href="kayit.html">Turnuvaya Katıl</a>
+            <a href="takimlar.html">Kayıtlı Oyuncular</a>
+        </nav>
+    </header>
+
+    <!-- 3. ANA İÇERİK -->
+    <main class="merkez-icerik">
+        <h2>BÜYÜK TURNUVA BAŞLIYOR</h2>
+        <p>Ödül Havuzu: <strong>500.000 TL</strong> | Son Kayıt: 30 Kasım</p>
+        
+        <!-- HTML5 <audio> Etiketi: Savaş Müziği -->
+        <div class="ses-kutusu">
+            <p>🎵 Turnuva Müziğini Dinle:</p>
+            <audio controls>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <br>
+        <a href="kayit.html" class="siber-buton">HEMEN BAŞVUR</a>
+    </main>
+
+</body>
+</html>

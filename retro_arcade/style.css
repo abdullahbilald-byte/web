@@ -1,0 +1,127 @@
+/* =========================================
+   1. GENEL AYARLAR (Tipografi ve Renkler)
+   ========================================= */
+body {
+    background-color: #1a0b2e; /* Koyu, derin mor */
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Google'dan çektiğimiz piksel fontu sadece Başlıklara veriyoruz! */
+h1, h3, .slogan {
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+}
+
+/* =========================================
+   2. HEADER TASARIMI (Neon Efekti)
+   ========================================= */
+header {
+    background-color: #0b0514;
+    padding: 40px;
+    border-bottom: 4px solid #f20089; /* Neon Pembe Çizgi */
+    box-shadow: 0 5px 20px rgba(242, 0, 137, 0.4);
+}
+
+#logo {
+    color: #00f0ff; /* Neon Mavi */
+    text-shadow: 2px 2px 0px #f20089, -2px -2px 0px #00f0ff; /* 80'ler Glitch (Bozulma) Efekti! */
+    font-size: 30px;
+}
+
+.slogan {
+    color: #f20089;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+/* =========================================
+   3. ANA İÇERİK - FLEXBOX İLE IZGARA (GRID) YAPISI
+   ========================================= */
+.oyun-kutuphanesi {
+    display: flex; /* Kutuları yan yana dizer */
+    flex-wrap: wrap; /* Ekrana sığmayan kutuları alt satıra atar! ÇOK ÖNEMLİ! */
+    justify-content: center; /* Kutuları ortalar */
+    gap: 30px; /* Kutular arası boşluk */
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   4. KART TASARIMLARI VE KUTU MODELİ (Box Model)
+   ========================================= */
+.oyun-karti {
+    background-color: #2d1b4e;
+    width: 250px;
+    border: 3px solid #00f0ff;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Kartın üzerine gelince havaya kalksın ve parlasın */
+.oyun-karti:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(0, 240, 255, 0.5);
+    border-color: #f20089; /* Kenarlık rengi pembeye dönsün */
+}
+
+/* Torun Seçici: Sadece .oyun-karti içindeki img'ler etkilensin */
+.oyun-karti img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid #00f0ff;
+}
+
+/* .oyun-karti:hover img { border-color: #f20089; } */ 
+
+.oyun-bilgi {
+    padding: 20px;
+    text-align: center;
+}
+
+.oyun-bilgi h3 {
+    font-size: 14px;
+    color: #f20089;
+    margin-top: 0;
+}
+
+.oyun-bilgi p {
+    font-size: 14px;
+    color: #a393eb;
+}
+
+/* =========================================
+   5. OYNA BUTONU (Sözde Sınıf - Hover Efektleri)
+   ========================================= */
+.btn-oyna {
+    display: inline-block;
+    background-color: #00f0ff;
+    color: #1a0b2e;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    transition: 0.2s;
+}
+
+.btn-oyna:hover {
+    background-color: #f20089;
+    color: white;
+}
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #0b0514;
+    color: #4b3e71;
+    border-top: 2px solid #00f0ff;
+}

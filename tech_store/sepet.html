@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepetim ve Ödeme | TechStore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1 class="logo">⚡ Tech<span>Store</span></h1>
+        <nav>
+            <a href="index.html">⬅ Alışverişe Dön</a>
+            <a href="sepet.html" class="sepet-buton aktif">🛒 Sepetim (<span id="sepetSayaci">0</span>)</a>
+        </nav>
+    </header>
+
+    <!-- EKRANI İKİYE BÖLEN ANA KAPSAYICI (Sol: Tablo & Kupon, Sağ: Form) -->
+    <main class="sepet-sayfasi-ikiye-bol">
+        
+        <!-- SOL TARAF: ÜRÜN TABLOSU & KUPON ALANI -->
+        <section class="sepet-tablo-alani">
+            <h2>Alışveriş Sepetiniz</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ürün Görseli</th>
+                        <th>Marka</th> <!-- GÖREV 5: Marka Sütunu -->
+                        <th>Ürün Adı</th>
+                        <th>Fiyat (TL)</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody id="sepetTabloGovdesi">
+                    <!-- JS İLE SEPETTEKİ ÜRÜNLER BURAYA DİZİLECEK -->
+                </tbody>
+                <!-- TABLO ALT BİLGİSİ (TFOOT): Toplam Tutar Ve Kargo Bilgisi İçin -->
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align:right; font-weight:bold;">Kargo Ücreti:</td>
+                        <td colspan="2" id="kargoTutarAlani" style="font-weight:bold; color:#e11d48;">₺0.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:right; font-weight:bold;">GENEL TOPLAM:</td>
+                        <td colspan="2" id="toplamTutarAlani" class="toplam-fiyat">₺0.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <!-- GÖREV 6: İndirim Kuponu Kutusu -->
+            <div class="kupon-kapsayici">
+                <input type="text" id="kuponKodu" placeholder="İndirim Kodu (Örn: MESLEK11)">
+                <button onclick="kuponUygula()" class="kupon-btn">Uygula</button>
+            </div>
+            <p id="kuponMesaj" style="font-weight: bold; margin-top: 8px;"></p>
+
+            <button onclick="sepetiBosalt()" class="temizle-btn">🗑️ Sepeti Tamamen Boşalt</button>
+        </section>
+
+        <!-- SAĞ TARAF: KREDİ KARTI VE TESLİMAT FORMU -->
+        <aside class="odeme-form-alani">
+            <form id="odemeFormu" onsubmit="siparisiTamamla(event)">
+                <fieldset>
+                    <legend>💳 Güvenli Ödeme</legend>
+
+                    <div class="form-grup">
+                        <label>Ad Soyad (Kart Üzerindeki):</label>
+                        <input type="text" id="musteriAd" required placeholder="Örn: Engin Emiroğlu">
+                    </div>
+
+                    <div class="form-grup">
+                        <label>Teslimat Adresi:</label>
+                        <textarea id="adres" rows="2" required placeholder="Mahalle, Sokak, İl/İlçe..."></textarea>
+                    </div>
+
+                    <!-- GÖREV 1: PATTERN (REGEX) DOĞRULAMA -->
+                    <div class="form-grup">
+                        <label>Kredi Kartı Numarası (16 Hane):</label>
+                        <input type="text" required pattern="[0-9]{16}" maxlength="16" title="Lütfen 16 haneli kart numaranızı boşluksuz giriniz" placeholder="1234123412341234">
+                    </div>
+
+                    <div class="yan-yana-input">
+                        <div class="form-grup">
+                            <label>Son Kullanma (AA/YY):</label>
+                            <input type="text" required pattern="[0-9]{2}/[0-9]{2}" maxlength="5" placeholder="08/28">
+                        </div>
+                        <div class="form-grup">
+                            <label>CVV (3 Hane):</label>
+                            <input type="password" required pattern="[0-9]{3}" maxlength="3" placeholder="123">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="satinal-btn">✅ SİPARİŞİ TAMAMLA</button>
+                </fieldset>
+            </form>
+        </aside>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

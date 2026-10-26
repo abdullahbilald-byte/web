@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turnuva Kaydı | CyberArena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="diger-sayfalar">
+
+    <header>
+        <h1 class="logo">CYBER<span>ARENA</span></h1>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="kayit.html" class="aktif">Turnuvaya Katıl</a>
+            <a href="takimlar.html">Kayıtlı Oyuncular</a>
+        </nav>
+    </header>
+
+    <main class="form-kapsayici">
+        <!-- GÖREV 7: onsubmit ile preventDefault tetiklenir -->
+        <form id="kayitFormu" onsubmit="oyuncuKaydet(event)">
+            <fieldset>
+                <legend>Oyuncu Başvuru Formu</legend>
+
+                <div class="form-grup">
+                    <label>Adınız Soyadınız:</label>
+                    <input type="text" id="adSoyad" required placeholder="Örn: Ahmet Yılmaz">
+                </div>
+
+                <div class="form-grup">
+                    <label>Oyuncu Nickname:</label>
+                    <input type="text" id="nickname" required pattern=".{3,}" title="En az 3 karakter giriniz" placeholder="Örn: ShadowHunter">
+                </div>
+
+                <!-- GÖREV 4: Yaş Sınırı (15 - 50) -->
+                <div class="form-grup">
+                    <label>Yaşınız (15 - 50):</label>
+                    <input type="number" id="oyuncuYas" required min="15" max="50" placeholder="Örn: 18">
+                </div>
+
+                <div class="form-grup">
+                    <label>E-Posta Adresiniz:</label>
+                    <input type="email" id="eposta" required placeholder="ornek@mail.com">
+                </div>
+
+                <!-- GÖREV 5: Counter-Strike ve PUBG eklendi -->
+                <div class="form-grup">
+                    <label>Yarışacağınız Oyun:</label>
+                    <select id="oyunSecim" required>
+                        <option value="">-- Oyun Seçiniz --</option>
+                        <option value="Counter-Strike">Counter-Strike</option>
+                        <option value="PUBG">PUBG</option>
+                        <option value="Valorant">Valorant</option>
+                        <option value="League of Legends">League of Legends</option>
+                        <option value="CS:GO 2">CS:GO 2</option>
+                        <option value="FC 24">EA Sports FC 24</option>
+                    </select>
+                </div>
+
+                <div class="form-grup">
+                    <label>Katılım Türü:</label>
+                    <div class="radyo-grup">
+                        <input type="radio" name="katilim" value="Bireysel" id="bireysel" checked> <label for="bireysel">Bireysel</label>
+                        <input type="radio" name="katilim" value="Takım" id="takim"> <label for="takim">Takım Kaptanı</label>
+                    </div>
+                </div>
+
+                <!-- GÖREV 6: Şartları Kabul Ediyorum Kutusu (Checkbox) -->
+                <div class="form-grup" style="display: flex; align-items: center; gap: 10px; margin-top: 15px;">
+                    <input type="checkbox" id="kurallarKutusu" required style="width: auto; cursor: pointer;">
+                    <label for="kurallarKutusu" style="margin-bottom: 0; cursor: pointer; font-weight: normal; color: #ccc;">Turnuva kurallarını okudum, kabul ediyorum.</label>
+                </div>
+
+                <button type="submit" class="siber-buton tam-genislik">KAYDI TAMAMLA</button>
+            </fieldset>
+        </form>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

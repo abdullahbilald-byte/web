@@ -1,0 +1,159 @@
+/* =========================================
+   1. ETİKET (TAG) VE ÇOKLU (MULTIPLE) SEÇİCİLER 
+   ========================================= */
+/* Bütün h1, h2 ve h3 etiketlerinin marginlerini sıfırlarız (Çoklu Seçici) */
+h1, h2, h3 {
+    margin: 0;
+    font-family: 'Arial Black', sans-serif;
+}
+
+/* Doğrudan body etiketini hedef alırız (Etiket Seçici) */
+body {
+    background-color: #0b0c10; /* Derin uzay siyahı */
+    color: #c5c6c7; /* Okunabilir açık gri */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. KİMLİK (ID) SEÇİCİLER (#)
+   Sayfada SADECE 1 TANE olan elemanlar içindir.
+   ========================================= */
+#logo {
+    color: #66fcf1; /* Neon Turkuaz */
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   3. SINIF (CLASS) SEÇİCİLER (.)
+   Birden fazla elemana aynı stili vermek içindir.
+   ========================================= */
+header {
+    background-color: #1f2833;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; /* Logo sola, menü sağa */
+    align-items: center;
+    border-bottom: 2px solid #45a29e;
+}
+
+nav a {
+    color: #c5c6c7;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.aktif-link {
+    color: #66fcf1;
+    border-bottom: 2px solid #66fcf1;
+}
+
+/* =========================================
+   4. SÖZDE SINIF (PSEUDO-CLASS) SEÇİCİLER (:)
+   Kullanıcı etkileşimlerini (fare ile üzerine gelme vb.) yakalar.
+   ========================================= */
+nav a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #66fcf1; /* Üzerine gelince neon parlasın */
+}
+
+/* Düğme Tasarımı */
+.neon-buton {
+    display: inline-block;
+    background-color: transparent;
+    color: #66fcf1;
+    border: 2px solid #66fcf1;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: all 0.4s ease;
+}
+
+.neon-buton:hover {
+    background-color: #66fcf1;
+    color: #0b0c10;
+    box-shadow: 0 0 15px #66fcf1, 0 0 30px #66fcf1; /* İki kat neon parlama */
+}
+
+/* =========================================
+   5. ÇOCUK (CHILD) VE TORUN (DESCENDANT) SEÇİCİLER
+   ========================================= */
+
+/* Ana Kapsayıcı Ayarı */
+.galeri-kapsayici {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    gap: 20px;
+}
+
+.gezegen-karti {
+    background-color: #1f2833;
+    border-radius: 10px;
+    width: 30%;
+    overflow: hidden; /* Resimlerin köşelerden taşmasını engeller */
+    transition: transform 0.3s;
+}
+
+/* SÖZDE SINIF: Kartın üzerine fare gelince kart yukarı doğru büyüsün */
+.gezegen-karti:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 25px rgba(102, 252, 241, 0.2);
+}
+
+/* TORUN SEÇİCİ (Boşluk bırakılarak yazılır): 
+   .gezegen-karti class'ının İÇİNDEKİ (torunu) img etiketlerini bul! */
+.gezegen-karti img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Resmi ezmeden kutuya uydurur */
+}
+
+/* ÇOCUK SEÇİCİ (> işareti ile yazılır): 
+   .kart-icerik class'ının DOĞRUDAN altındaki h3'ü bul! */
+.kart-icerik > h3 {
+    color: #45a29e;
+    margin-bottom: 10px;
+}
+
+.kart-icerik {
+    padding: 20px;
+    text-align: center;
+}
+
+/* =========================================
+   6. SÖZDE ELEMAN (PSEUDO-ELEMENT) SEÇİCİLER (::)
+   Elemanların belirli bir kısmını (ilk harf, seçili alan) hedef alır.
+   ========================================= */
+
+/* p etiketlerinin ilk harfini kitaplardaki gibi devasa yapar */
+.hikaye-metni::first-letter {
+    font-size: 50px;
+    font-weight: bold;
+    color: #66fcf1;
+    float: left;
+    line-height: 1;
+    margin-right: 8px;
+}
+
+/* Fare ile sitedeki bir metni seçtiğimizde arkaplan rengini değiştirir */
+::selection {
+    background-color: #66fcf1;
+    color: #0b0c10;
+}
+
+/* Footer Ayarı */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1f2833;
+    border-top: 1px solid #45a29e;
+    margin-top: 40px;
+}

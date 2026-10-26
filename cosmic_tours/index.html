@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CosmicTours | Uzay Seni Çağırıyor</title>
+    
+    <!-- CSS EKLEME YÖNTEMİ 1: SAYFA DIŞI (EXTERNAL) CSS -->
+    <!-- En profesyonel yöntemdir. Tüm sayfalar bu dosyadan beslenir. -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- CSS EKLEME YÖNTEMİ 2: SAYFA İÇİ (INTERNAL) CSS -->
+    <!-- Sadece bu sayfaya (index.html) özel bir ayar yapmak istersek kullanırız. -->
+    <style>
+        .ana-sayfa-ozel { border-bottom: 3px dashed #f39c12; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 id="logo">CosmicTours</h1>
+        <nav>
+            <a href="index.html" class="aktif-link">Merkez Üs</a>
+            <a href="turlar.html">Gezegen Turları</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="karsilama-alani">
+            <h2 class="ana-sayfa-ozel">Sıradaki Tatiliniz Dünya Dışında!</h2>
+            
+            <p class="hikaye-metni">İnsanlık sınırları aştı. Artık Ay'da yürümek sıradan bir hafta sonu aktivitesi. CosmicTours ile Güneş sisteminin en egzotik köşelerine lüks kruvaziyer gemilerimizle seyahat edin.</p>
+            
+            <!-- CSS EKLEME YÖNTEMİ 3: SATIR İÇİ (INLINE) CSS -->
+            <!-- Acil ve tek seferlik durumlarda kullanılır. Çok tavsiye edilmez! -->
+            <p style="color: red; font-weight: bold;">DİKKAT: Venüs turlarımız aşırı sıcaklık sebebiyle geçici olarak durdurulmuştur.</p>
+
+            <a href="turlar.html" class="neon-buton">Turları Keşfet</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CosmicTours A.Ş. Tüm Galaktik Hakları Saklıdır.</p>
+    </footer>
+
+</body>
+</html>
