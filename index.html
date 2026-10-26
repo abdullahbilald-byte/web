@@ -1,83 +1,1083 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdullah Bilal | Proje Portföy Merkezi</title>
-</head>
-<body style="margin: 0; min-height: 100vh; padding: 40px 20px; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #0f172a, #1e293b); color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; box-sizing: border-box;">
+    <title>Abdullah Bilal Demir | Ultra Proje Portföy Merkezi</title>
+    <!-- FontAwesome İkon Kütüphanesi -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-    <main style="width: min(1100px, 100%); padding: 36px; background: #1e293b; border: 1px solid #334155; border-radius: 16px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+    <style>
+        :root {
+            --bg-dark: #020617;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --card-border: rgba(56, 189, 248, 0.22);
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.4);
+            --secondary: #818cf8;
+            --accent: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* PARÇACIK VE FARE IŞIĞI */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        /* TOP NAVIGATION BAR */
+        .top-bar {
+            width: 100%;
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .brand-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .brand-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-title {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: rgba(56, 189, 248, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--primary-glow);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3.5rem 1.5rem;
+            width: 100%;
+        }
+
+        /* HERO HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(56, 189, 248, 0.08);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+        }
+
+        header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.15;
+            background: linear-gradient(135deg, #ffffff 20%, var(--primary) 70%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            font-weight: 400;
+        }
+
+        .typing-text {
+            color: var(--primary);
+            font-weight: 700;
+            border-right: 2px solid var(--primary);
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        /* STATS BAR */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            padding: 1.2rem 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .stat-item .num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-item .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ARAMA VE FİLTRELER */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 580px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1.4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            transition: var(--transition);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1.1rem 1rem 1.1rem 3.5rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 40px;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .search-box input:focus + i { color: var(--primary); }
+
+        .filters {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.65rem 1.5rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #020617;
+            border-color: transparent;
+            box-shadow: 0 4px 25px var(--primary-glow);
+            font-weight: 700;
+        }
+
+        /* PROJE GRID & MİKRO BANNER'LI KARTLAR */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 2.2rem;
+            perspective: 1000px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease-out, border-color 0.4s, box-shadow 0.4s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .card-banner {
+            width: 100%;
+            height: 180px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .card-banner i.banner-icon {
+            font-size: 4.5rem;
+            color: rgba(255, 255, 255, 0.35);
+            transition: transform 0.5s ease, color 0.5s ease;
+        }
+
+        .project-card:hover .card-banner i.banner-icon {
+            transform: scale(1.2) rotate(-5deg);
+            color: #ffffff;
+        }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, transparent 80%);
+        }
+
+        .card-tag-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(12px);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            font-size: 0.75rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .card-content {
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+            transform: translateZ(30px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .icon-wrapper {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .card-body h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .card-body p {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-top: 0.6rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .card-tech-stack {
+            display: flex;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.4rem;
+        }
+
+        .tech-pill {
+            font-size: 0.74rem;
+            padding: 0.25rem 0.7rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--primary);
+            gap: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 1.2rem;
+        }
+
+        .card-footer i { transition: var(--transition); }
+
+        .project-card:hover {
+            border-color: rgba(56, 189, 248, 0.6);
+            box-shadow: 0 25px 50px -12px rgba(56, 189, 248, 0.25);
+        }
+
+        .project-card:hover .card-footer i { transform: translateX(6px); }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 6rem;
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: blur(12px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+            display: none;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.4rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CANLI ARKA PLAN PARÇACIK & IŞIK TAKİBİ -->
+    <canvas id="particleCanvas"></canvas>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- ÜST BAR LOGO VE SOSYAL MEDYA -->
+    <nav class="top-bar">
+        <div class="top-bar-content">
+            <a href="https://github.com/abdullahbilald-byte" target="_blank" rel="noopener noreferrer" class="brand-logo">
+                <div class="brand-avatar">ABD</div>
+                <div class="brand-info">
+                    <span class="brand-name">ABDULLAH BİLAL DEMİR</span>
+                    <span class="brand-title"><span class="status-dot"></span> Web & Software Developer</span>
+                </div>
+            </a>
+            <div class="social-links">
+                <a href="https://github.com/abdullahbilald-byte" class="social-btn" title="GitHub Profile" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="http://www.linkedin.com/in/abdullah-bilal-demir-0446aa437" class="social-btn" title="LinkedIn Profile" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
         
-        <header style="margin-bottom: 32px;">
-            <h1 style="margin: 0 0 10px; color: #38bdf8; font-size: 2.2rem; font-weight: 700;">Proje Portföyü</h1>
-            <p style="margin: 0; color: #94a3b8; font-size: 1.05rem;">abdullahbilal.lovestoblog.com üzerindeki Web Ders Çalışmaları</p>
+        <!-- HERO HEADER -->
+        <header>
+            <span class="badge"><i class="fa-solid fa-sparkles"></i> Web Ders Çalışmaları & Projeler</span>
+            <h1>Proje Portföy Merkezi</h1>
+            <p class="hero-subtitle">abdullahbilal.lovestoblog.com üzerindeki <span class="typing-text" id="typing"></span></p>
         </header>
 
-        <nav style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; text-align: left;">
-            
-            <a href="teknoloji_blogu/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Teknoloji Blogu</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">Yapay Zeka Devrimi ve Geleceğin Teknolojileri</span>
+        <!-- İSTATİSTİK SAYACI -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="num">15</div>
+                <div class="label">Aktif Proje</div>
+            </div>
+            <div class="stat-item">
+                <div class="num">HTML5 / CSS3 / JS</div>
+                <div class="label">Teknoloji Yığını</div>
+            </div>
+            <div class="stat-item">
+                <div class="num">2026</div>
+                <div class="label">Son Güncelleme</div>
+            </div>
+        </div>
+
+        <!-- ARAMA VE FİLTRELER -->
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Proje, kategori veya teknoloji ara...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Tümü</button>
+                <button class="filter-btn" data-filter="tech">Siber & Teknoloji</button>
+                <button class="filter-btn" data-filter="space">Uzay & Bilim</button>
+                <button class="filter-btn" data-filter="game">Oyun & Akademi</button>
+                <button class="filter-btn" data-filter="exam">Sınav & Diğer</button>
+            </div>
+        </div>
+
+        <!-- PROJE KARTLARI LİSTESİ (15 KLASÖR BİREBİR EŞLEŞTİ) -->
+        <div class="projects-grid" id="projectsGrid">
+
+            <!-- 1. sinav_1294 -->
+            <a href="sinav_1294/index.html" class="project-card" data-category="exam">
+                <div class="card-banner" style="background: linear-gradient(135deg, #1e1b4b 0%, #311b92 100%);">
+                    <i class="fa-solid fa-utensils banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Sınav Projesi</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-utensils"></i></div>
+                            <h3>Kampüs Yemekhane (1294)</h3>
+                        </div>
+                        <p>Dinamik menü, kalori hesabı, sepet yönetimi ve kişiselleştirilmiş kupon otomasyonu.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">jQuery</span>
+                            <span class="tech-pill">Bootstrap 5</span>
+                            <span class="tech-pill">REST API</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="mars_projesi/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Mars Kolonisi</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">Kızıl Gezegene Yolculuk ve Koloni Başvurusu</span>
+            <!-- 2. cosmic_tours -->
+            <a href="cosmic_tours/index.html" class="project-card" data-category="space">
+                <div class="card-banner" style="background: linear-gradient(135deg, #0284c7 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-shuttle-space banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Turizm</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-shuttle-space"></i></div>
+                            <h3>CosmicTours</h3>
+                        </div>
+                        <p>Uzay Turları, galaktik tatil rotaları ve futuristik gezi rehberi web projesi.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">Tourism</span>
+                            <span class="tech-pill">Space UI</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="kahraman_akademisi/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Kahraman Akademisi</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">Süper Kahraman Eğitim Merkezi ve Kadrosu</span>
+            <!-- 3. cyber_arena -->
+            <a href="cyber_arena/index.html" class="project-card" data-category="tech">
+                <div class="card-banner" style="background: linear-gradient(135deg, #065f46 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-shield-halved banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Siber</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+                            <h3>Cyber Arena</h3>
+                        </div>
+                        <p>Siber Güvenlik, CTF görevleri ve rekabetçi arena simülasyon platformu projesi.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">CTF Platform</span>
+                            <span class="tech-pill">Gamification</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="sihir_akademisi/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Sihir Akademisi</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">Arcanum Akademisi, Sihir Dersleri ve Kadim Sırlar</span>
+            <!-- 4. hacer_terminali -->
+            <a href="hacer_terminali/index.html" class="project-card" data-category="tech">
+                <div class="card-banner" style="background: linear-gradient(135deg, #14532d 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-terminal banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Siber</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-terminal"></i></div>
+                            <h3>Hacker Terminali</h3>
+                        </div>
+                        <p>İnteraktif komut satırı simülasyonu ve siber güvenlik temalı web uygulaması.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">JavaScript CLI</span>
+                            <span class="tech-pill">CyberSecurity</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="hacer_terminali/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Hacker Terminali</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">İnteraktif Komut Satırı ve Siber Güvenlik Temalı Uygulama</span>
+            <!-- 5. kahraman_akademisi -->
+            <a href="kahraman_akademisi/index.html" class="project-card" data-category="game">
+                <div class="card-banner" style="background: linear-gradient(135deg, #991b1b 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-mask banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Akademi</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-mask"></i></div>
+                            <h3>Kahraman Akademisi</h3>
+                        </div>
+                        <p>Süper Kahraman Eğitim Merkezi, kadro ve güç analiz ekranları arayüz tasarımı.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">Superhero UI</span>
+                            <span class="tech-pill">Cards Layout</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="cosmic_tours/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">CosmicTours</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">Uzay Turları ve Galaktik Tatil Rehberi</span>
+            <!-- 6. mars_projesi -->
+            <a href="mars_projesi/index.html" class="project-card" data-category="space">
+                <div class="card-banner" style="background: linear-gradient(135deg, #9a3412 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-globe banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Uzay</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-globe"></i></div>
+                            <h3>Mars Kolonisi</h3>
+                        </div>
+                        <p>Kızıl Gezegene Yolculuk, yaşam destek üniteleri ve interaktif koloni başvuru formu.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">Space Tech</span>
+                            <span class="tech-pill">Form Validation</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="retro_arcade/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Retro Arcade</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">Nostaljik Atari ve Klasik Oyunlar Koleksiyonu</span>
+            <!-- 7. retro_arcade -->
+            <a href="retro_arcade/index.html" class="project-card" data-category="game">
+                <div class="card-banner" style="background: linear-gradient(135deg, #86198f 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-gamepad banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Oyun</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-gamepad"></i></div>
+                            <h3>Retro Arcade</h3>
+                        </div>
+                        <p>Nostaljik atari salonu deneyimi, Mario grafikleri ve klasik oyunlar koleksiyonu.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">Pixel Art</span>
+                            <span class="tech-pill">JS Games</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="sehir_tanitim/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Şehir Tanıtımı</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">İki kıtayı bağlayan efsanevi şehir: İstanbul</span>
+            <!-- 8. sehir_tanitim -->
+            <a href="sehir_tanitim/index.html" class="project-card" data-category="exam">
+                <div class="card-banner" style="background: linear-gradient(135deg, #075985 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-city banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Kültür</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-city"></i></div>
+                            <h3>Şehir Tanıtım Rehberi</h3>
+                        </div>
+                        <p>Şehirlerin kültürel zenginlikleri, tarihi mekânları ve gezilecek yerler rehberi.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">City Guide</span>
+                            <span class="tech-pill">Interactive Map</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="web1/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Oyun Portalı (Web1)</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">Oyunlar ve eğlence içerikleri</span>
+            <!-- 9. siber_garaj -->
+            <a href="siber_garaj/index.html" class="project-card" data-category="tech">
+                <div class="card-banner" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
+                    <i class="fa-solid fa-car-side banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">VIP Kiralama</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-car-side"></i></div>
+                            <h3>SiberGaraj</h3>
+                        </div>
+                        <p>VIP Araç ve Motosiklet Kiralama Platformu, rezervasyon yönetimi.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">Bootstrap 5</span>
+                            <span class="tech-pill">jQuery</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="uzay_gemisi/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Uzay Gemisi</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">Uzay Aracı ve Tasarım Projesi</span>
+            <!-- 10. sihir_akademisi -->
+            <a href="sihir_akademisi/index.html" class="project-card" data-category="game">
+                <div class="card-banner" style="background: linear-gradient(135deg, #5b21b6 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-wand-magic-sparkles banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Akademi</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <h3>Sihir Akademisi</h3>
+                        </div>
+                        <p>Arcanum Akademisi, büyü dersleri ve kadim sırlar rehberi web tasarımı.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">Fantasy UI</span>
+                            <span class="tech-pill">Magic Spells</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="sine_evren/index.html" style="padding: 22px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #f8fafc; text-decoration: none; display: block; transition: transform 0.2s;">
-                <strong style="color: #38bdf8; font-size: 1.2rem; display: block; margin-bottom: 8px;">Sine Evren</strong>
-                <span style="color: #94a3b8; font-size: 0.95rem; line-height: 1.4;">Sinema ve Film Rehberi Projesi</span>
+            <!-- 11. sine_evren -->
+            <a href="sine_evren/index.html" class="project-card" data-category="game">
+                <div class="card-banner" style="background: linear-gradient(135deg, #831843 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-film banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Sinema</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-film"></i></div>
+                            <h3>Sine Evren</h3>
+                        </div>
+                        <p>Film ve dizi dünyasının en kapsamlı platformu ve sinema rehberi.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">Cinema API</span>
+                            <span class="tech-pill">Movie Database</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-        </nav>
+            <!-- 12. tech_store -->
+            <a href="tech_store/index.html" class="project-card" data-category="tech">
+                <div class="card-banner" style="background: linear-gradient(135deg, #0369a1 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-cart-shopping banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">E-Ticaret</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-cart-shopping"></i></div>
+                            <h3>Tech Store</h3>
+                        </div>
+                        <p>Teknoloji ve Elektronik Ürünler Mağazası arayüz tasarımı.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">E-Commerce</span>
+                            <span class="tech-pill">Grid System</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
 
-        <footer style="margin-top: 36px; padding-top: 20px; border-top: 1px solid #334155; color: #64748b; font-size: 0.9rem;">
-            <p style="margin: 0;">&copy; 2026 abdullahbilal.lovestoblog.com | Tüm Hakları Saklıdır.</p>
-        </footer>
+            <!-- 13. teknoloji_blogu -->
+            <a href="teknoloji_blogu/index.html" class="project-card" data-category="tech">
+                <div class="card-banner" style="background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-microchip banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Blog</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-microchip"></i></div>
+                            <h3>Teknoloji Blogu</h3>
+                        </div>
+                        <p>Yapay Zeka Devrimi ve Geleceğin Teknolojileri modern blog rehberi.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">HTML5</span>
+                            <span class="tech-pill">AI Trends</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
 
-    </main>
+            <!-- 14. uzay_gemisi -->
+            <a href="uzay_gemisi/index.html" class="project-card" data-category="space">
+                <div class="card-banner" style="background: linear-gradient(135deg, #4338ca 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-rocket banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Simülasyon</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-rocket"></i></div>
+                            <h3>Uzay Gemisi Komut Modülü</h3>
+                        </div>
+                        <p>Derin uzay keşif gemisi kontrol paneli ve fırlatma simülatörü.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">Spaceship UI</span>
+                            <span class="tech-pill">Telemetry</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
 
+            <!-- 15. web1 -->
+            <a href="web1/index.html" class="project-card" data-category="exam">
+                <div class="card-banner" style="background: linear-gradient(135deg, #0f766e 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-code banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Ders Çalışması</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-code"></i></div>
+                            <h3>Web1 Temel Projesi</h3>
+                        </div>
+                        <p>Web Tasarımının Temelleri, Semantik HTML5 ve CSS3 Uygulama Projesi.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">HTML5</span>
+                            <span class="tech-pill">CSS3</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="no-results" id="noResults">Aradığınız kriterlere uygun proje bulunamadı.</div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Abdullah Bilal Demir. Tüm Hakları Saklıdır.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Typing Effect
+        const phrases = ["Tüm Web Ders Çalışmaları", "15 Farklı Proje Koleksiyonu", "Modern HTML5/CSS3/JS Kodları"];
+        let phraseIdx = 0, charIdx = 0, isDeleting = false;
+        const typingEl = document.getElementById("typing");
+
+        function type() {
+            const current = phrases[phraseIdx];
+            if (isDeleting) {
+                typingEl.textContent = current.substring(0, charIdx--);
+            } else {
+                typingEl.textContent = current.substring(0, charIdx++);
+            }
+
+            if (!isDeleting && charIdx === current.length + 1) {
+                isDeleting = true;
+                setTimeout(type, 1800);
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                setTimeout(type, 400);
+            } else {
+                setTimeout(type, isDeleting ? 40 : 80);
+            }
+        }
+        type();
+
+        // Parçacık Arka Planı
+        const canvas = document.getElementById("particleCanvas");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(56, 189, 248, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 65; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Fare Işık Takibi
+        const glow = document.getElementById("cursorGlow");
+        window.addEventListener("mousemove", (e) => {
+            glow.style.left = e.clientX + "px";
+            glow.style.top = e.clientY + "px";
+        });
+
+        // Live Search & Filter
+        const searchInput = document.getElementById("searchInput");
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const cards = document.querySelectorAll(".project-card");
+        const noResults = document.getElementById("noResults");
+
+        function filterProjects() {
+            const query = searchInput.value.toLowerCase().trim();
+            const activeFilter = document.querySelector(".filter-btn.active").getAttribute("data-filter");
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const category = card.getAttribute("data-category");
+                const text = card.innerText.toLowerCase();
+
+                const matchesSearch = text.includes(query);
+                const matchesFilter = activeFilter === "all" || category === activeFilter;
+
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = "flex";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            noResults.style.display = visibleCount === 0 ? "block" : "none";
+        }
+
+        searchInput.addEventListener("input", filterProjects);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                filterProjects();
+            });
+        });
+
+        // 3D Tilt Effect
+        cards.forEach(card => {
+            card.addEventListener("mousemove", (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+            });
+
+            card.addEventListener("mouseleave", () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            });
+        });
+    </script>
 </body>
 </html>
