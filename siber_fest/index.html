@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiberFest 2026 | Ulusal Teknoloji Yarışması</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<!-- Sayfa başı çıpası için id="ust" veriyoruz -->
+<body id="ust" class="bg-dark text-light">
+
+    <!-- ÜST MENÜ: Hem Sayfalar Arası Hem Sayfa İçi (#) Bağlantılar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info fs-3" href="index.html">
+                <i class="fa-solid fa-microchip"></i> SİBER<span class="text-white">FEST</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <!-- SAYFA İÇİ BAĞLANTILAR (Çıpa / Anchor - Kitap Sayfa 87) -->
+                    <li class="nav-item"><a class="nav-link" href="#hakkinda">Hakkında</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#juriler">Jüri Heyeti</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#iletisim">İletişim & Şartname</a></li>
+                    
+                    <!-- SAYFALAR ARASI BAĞLANTILAR (Kitap Sayfa 89) -->
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-info btn-sm" href="basvuru.html">
+                            <i class="fa-solid fa-pen-to-square"></i> Başvuru Yap
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-info btn-sm fw-bold text-dark" href="projeler.html">
+                            <i class="fa-solid fa-Rocket"></i> Projeler (<span id="projeSayaci">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. BÖLÜM: HAKKINDA VE KONTENJAN GÖSTERGESİ (id="hakkinda") -->
+    <section id="hakkinda" class="container my-5 py-5 text-center bg-black rounded border border-secondary p-4">
+        <span class="badge bg-info text-dark mb-2">SON BAŞVURU: 30 MAYIS 2026</span>
+        <h1 class="display-4 fw-bold text-info">Geleceğin Teknolojisini Sen Kodla!</h1>
+        <p class="lead text-secondary mx-auto" style="max-width: 700px;">
+            Lise ve üniversite takımlarının yarıştığı SiberFest'te projeni kaydet, bütçe desteğini al ve büyük finalde yerini kap!
+        </p>
+
+        <!-- HTML5 <progress> ve <meter> Önizlemesi (Kitap Sayfa 97-98) -->
+        <div class="row justify-content-center my-4 text-start">
+            <div class="col-md-5 bg-dark p-3 rounded border border-secondary m-2">
+                <label class="fw-bold small text-warning">📊 Genel Başvuru Takvimi İlerlemesi (<progress>):</label>
+                <progress value="75" max="100" class="w-100 mt-2" style="height: 20px;"></progress>
+                <small class="text-secondary">Takvimin %75'i tamamlandı.</small>
+            </div>
+            <div class="col-md-5 bg-dark p-3 rounded border border-secondary m-2">
+                <label class="fw-bold small text-info">🌡️ Sunucu Yoğunluk Ölçümü (<meter>):</label>
+                <meter min="0" low="30" high="80" max="100" value="65" class="w-100 mt-2" style="height: 20px;"></meter>
+                <small class="text-secondary">Kapasite: %65 (Normal Seviye)</small>
+            </div>
+        </div>
+
+        <a href="basvuru.html" class="btn btn-info btn-lg fw-bold text-dark px-5 mt-2">
+            <i class="fa-solid fa-paper-plane"></i> Hemen Takımını Kaydet
+        </a>
+    </section>
+
+    <!-- 2. BÖLÜM: CANLI API JÜRİ HEYETİ VE MAILTO BAĞLANTILARI (id="juriler") -->
+    <section id="juriler" class="container my-5 py-4">
+        <h2 class="text-center text-info mb-2"><i class="fa-solid fa-user-tie"></i> Festival Jüri ve Mentör Heyeti</h2>
+        <p class="text-center text-secondary mb-4">Mentörlerin e-posta butonlarına tıklayarak doğrudan soru sorabilirsiniz (<code>mailto:</code> kullanımı).</p>
+        
+        <div id="juri-listesi" class="row g-4">
+            <!-- JS İLE API'DEN JÜRİLER ÇEKİLECEK -->
+        </div>
+    </section>
+
+    <!-- 3. BÖLÜM: DOSYA İNDİRME, RESİM LİNKİ VE E-POSTA BAĞLANTISI (id="iletisim") -->
+    <section id="iletisim" class="container my-5 py-4 bg-black rounded border border-info p-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h3 class="text-info"><i class="fa-solid fa-folder-open"></i> Yarışma Dosyaları ve İletişim</h3>
+                <p class="text-secondary">Başvuru yapmadan önce yarışma şartnamesini indirip incelemeniz gerekmektedir.</p>
+                
+                <!-- DOSYA BAĞLANTISI (Kitap Sayfa 90) -->
+                <a href="https://mtegm.meb.gov.tr" target="_self" class="btn btn-outline-warning me-2 mb-2">
+                    <i class="fa-solid fa-file-pdf"></i> Şartnameyi İndir (.PDF)
+                </a>
+
+                <!-- E-POSTA BAĞLANTISI (Kitap Sayfa 90) -->
+                <a href="mailto:iletisim@siberfest.org.tr?subject=SiberFest%20Proje%20Sorusu" class="btn btn-outline-light mb-2">
+                    <i class="fa-solid fa-envelope"></i> Komiteye E-Posta Gönder
+                </a>
+            </div>
+
+            <!-- GÖRÜNTÜYÜ BAĞLANTI OLARAK KULLANMA VE SİTE DIŞI LİNK (Kitap Sayfa 89-90) -->
+            <div class="col-md-4 text-center mt-3 mt-md-0">
+                <p class="small text-secondary mb-1">Resmî Sponsor (Resme Tıklayınız):</p>
+                <a href="https://www.eba.gov.tr" target="_blank" title="EBA Ana Sayfasına Git">
+                    <img src="https://via.placeholder.com/220x80/0dcaf0/000000?text=EBA+TEKNOLOJI" class="img-fluid rounded border border-light sponsor-resim" alt="Sponsor Logo">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAYFA İÇİ ÇIPA: YUKARI ÇIK BUTONU -->
+    <a href="#ust" class="yukari-cik-btn" title="Sayfa Başına Dön">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+    <footer class="bg-black text-center py-4 text-secondary border-top border-secondary">
+        <p class="mb-0">&copy; 2026 SiberFest Otomasyonu | 11. Sınıf Web Tabanlı Uygulama Geliştirme</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

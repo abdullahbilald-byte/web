@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proje Başvuru Formu | SiberFest</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info fs-3" href="index.html">
+                <i class="fa-solid fa-microchip"></i> SİBER<span class="text-white">FEST</span>
+            </a>
+            <div class="navbar-nav ms-auto align-items-center">
+                <a class="nav-link" href="index.html"><i class="fa-solid fa-house"></i> Ana Sayfa</a>
+                <a class="nav-link active" href="basvuru.html">Başvuru Formu</a>
+                <a class="btn btn-info btn-sm fw-bold text-dark ms-3" href="projeler.html">
+                    Projeler (<span id="projeSayaci">0</span>)
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5" style="max-width: 850px;">
+        <h2 class="text-info text-center mb-4"><i class="fa-solid fa-file-pen"></i> Ulusal Proje Başvuru Formu</h2>
+
+        <!-- GÖREV 10 NOTU: Sınavda novalidate test etmek için buraya novalidate ekleyip test edip sileceksin -->
+        <form id="projeFormu" onsubmit="projeKaydet(event)" autocomplete="on">
+            
+            <!-- 1. GRUP: KAPTAN BİLGİLERİ -->
+            <fieldset class="border border-info rounded p-4 mb-4 bg-black">
+                <legend class="float-none w-auto px-3 text-info fw-bold fs-5">
+                    1. Takım ve Kaptan Bilgileri
+                </legend>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Takım Adı (*):</label>
+                        <input type="text" id="takimAdi" class="form-control bg-dark text-light border-secondary" required autofocus minlength="3" maxlength="30" placeholder="Örn: Siber Yıldızlar">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Takım Kaptanı Ad Soyad (*):</label>
+                        <input type="text" id="kaptanAd" class="form-control bg-dark text-light border-secondary" required placeholder="Örn: Zeynep Kaya">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Kaptan E-Posta (*):</label>
+                        <input type="email" id="kaptanMail" class="form-control bg-dark text-light border-secondary" required placeholder="kaptan@okul.k12.tr">
+                    </div>
+
+                    <!-- GÖREV 7: TELEFON PATTERN KONTROLÜ -->
+                    <div class="col-md-4">
+                        <label class="form-label">GSM Telefon (10 Hane *):</label>
+                        <input type="tel" id="kaptanTel" class="form-control bg-dark text-light border-secondary" required pattern="5[0-9]{9}" title="Başında 0 olmadan 5XX... şeklinde 10 haneli giriniz" placeholder="5321234567">
+                    </div>
+
+                    <!-- GÖREV 4: DATALIST (ŞEHİRLER GENİŞLETİLDİ) -->
+                    <div class="col-md-4">
+                        <label class="form-label">Katıldığınız İl (Datalist *):</label>
+                        <input list="illerListesi" id="sehirSecim" class="form-control bg-dark text-light border-secondary" required placeholder="İl yazın veya seçin...">
+                        <datalist id="illerListesi">
+                            <option value="Zonguldak">
+                            <option value="İstanbul">
+                            <option value="Ankara">
+                            <option value="İzmir">
+                            <option value="Bursa">
+                            <option value="Sakarya">
+                            <option value="Antalya">
+                            <option value="Trabzon">
+                            <option value="Konya">
+                        </datalist>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- 2. GRUP: TEKNİK DETAYLAR -->
+            <fieldset class="border border-warning rounded p-4 mb-4 bg-black">
+                <legend class="float-none w-auto px-3 text-warning fw-bold fs-5">
+                    2. Proje Teknik Detayları ve Bütçe
+                </legend>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Proje Adı (*):</label>
+                        <input type="text" id="projeAdi" class="form-control bg-dark text-light border-secondary" required placeholder="Örn: Akıllı Sera Otomasyonu">
+                    </div>
+
+                    <!-- GÖREV 3: <OPTGROUP> (BİYOTEKNOLOJİ EKLENDİ) -->
+                    <div class="col-md-6">
+                        <label class="form-label">Yarışma Kategorisi (*):</label>
+                        <select id="kategoriSecim" class="form-select bg-dark text-light border-secondary" required>
+                            <option value="">-- Kategori Seçiniz --</option>
+                            <optgroup label="Yazılım ve Siber Teknolojiler">
+                                <option value="Yapay Zeka">Yapay Zeka ve Derin Öğrenme</option>
+                                <option value="Web & Mobil">Web ve Mobil Uygulama Geliştirme</option>
+                                <option value="Siber Güvenlik">Siber Güvenlik ve Kriptoloji</option>
+                            </optgroup>
+                            <optgroup label="Donanım ve Mühendislik">
+                                <option value="İnsansız Hava Araçları">İnsansız Hava Araçları (İHA)</option>
+                                <option value="Robotik & IoT">Robotik ve Nesnelerin İnterneti</option>
+                                <option value="Akıllı Enerji">Akıllı Ulaşım ve Enerji</option>
+                            </optgroup>
+                            <optgroup label="Biyoteknoloji ve Sağlık">
+                                <option value="Biyoteknoloji">Biyoteknoloji ve Genetik</option>
+                                <option value="Tibbi Cihaz">Akıllı Tıbbi Cihazlar</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Üye Sayısı (2-6 Kişi):</label>
+                        <input type="number" id="uyeSayisi" class="form-control bg-dark text-light border-secondary" min="2" max="6" step="1" value="3" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Sunum Tarihi (*):</label>
+                        <input type="date" id="sunumTarihi" class="form-control bg-dark text-light border-secondary" min="2026-05-01" max="2026-06-30" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Takım Temsil Rengi:</label>
+                        <input type="color" id="takimRengi" class="form-control form-control-color w-100 bg-dark border-secondary" value="#0dcaf0">
+                    </div>
+
+                    <!-- GÖREV 8: STEP DEĞİŞİKLİĞİ (step="5000" yapıldı) -->
+                    <div class="col-md-6">
+                        <label class="form-label d-flex justify-content-between">
+                            <span>Talep Edilen Hibe Bütçesi:</span>
+                            <strong id="butceGosterge" class="text-warning">20000 TL</strong>
+                        </label>
+                        <input type="range" id="butceRange" class="form-range" min="5000" max="50000" step="5000" value="20000" oninput="butceYazdir(this.value)">
+                        <small class="text-secondary">Min: 5.000 TL - Max: 50.000 TL (5.000 TL artışlı)</small>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label d-flex justify-content-between">
+                            <span>Proje Hazırlık Oranı (%):</span>
+                            <strong id="hazirlikGosterge" class="text-info">%60</strong>
+                        </label>
+                        <input type="range" id="hazirlikRange" class="form-range" min="10" max="100" step="10" value="60" oninput="hazirlikYazdir(this.value)">
+                        <small class="text-secondary">Prototipin ne kadarı bitti?</small>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Proje GitHub Repo Adresi (URL):</label>
+                        <input type="url" id="githubUrl" class="form-control bg-dark text-light border-secondary" placeholder="https://github.com/takim/proje">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Proje Sunum Dosyası (.pdf / .zip):</label>
+                        <input type="file" id="projeDosya" class="form-control bg-dark text-light border-secondary">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label d-block">Eğitim Seviyesi:</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="seviye" id="lise" value="Lise" checked>
+                            <label class="form-check-label" for="lise">Mesleki / Anadolu Lisesi</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="seviye" id="uni" value="Üniversite">
+                            <label class="form-check-label" for="uni">Üniversite</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label d-block">Stand İhtiyaçları:</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="ihtiyac1" value="Fiber İnternet" checked>
+                            <label class="form-check-label" for="ihtiyac1">Fiber İnternet</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="ihtiyac2" value="380V Sanayi Elektriği">
+                            <label class="form-check-label" for="ihtiyac2">Sanayi Elektriği</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Proje Özeti ve Amacı (*):</label>
+                        <textarea id="projeOzet" rows="3" class="form-control bg-dark text-light border-secondary" required placeholder="Projenizin çözdüğü problemi kısaca anlatınız..."></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-info btn-lg fw-bold text-dark flex-grow-1">
+                    <i class="fa-solid fa-check-circle"></i> BAŞVURUYU SİSTEME KAYDET
+                </button>
+                <button type="reset" class="btn btn-outline-danger btn-lg">
+                    <i class="fa-solid fa-rotate-left"></i> Formu Temizle
+                </button>
+            </div>
+
+        </form>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
