@@ -356,7 +356,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            /* Geçiş hızı akıcı tilt takibi için dinamik ayarlandı */
             transition: border-color 0.4s, box-shadow 0.4s;
             transform-style: preserve-3d;
             will-change: transform;
@@ -556,7 +555,7 @@
         <!-- İSTATİSTİK SAYACI -->
         <div class="stats-bar">
             <div class="stat-item">
-                <div class="num">19</div>
+                <div class="num">20</div>
                 <div class="label">Aktif Proje Klasörü</div>
             </div>
             <div class="stat-item">
@@ -584,8 +583,32 @@
             </div>
         </div>
 
-        <!-- PROJE KARTLARI LİSTESİ (19 PROJE TAM LİSTE) -->
+        <!-- PROJE KARTLARI LİSTESİ -->
         <div class="projects-grid" id="projectsGrid">
+
+            <!-- FİNAL_1294 EKLENTİSİ -->
+            <a href="final_1294/index.html" class="project-card" data-category="exam">
+                <div class="card-banner" style="background: linear-gradient(135deg, #10b981 0%, #0f172a 100%);">
+                    <i class="fa-solid fa-award banner-icon"></i>
+                    <div class="card-overlay"></div>
+                    <span class="card-tag-badge">Final Projesi</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="icon-wrapper"><i class="fa-solid fa-award"></i></div>
+                            <h3>Final 1294</h3>
+                        </div>
+                        <p>Özel final dönemi entegre web geliştirme ve uygulama projesi.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-pill">Final App</span>
+                            <span class="tech-pill">Advanced UI</span>
+                            <span class="tech-pill">HTML5/JS</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
 
             <!-- 1. aero_siber -->
             <a href="aero_siber/index.html" class="project-card" data-category="tech">
@@ -827,238 +850,30 @@
                 </div>
             </a>
 
-            <!-- 11. siber_garaj -->
-            <a href="siber_garaj/index.html" class="project-card" data-category="tech">
-                <div class="card-banner" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
-                    <i class="fa-solid fa-car-side banner-icon"></i>
-                    <div class="card-overlay"></div>
-                    <span class="card-tag-badge">VIP Kiralama</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <div class="icon-wrapper"><i class="fa-solid fa-car-side"></i></div>
-                            <h3>SiberGaraj</h3>
-                        </div>
-                        <p>VIP Araç ve Motosiklet Kiralama Platformu, online rezervasyon yönetimi.</p>
-                        <div class="card-tech-stack">
-                            <span class="tech-pill">Bootstrap 5</span>
-                            <span class="tech-pill">jQuery</span>
-                            <span class="tech-pill">Rental UI</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- 12. sihir_akademisi -->
-            <a href="sihir_akademisi/index.html" class="project-card" data-category="game">
-                <div class="card-banner" style="background: linear-gradient(135deg, #5b21b6 0%, #0f172a 100%);">
-                    <i class="fa-solid fa-wand-magic-sparkles banner-icon"></i>
-                    <div class="card-overlay"></div>
-                    <span class="card-tag-badge">Akademi</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <div class="icon-wrapper"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                            <h3>Sihir Akademisi</h3>
-                        </div>
-                        <p>Arcanum Akademisi, büyü dersleri ve kadim sırlar rehberi web tasarımı.</p>
-                        <div class="card-tech-stack">
-                            <span class="tech-pill">Fantasy UI</span>
-                            <span class="tech-pill">Magic Spells</span>
-                            <span class="tech-pill">Animations</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- 13. sinav_1294 -->
-            <a href="sinav_1294/index.html" class="project-card" data-category="exam">
-                <div class="card-banner" style="background: linear-gradient(135deg, #1e1b4b 0%, #311b92 100%);">
-                    <i class="fa-solid fa-file-pen banner-icon"></i>
-                    <div class="card-overlay"></div>
-                    <span class="card-tag-badge">Sınav</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <div class="icon-wrapper"><i class="fa-solid fa-file-pen"></i></div>
-                            <h3>Sınav Modülü 1294</h3>
-                        </div>
-                        <p>Akademik sınav değerlendirme, soru havuzu ve test çözme modülü.</p>
-                        <div class="card-tech-stack">
-                            <span class="tech-pill">Quiz Engine</span>
-                            <span class="tech-pill">Evaluation</span>
-                            <span class="tech-pill">JavaScript</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- 14. sinav_12941 -->
-            <a href="sinav_12941/index.html" class="project-card" data-category="exam">
-                <div class="card-banner" style="background: linear-gradient(135deg, #3b0764 0%, #1e1b4b 100%);">
-                    <i class="fa-solid fa-clipboard-check banner-icon"></i>
-                    <div class="card-overlay"></div>
-                    <span class="card-tag-badge">Sınav</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <div class="icon-wrapper"><i class="fa-solid fa-clipboard-check"></i></div>
-                            <h3>Sınav Modülü v2</h3>
-                        </div>
-                        <p>Gelişmiş sınav takip ve interaktif soru test platformu uygulaması.</p>
-                        <div class="card-tech-stack">
-                            <span class="tech-pill">Advanced Quiz</span>
-                            <span class="tech-pill">Form Logic</span>
-                            <span class="tech-pill">UI/UX</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- 15. sine_evren -->
-            <a href="sine_evren/index.html" class="project-card" data-category="game">
-                <div class="card-banner" style="background: linear-gradient(135deg, #831843 0%, #0f172a 100%);">
-                    <i class="fa-solid fa-film banner-icon"></i>
-                    <div class="card-overlay"></div>
-                    <span class="card-tag-badge">Sinema</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <div class="icon-wrapper"><i class="fa-solid fa-film"></i></div>
-                            <h3>Sine Evren</h3>
-                        </div>
-                        <p>Sinema, film incelemeleri ve interaktif sinema salonu platformu.</p>
-                        <div class="card-tech-stack">
-                            <span class="tech-pill">Cinema DB</span>
-                            <span class="tech-pill">Media UI</span>
-                            <span class="tech-pill">CSS/JS</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- 16. tech_store -->
-            <a href="tech_store/index.html" class="project-card" data-category="tech">
-                <div class="card-banner" style="background: linear-gradient(135deg, #047857 0%, #0f172a 100%);">
-                    <i class="fa-solid fa-store banner-icon"></i>
-                    <div class="card-overlay"></div>
-                    <span class="card-tag-badge">E-Ticaret</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <div class="icon-wrapper"><i class="fa-solid fa-store"></i></div>
-                            <h3>Tech Store</h3>
-                        </div>
-                        <p>Teknoloji ürünleri satış, sepet yönetimi ve e-ticaret arayüzü.</p>
-                        <div class="card-tech-stack">
-                            <span class="tech-pill">E-Commerce</span>
-                            <span class="tech-pill">Cart System</span>
-                            <span class="tech-pill">Responsive</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- 17. teknoloji_blogu -->
-            <a href="teknoloji_blogu/index.html" class="project-card" data-category="tech">
-                <div class="card-banner" style="background: linear-gradient(135deg, #b45309 0%, #0f172a 100%);">
-                    <i class="fa-solid fa-blog banner-icon"></i>
-                    <div class="card-overlay"></div>
-                    <span class="card-tag-badge">Blog</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <div class="icon-wrapper"><i class="fa-solid fa-blog"></i></div>
-                            <h3>Teknoloji Blogu</h3>
-                        </div>
-                        <p>Yazılım, siber güvenlik ve yapay zeka makalelerinin yayınlandığı blog platformu.</p>
-                        <div class="card-tech-stack">
-                            <span class="tech-pill">Blog Layout</span>
-                            <span class="tech-pill">Articles</span>
-                            <span class="tech-pill">Typography</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- 18. uzay_gemisi -->
-            <a href="uzay_gemisi/index.html" class="project-card" data-category="space">
-                <div class="card-banner" style="background: linear-gradient(135deg, #312e81 0%, #0f172a 100%);">
-                    <i class="fa-solid fa-rocket banner-icon"></i>
-                    <div class="card-overlay"></div>
-                    <span class="card-tag-badge">Uzay</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <div class="icon-wrapper"><i class="fa-solid fa-rocket"></i></div>
-                            <h3>Uzay Gemisi Simülatörü</h3>
-                        </div>
-                        <p>Uzay gemisi kokpit göstergeleri, rota planlama ve kontrol paneli.</p>
-                        <div class="card-tech-stack">
-                            <span class="tech-pill">Cockpit UI</span>
-                            <span class="tech-pill">Animations</span>
-                            <span class="tech-pill">Interactive</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
-            <!-- 19. web1 -->
-            <a href="web1/index.html" class="project-card" data-category="exam">
-                <div class="card-banner" style="background: linear-gradient(135deg, #334155 0%, #0f172a 100%);">
-                    <i class="fa-solid fa-code banner-icon"></i>
-                    <div class="card-overlay"></div>
-                    <span class="card-tag-badge">Temel Web</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="card-header">
-                            <div class="icon-wrapper"><i class="fa-solid fa-code"></i></div>
-                            <h3>Web Dersleri v1</h3>
-                        </div>
-                        <p>İlk web tasarımı ve HTML/CSS çalışma örnekleri arşivi.</p>
-                        <div class="card-tech-stack">
-                            <span class="tech-pill">HTML Basics</span>
-                            <span class="tech-pill">CSS Styles</span>
-                            <span class="tech-pill">Archive</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">Projeyi İncele <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </a>
-
         </div>
 
         <div class="no-results" id="noResults">
-            <i class="fa-solid fa-circle-exclamation" style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);"></i>
+            <i class="fa-regular fa-face-grimace fa-2x" style="margin-bottom: 1rem;"></i>
             <p>Aradığınız kriterlere uygun proje bulunamadı.</p>
         </div>
-
     </div>
 
+    <!-- FOOTER -->
     <footer>
         <p>&copy; 2026 Abdullah Bilal Demir. Tüm hakları saklıdır. | Ultra Proje Portföy Merkezi</p>
     </footer>
 
+    <!-- JAVASCRIPT ETKİLEŞİMLERİ (Arama, Filtreleme, 3D Tilt, Fare Işığı ve Parçacıklar) -->
     <script>
-        // YazıEfekti (Typing Effect)
-        const words = ["Siber Güvenlik Projeleri", "Uzay Simülasyonları", "Web Çalışmaları", "Eğitim ve Sınav Modülleri"];
+        // Fare Işığı Takibi (İmleç Efekti)
+        const cursorGlow = document.getElementById('cursorGlow');
+        window.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // Yazı Efekti (Typing)
+        const words = ["Yazılım Mühendisliği Projeleri", "Web Çalışmaları & Tasarımlar", "İnteraktif Laboratuvarlar"];
         let i = 0;
         let timer;
 
@@ -1071,7 +886,7 @@
                     setTimeout(deletingEffect, 2000);
                     return;
                 }
-                timer = setTimeout(loopTyping, 100);
+                timer = setTimeout(loopTyping, 80);
             };
             loopTyping();
         }
@@ -1091,104 +906,11 @@
                     setTimeout(typingEffect, 500);
                     return;
                 }
-                timer = setTimeout(loopDeleting, 50);
+                timer = setTimeout(loopDeleting, 40);
             };
             loopDeleting();
         }
         typingEffect();
-
-        // Fare Işığı Takibi (Cursor Glow)
-        const cursorGlow = document.getElementById('cursorGlow');
-        window.addEventListener('mousemove', (e) => {
-            cursorGlow.style.left = e.clientX + 'px';
-            cursorGlow.style.top = e.clientY + 'px';
-        });
-
-        // Parçacık Arka Plan Efekti
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.6 - 0.3;
-                this.speedY = Math.random() * 0.6 - 0.3;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.width * canvas.height) / 15000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-        initParticles();
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        // Karta Fare Konumuna Göre 3D Tilt (Eğilme/Dönme) Efekti
-        const cards = document.querySelectorAll('.project-card');
-
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; // Kart içindeki X koordinatı
-                const y = e.clientY - rect.top;  // Kart içindeki Y koordinatı
-
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                // İmlecin merkezden uzaklığına göre açı hesaplama (-12 ile +12 derece arası)
-                const rotateX = -((y - centerY) / centerY) * 12;
-                const rotateY = ((x - centerX) / centerX) * 12;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                // Fare çıkınca kart orijinal pozisyonuna yumuşakça döner
-                card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-            });
-
-            card.addEventListener('mouseenter', () => {
-                // Fare üzerindeyken ani geçişleri engellemek için transition'ı sıfırla
-                card.style.transition = 'transform 0.1s ease-out, border-color 0.4s, box-shadow 0.4s';
-            });
-        });
 
         // Arama ve Filtreleme Mantığı
         const searchInput = document.getElementById('searchInput');
@@ -1196,20 +918,21 @@
         const projectCards = document.querySelectorAll('.project-card');
         const noResults = document.getElementById('noResults');
 
-        let currentFilter = 'all';
+        let currentCategory = 'all';
 
         function filterProjects() {
             const query = searchInput.value.toLowerCase().trim();
             let visibleCount = 0;
 
             projectCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
                 const category = card.getAttribute('data-category');
-                const textContent = card.innerText.toLowerCase();
+                
+                const matchesCategory = (currentCategory === 'all' || category === currentCategory);
+                const matchesQuery = (title.includes(query) || desc.includes(query));
 
-                const matchesCategory = (currentFilter === 'all' || category === currentFilter);
-                const matchesSearch = textContent.includes(query);
-
-                if (matchesCategory && matchesSearch) {
+                if (matchesCategory && matchesQuery) {
                     card.style.display = 'flex';
                     visibleCount++;
                 } else {
@@ -1230,10 +953,106 @@
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                currentFilter = btn.getAttribute('data-filter');
+                currentCategory = btn.getAttribute('data-filter');
                 filterProjects();
             });
         });
+
+        // 3D Tilt Efekti
+        projectCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        // Kanvas Parçacık Animasyonu
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particlesArray = [];
+        const numberOfParticles = Math.floor(window.innerWidth / 35);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(56, 189, 248, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray.length = 0;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+
+                for (let j = i + 1; j < particlesArray.length; j++) {
+                    const dx = particlesArray[i].x - particlesArray[j].x;
+                    const dy = particlesArray[i].y - particlesArray[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 110) {
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.12 * (1 - distance / 110)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
     </script>
 </body>
 </html>
+```[cite: 1]
