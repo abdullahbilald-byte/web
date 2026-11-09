@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroSiber | Geleceğin Havayolu ve Uçuş Portalı</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="sayfaBasi" class="bg-dark text-light">
+
+    <!-- 9. HAFTA BELİRLİ GÜNLER: 10 KASIM ATATÜRK'Ü ANMA BANDI -->
+    <div class="anma-bari text-center py-2">
+        <i class="fa-solid fa-infinity text-warning"></i> 
+        <strong>"İstikbal göklerdedir."</strong> — Cumhuriyetimizin Kurucusu Gazi Mustafa Kemal Atatürk'ü saygı ve özlemle anıyoruz.
+    </div>
+
+    <!-- KİTAP SAYFA 136 (GÖRSEL 4.27): SABİT POZİSYONLU (FIXED) HIZLI ERİŞİM BUTONLARI -->
+    <div class="sabit-yan-menu">
+        <a href="mailto:destek@aerosiber.com?subject=Acil%20Ucus%20Destegi" class="yan-btn kirmizi" title="E-Posta Gönder (mailto)">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a href="tel:+908502220000" class="yan-btn siyah" title="Çağrı Merkezini Ara (tel)">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="https://www.shgm.gov.tr" target="_blank" class="yan-btn mavi" title="Sivil Havacılık (Dış Bağlantı)">
+            <i class="fa-solid fa-plane-up"></i>
+        </a>
+    </div>
+
+    <!-- ÜST MENÜ (NAVBAR) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info fs-3" href="index.html">
+                <i class="fa-solid fa-plane-departure"></i> AERO<span class="text-white">SİBER</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#anaMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="anaMenu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#avantajlar">Avantajlar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kaptanlar">Kaptanlarımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bagaj-kurallari">Bagaj & Kurallar</a></li>
+                    
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-info btn-sm" href="rezervasyon.html">
+                            <i class="fa-solid fa-ticket"></i> Bilet Al (Form)
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-info btn-sm fw-bold text-dark" href="biletlerim.html">
+                            <i class="fa-solid fa-passport"></i> Biniş Kartlarım (<span id="biletSayaci">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- KARŞILAMA ALANI -->
+    <header class="container my-5 p-5 bg-black rounded border border-secondary text-center">
+        <h1 id="anaBaslik" class="display-5 fw-bold text-info">Bulutların Üzerinde Siber Konfor</h1>
+        <p class="hikaye-paragrafi text-secondary mx-auto mt-3" style="max-width: 750px;">
+            AeroSiber Havayolları ile kıtalararası yolculuk artık çok daha hızlı ve güvenli. Akıllı koltuk seçimi, dijital biniş kartı ve anlık bagaj ölçüm sistemimizle uçuş deneyiminizi yeniden tanımlıyoruz.
+        </p>
+        <div class="mt-4">
+            <a href="rezervasyon.html" class="btn btn-info btn-lg fw-bold text-dark me-2">
+                <i class="fa-solid fa-calendar-check"></i> Hemen Uçuş Planla
+            </a>
+            <a href="#kaptanlar" class="btn btn-outline-light btn-lg">
+                <i class="fa-solid fa-arrow-down"></i> Mürettebatı Tanı
+            </a>
+        </div>
+    </header>
+
+    <!-- 1. BÖLÜM: AVANTAJLAR -->
+    <section id="avantajlar" class="container my-5 py-3">
+        <h2 class="bolum-basligi text-info mb-4">Neden AeroSiber?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="kutu-modeli-ornek">
+                    <h3>🚀 Süpersonik Hız</h3>
+                    <p>Yeni nesil aerodinamik filomuzla uçuş sürelerini <b>%30 oranında</b> kısaltıyoruz.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kutu-modeli-ornek">
+                    <h3>🛡️ Tam Güvenlik</h3>
+                    <p>Yapay zeka destekli otopilot ve <b>7/24 siber kalkan</b> ile güvenli seyahat.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kutu-modeli-ornek">
+                    <h3>🧳 Akıllı Bagaj</h3>
+                    <p>HTML5 <b>meter ve progress</b> sensörleriyle valiz ağırlığınız anlık takip edilir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. BÖLÜM: KİTAP SAYFA 136 KAPTANLAR -->
+    <section id="kaptanlar" class="container my-5 py-4 text-center">
+        <h2 class="bolum-basligi text-info mb-2">Kıdemli Kaptan Pilotlarımız</h2>
+        <p class="text-secondary mb-4">CSS <code>position: relative</code>, <code>position: absolute</code> ve <code>z-index</code> ile tasarlanmış özel profil kartları:</p>
+        
+        <div id="kaptan-listesi" class="d-flex flex-wrap justify-content-center gap-4">
+            <!-- JS İLE YÜKLENECEK -->
+        </div>
+    </section>
+
+    <!-- 3. BÖLÜM: DOSYA İNDİRME -->
+    <section id="bagaj-kurallari" class="container my-5 p-4 bg-black rounded border border-info">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h3 class="text-info">Uçuş ve Bagaj Kuralları El Kitabı</h3>
+                <p class="text-secondary">Kabin bagajı sıvı kısıtlamaları ve tehlikeli madde kurallarını içeren PDF dosyayı indirebilirsiniz.</p>
+                
+                <a href="bagaj-kurallari.pdf" download class="ozel-link me-3">
+                    <i class="fa-solid fa-file-arrow-down"></i> Kurallar Kitapçığını İndir (.PDF)
+                </a>
+                <a href="mailto:kayipbagaj@aerosiber.com" class="ozel-link">
+                    <i class="fa-solid fa-suitcase-rolling"></i> Kayıp Eşya Bildirimi
+                </a>
+            </div>
+            <div class="col-md-4 text-center mt-3 mt-md-0">
+                <a href="rezervasyon.html" title="Bilet Almak İçin Resme Tıklayın">
+                    <img src="https://via.placeholder.com/240x90/ffc107/000000?text=BILET+AL+TIKLA" class="img-fluid rounded border border-warning" alt="Bilet Al Banner">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SABİT YUKARI KAYDIRMA OKU -->
+    <a href="#sayfaBasi" id="kaydirmaCubugu" title="En Üste Çık">
+        <i class="fa-solid fa-angles-up"></i>
+    </a>
+
+    <footer class="bg-black text-center py-4 text-secondary border-top border-secondary">
+        <p class="mb-0">&copy; 2026 AeroSiber Havacılık A.Ş. | Tüm Uçuş Hakları Saklıdır.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

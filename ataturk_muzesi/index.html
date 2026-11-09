@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1881 - 1938∞ | Dijital Atatürk Müzesi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="sayfaBasi" class="bg-siyah text-light">
+
+    <!-- 09:05 SAYGI DURUŞU TAM EKRAN KATMANI -->
+    <div id="saygiDurusuKatmani" style="display: none;">
+        <div class="saygi-icerik text-center">
+            <h1 class="display-1 fw-bold text-altin">09 : 05</h1>
+            <h2 class="text-white my-3">Fikirler Ölmez. Saygı, Minnet ve Özlemle...</h2>
+            <p class="text-secondary fs-4">1881 - 1938 <i class="fa-solid fa-infinity text-altin"></i></p>
+            <button onclick="saygiDurusuKapat()" class="btn btn-outline-warning mt-4 px-4">
+                Müzeye Dön
+            </button>
+        </div>
+    </div>
+
+    <!-- SABİT YAN HIZLI ERİŞİM BAR -->
+    <div class="sabit-anma-menu">
+        <button onclick="saygiDurusuAc()" class="yan-anma-btn altin" title="09:05 Saygı Duruşu Modu">
+            <i class="fa-solid fa-bell"></i>
+        </button>
+        <a href="defter.html" class="yan-anma-btn kirmizi" title="Anı Defterine Yaz">
+            <i class="fa-solid fa-feather-pointed"></i>
+        </a>
+        <a href="https://www.anitkabir.tsk.tr" target="_blank" class="yan-anma-btn siyah" title="Resmî Anıtkabir Sitesi">
+            <i class="fa-solid fa-landmark"></i>
+        </a>
+    </div>
+
+    <!-- ÜST MENÜ (NAVBAR) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-altin sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-altin fs-3 baslik-font" href="index.html">
+                1881 - 1938<i class="fa-solid fa-infinity ms-1"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#muzeMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="muzeMenu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#kronoloji">Kronoloji</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hitabe">Gençliğe Hitabe</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#vizyon">Bilim & Vizyon</a></li>
+                    
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-warning btn-sm" href="defter.html">
+                            <i class="fa-solid fa-feather"></i> Anı Defterini İmzala
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-warning btn-sm fw-bold text-dark" href="anilar.html">
+                            <i class="fa-solid fa-book-open"></i> Anı Duvarı (<span id="aniSayaci">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- KARŞILAMA ALANI -->
+    <header class="anma-hero text-center d-flex align-items-center justify-content-center">
+        <div class="container p-4">
+            <span class="badge bg-danger px-3 py-2 mb-3 fs-6">10 KASIM ATATÜRK'Ü ANMA HAFTASI</span>
+            <h1 class="display-3 fw-bold text-altin baslik-font">MUSTAFA KEMAL ATATÜRK</h1>
+            <p class="lead text-light mx-auto my-3" style="max-width: 750px; font-size: 1.35em;">
+                "Benim naçiz vücudum elbet bir gün toprak olacaktır, ancak Türkiye Cumhuriyeti ilelebet payidar kalacaktır."
+            </p>
+            <div class="mt-4">
+                <a href="defter.html" class="btn btn-warning btn-lg fw-bold text-dark me-2 px-4">
+                    <i class="fa-solid fa-pen-fancy"></i> Ata'ya Sözünü Yaz
+                </a>
+                <button onclick="saygiDurusuAc()" class="btn btn-outline-light btn-lg px-4">
+                    <i class="fa-solid fa-clock"></i> 09:05 Saygı Duruşu
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. BÖLÜM: TARİHSEL KRONOLOJİ KARTLARI -->
+    <section id="kronoloji" class="container my-5 py-4">
+        <h2 class="ozel-baslik text-center text-altin mb-5">Bir Milletin Yeniden Doğuş Kronolojisi</h2>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <article class="kronoloji-karti">
+                    <span class="yil-rozeti">1881</span>
+                    <h4>Selanik'te Doğuş</h4>
+                    <p>Bir milletin kaderini değiştirecek olan Mustafa, Selanik'te Kocakasım Mahallesi'ndeki pembe evde dünyaya geldi.</p>
+                </article>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <article class="kronoloji-karti">
+                    <span class="yil-rozeti">1919</span>
+                    <h4>19 Mayıs Samsun</h4>
+                    <p>Bandırma Vapuru ile Samsun'a çıkarak Milli Mücadele ateşini yaktı ve Kurtuluş Savaşı'nı başlattı.</p>
+                </article>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <article class="kronoloji-karti">
+                    <span class="yil-rozeti">1923</span>
+                    <h4>Cumhuriyetin İlanı</h4>
+                    <p>"Egemenlik kayıtsız şartsız milletindir!" ilkesiyle 29 Ekim 1923'te Türkiye Cumhuriyeti'ni kurdu.</p>
+                </article>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <article class="kronoloji-karti">
+                    <span class="yil-rozeti sonsuz">1938 ∞</span>
+                    <h4>Sonsuzluğa Yolculuk</h4>
+                    <p>10 Kasım 1938 saat 09:05'te Dolmabahçe'de gözlerini yumdu; fikirleri ve eserleri Türk gençliğine emanet kaldı.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. BÖLÜM: GENÇLİĞE HİTABE -->
+    <section id="hitabe" class="container my-5 py-4">
+        <div class="hitabe-cerceve">
+            <h2 class="text-center text-altin baslik-font mb-4">ATATÜRK'ÜN GENÇLİĞE HİTABESİ</h2>
+            
+            <p class="hitabe-metin">
+                <b>Ey Türk gençliği!</b> <ins>Birinci vazifen;</ins> Türk istiklalini, Türk Cumhuriyetini, ilelebet muhafaza ve müdafaa etmektir. 
+                <mark class="bg-warning text-dark px-1 fw-bold">Mevcudiyetinin ve istikbalinin yegâne temeli budur.</mark> Bu temel, senin en kıymetli hazinendir. İstikbalde dahi, seni bu hazineden mahrum etmek isteyecek dâhilî ve haricî bedhahların olacaktır.
+            </p>
+            <p class="hitabe-metin">
+                <b>Ey Türk istikbalinin evladı!</b> <em>İşte, bu ahval ve şerait içinde dahi vazifen, Türk istiklal ve cumhuriyetini kurtarmaktır. Muhtaç olduğun kudret, damarlarındaki asil kanda mevcuttur!</em>
+            </p>
+            <div class="text-end mt-3">
+                <strong class="text-altin fs-5">Mustafa Kemal Atatürk</strong><br>
+                <small class="text-secondary">20 Ekim 1927</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. BÖLÜM: BİLİM VE VİZYON -->
+    <section id="vizyon" class="container my-5 p-4 bg-black rounded border border-secondary">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h3 class="text-altin baslik-font">Bilim ve Teknoloji Mirası</h3>
+                <p class="text-secondary">
+                    Atatürk, kendi eliyle yazdığı <b>"Geometri"</b> kitabıyla bugün kullandığımız üçgen, açı, artı, eksi, çarpı, bölü gibi Türkçe matematik ve mühendislik terimlerini dilimize kazandırmıştır.
+                </p>
+                <a href="defter.html" class="ozel-anma-link me-3">
+                    <i class="fa-solid fa-laptop-code"></i> Bilişim Gençliği Olarak Söz Bırak
+                </a>
+                <a href="mailto:kultur@meb.gov.tr?subject=10%20Kasim%20Projemiz" class="ozel-anma-link">
+                    <i class="fa-solid fa-share-nodes"></i> Projeyi Paylaş
+                </a>
+            </div>
+            <div class="col-md-4 text-center mt-3 mt-md-0">
+                <div class="p-3 border border-warning rounded bg-dark">
+                    <i class="fa-solid fa-graduation-cap fs-1 text-altin mb-2"></i>
+                    <h6 class="text-white mb-0">"Hayatta en hakiki mürşit ilimdir, fendir."</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="#sayfaBasi" id="yukariOk" title="Sayfa Başına Dön">
+        <i class="fa-solid fa-chevron-up"></i>
+    </a>
+
+    <footer class="bg-black text-center py-4 text-secondary border-top border-secondary">
+        <p class="mb-0">&copy; 2026 Zonguldak MTAL Bilişim Teknolojileri Alanı | Saygı ve Minnetle</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

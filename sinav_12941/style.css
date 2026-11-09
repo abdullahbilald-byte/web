@@ -1,0 +1,113 @@
+.uzman-karti {
+    transition: all 0.3s ease;
+    background-color: #111418;
+}
+
+.uzman-karti:hover {
+    transform: translateY(-8px);
+    border-color: #0dcaf0 !important;
+}
+
+.uzman-avatar {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #0dcaf0;
+    margin: 15px auto 5px;
+}
+
+#uzman-listesi .card-body {
+    min-height: 255px;
+}
+
+.work-dashboard {
+    padding: 1.5rem;
+    border: 1px solid #264452;
+    border-radius: 1rem;
+    background: linear-gradient(145deg, #101a20, #090d11);
+}
+
+.work-eyebrow {
+    color: #7f9aa4;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.live-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.35rem;
+    border-radius: 50%;
+    background: #75e0a1;
+    box-shadow: 0 0 0.65rem #75e0a1;
+    animation: live-pulse 1.5s ease-in-out infinite;
+}
+
+.work-card {
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid #29363e;
+    border-radius: 0.85rem;
+    background: #111820;
+}
+
+.work-card img {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.work-card .progress {
+    height: 0.45rem;
+    background: #29363e;
+}
+
+.activity-feed {
+    display: grid;
+    gap: 0.5rem;
+    padding-left: 1.25rem;
+    color: #aeb8bf;
+    font-size: 0.875rem;
+}
+
+.activity-feed li {
+    padding: 0.65rem 0.75rem;
+    border-left: 2px solid #0dcaf0;
+    border-radius: 0.25rem;
+    background: #111820;
+}
+
+.activity-time {
+    margin-right: 0.5rem;
+    color: #0dcaf0;
+    font-variant-numeric: tabular-nums;
+}
+
+@keyframes live-pulse {
+    50% {
+        opacity: 0.4;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .navbar-brand {
+        font-size: 1.15rem !important;
+    }
+
+    .work-dashboard {
+        padding: 1rem;
+    }
+
+    .navbar-nav {
+        align-items: flex-start !important;
+        padding-bottom: 0.5rem;
+    }
+
+    .navbar-nav .btn {
+        margin-left: 0 !important;
+    }
+}

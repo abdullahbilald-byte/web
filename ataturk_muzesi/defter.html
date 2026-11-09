@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anı Defterini İmzala | Dijital Atatürk Müzesi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-siyah text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-altin">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-altin fs-3 baslik-font" href="index.html">
+                1881 - 1938<i class="fa-solid fa-infinity ms-1"></i>
+            </a>
+            <div class="navbar-nav ms-auto align-items-center">
+                <a class="nav-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Müzeye Dön</a>
+                <a class="nav-link active" href="defter.html">Anı Defteri</a>
+                <a class="btn btn-warning btn-sm fw-bold text-dark ms-3" href="anilar.html">
+                    Anı Duvarı (<span id="aniSayaci">0</span>)
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5" style="max-width: 850px;">
+        <div class="text-center mb-4">
+            <h2 class="text-altin baslik-font"><i class="fa-solid fa-feather-pointed"></i> Dijital Anıtkabir Özel Defteri</h2>
+            <p class="text-secondary">Cumhuriyetin 2. Yüzyılında Atatürk'e olan bağlılığınızı ve gelecek hedeflerinizi kaydedin.</p>
+        </div>
+
+        <form id="aniFormu" onsubmit="aniKaydet(event)" autocomplete="on">
+            
+            <fieldset class="anma-fieldset mb-4">
+                <legend><i class="fa-solid fa-user-graduate"></i> 1. Ziyaretçi Kimlik Bilgileri</legend>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Adınız ve Soyadınız (*):</label>
+                        <input type="text" id="ziyaretciAd" class="form-control anma-input" required autofocus minlength="3" placeholder="Örn: Mustafa Demir">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Katıldığınız Şehir (Datalist *):</label>
+                        <input list="sehirler" id="ziyaretciSehir" class="form-control anma-input" required placeholder="Şehir yazın veya seçin...">
+                        <datalist id="sehirler">
+                            <option value="Zonguldak">
+                            <option value="Ankara">
+                            <option value="İstanbul">
+                            <option value="İzmir">
+                            <option value="Samsun">
+                            <option value="Erzurum">
+                            <option value="Sivas">
+                            <option value="Çanakkale">
+                        </datalist>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Okul / Kurum No (Sadece Rakam *):</label>
+                        <input type="text" id="okulNo" class="form-control anma-input" required pattern="[0-9]{2,6}" title="2 ile 6 hane arası rakam giriniz" placeholder="Örn: 1923">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">E-Posta Adresiniz:</label>
+                        <input type="email" id="ziyaretciMail" class="form-control anma-input" placeholder="ornek@okul.k12.tr">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Ziyaret Tarihi (*):</label>
+                        <input type="date" id="ziyaretTarih" class="form-control anma-input" value="2026-11-10" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="anma-fieldset mb-4">
+                <legend><i class="fa-solid fa-scroll"></i> 2. Cumhuriyet Sözü ve Anı Yaprağı Tasarımı</legend>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Mesaj Kategorisi (Optgroup *):</label>
+                        <select id="mesajKategori" class="form-select anma-input" required>
+                            <option value="">-- Kategori Seçiniz --</option>
+                            <optgroup label="Gençliğin Cumhuriyet Sözü">
+                                <option value="Bilim ve Teknoloji Sözü">Bilim ve Teknoloji Üretme Sözü</option>
+                                <option value="Bağımsızlık ve Vatan Sözü">Bağımsızlık ve Vatan Koruma Sözü</option>
+                            </optgroup>
+                            <optgroup label="Anma ve Minnet">
+                                <option value="10 Kasım Özlem Mesajı">10 Kasım Özlem ve Minnet Mesajı</option>
+                                <option value="Öğretmen ve Eğitimcilerin Sözü">Eğitim Ordusu Sözü</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label d-block">Ziyaretçi Unvanı:</label>
+                        <div class="form-check form-check-inline mt-2">
+                            <input class="form-check-input" type="radio" name="unvan" id="ogrenci" value="Bilişim Öğrencisi" checked>
+                            <label class="form-check-label" for="ogrenci">Öğrenci</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="unvan" id="ogretmen" value="Öğretmen">
+                            <label class="form-check-label" for="ogretmen">Öğretmen</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="unvan" id="mezun" value="Mezun / Veli">
+                            <label class="form-check-label" for="mezun">Veli / Vatandaş</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Anı Kartı Kenarlık Rengi (Color):</label>
+                        <input type="color" id="yaprakRengi" class="form-control form-control-color w-100 anma-input" value="#d4af37">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label d-flex justify-content-between">
+                            <span>Bilişim ve Bilim Hedef Puanım:</span>
+                            <strong id="hedefGosterge" class="text-altin">%100</strong>
+                        </label>
+                        <input type="range" id="hedefRange" class="form-range mt-2" min="50" max="100" step="5" value="100" oninput="hedefGuncelle(this.value)">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Atatürk'e Mesajınız ve Sözünüz (*):</label>
+                        <textarea id="aniMetni" rows="4" class="form-control anma-input" required minlength="15" placeholder="Aziz Atatürk; açtığın yolda, gösterdiğin hedefe..."></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="hitabeOnay" required checked>
+                            <label class="form-check-label text-warning" for="hitabeOnay">
+                                Atatürk'ün Gençliğe Hitabesi'ndeki birinci vazifemi okudum, anladım ve söz veriyorum. (*)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-warning btn-lg fw-bold text-dark flex-grow-1">
+                    <i class="fa-solid fa-stamp"></i> ANI DEFTERİNE MÜHÜRLE VE KAYDET
+                </button>
+                <button type="reset" class="btn btn-outline-light btn-lg">
+                    Temizle
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

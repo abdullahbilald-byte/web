@@ -1,0 +1,181 @@
+html { scroll-behavior: smooth; }
+
+body.bg-siyah {
+    background-color: #0a0a0c;
+    font-family: 'Lora', serif;
+}
+
+.baslik-font, h1, h2, h3, h4, legend {
+    font-family: 'Cinzel', serif;
+}
+
+.text-altin { color: #d4af37 !important; }
+.border-altin { border-color: #d4af37 !important; }
+
+/* HERO SECTION */
+.anma-hero {
+    min-height: 55vh;
+    background: radial-gradient(circle, rgba(25,25,35,0.9) 0%, rgba(5,5,8,1) 100%);
+    border-bottom: 2px solid #d4af37;
+}
+
+/* 09:05 SAYGI DURUŞU KATMANI */
+#saygiDurusuKatmani {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.96);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* SABİT YAN MENÜ */
+.sabit-anma-menu {
+    position: fixed;
+    right: 0; top: 38%;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.yan-anma-btn {
+    width: 45px; height: 45px;
+    border: none; color: white;
+    display: flex; align-items: center; justify-content: center;
+    border-top-left-radius: 8px; border-bottom-left-radius: 8px;
+    text-decoration: none; cursor: pointer;
+    transition: width 0.3s;
+}
+.yan-anma-btn:hover { width: 65px; color: white; }
+.yan-anma-btn.altin { background-color: #d4af37; color: #000; }
+.yan-anma-btn.kirmizi { background-color: #e30a17; }
+.yan-anma-btn.siyah { background-color: #222; border: 1px solid #d4af37; }
+
+/* KRONOLOJİ KARTLARI */
+.kronoloji-karti {
+    position: relative;
+    background-color: #121216;
+    border: 1px solid #2c2c35;
+    border-top: 4px solid #d4af37;
+    border-radius: 10px;
+    padding: 35px 20px 20px 20px;
+    height: 100%;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.kronoloji-karti:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+    border-color: #d4af37;
+}
+.kronoloji-karti > h4 { color: #d4af37; font-size: 1.25em; margin-bottom: 10px; }
+.kronoloji-karti p { color: #b0b0b8; font-size: 0.95em; margin-bottom: 0; }
+
+.yil-rozeti {
+    position: absolute;
+    top: -15px; right: 20px;
+    background-color: #d4af37;
+    color: #000;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.yil-rozeti.sonsuz { background-color: #e30a17; color: #fff; }
+
+/* GENÇLİĞE HİTABE VE SÖZDE ELEMANLAR */
+.hitabe-cerceve {
+    background-color: #111115;
+    border: 2px double #d4af37;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+}
+
+.hitabe-metin {
+    font-size: 1.15em;
+    line-height: 1.8;
+    color: #e0e0e0;
+}
+
+.hitabe-cerceve p:first-of-type::first-letter {
+    font-family: 'Cinzel', serif;
+    font-size: 3.2em;
+    font-weight: bold;
+    color: #d4af37;
+    float: left;
+    line-height: 1;
+    margin-right: 12px;
+}
+
+::selection {
+    background-color: #d4af37;
+    color: #000000;
+}
+
+.ozel-anma-link:link, .ozel-anma-link:visited {
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: bold;
+}
+.ozel-anma-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* FORM ODAKLANMA (:focus) */
+.anma-fieldset {
+    background-color: #111115;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 25px;
+}
+.anma-fieldset legend {
+    float: none; width: auto;
+    padding: 0 12px;
+    color: #d4af37;
+    font-size: 1.15em;
+}
+.anma-input {
+    background-color: #1a1a20 !important;
+    color: #fff !important;
+    border: 1px solid #3a3a45 !important;
+}
+.anma-input:focus {
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4) !important;
+}
+
+/* ANI DUVARI YAPRAĞI VE MÜHÜR */
+.ani-yapragi {
+    position: relative;
+    background-color: #121217;
+    border: 1px solid #2c2c35;
+    border-left: 8px solid #d4af37;
+    border-radius: 10px;
+    padding: 25px;
+    height: 100%;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+.muhur-damga {
+    position: absolute;
+    top: 15px; right: 15px;
+    border: 2px dashed #e30a17;
+    color: #e30a17;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    transform: rotate(-6deg);
+}
+
+#yukariOk {
+    position: fixed;
+    bottom: 25px; right: 25px;
+    width: 45px; height: 45px;
+    background-color: #d4af37; color: #000;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 20px; z-index: 999;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anı Duvarı | Dijital Atatürk Müzesi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-siyah text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-altin">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-altin fs-3 baslik-font" href="index.html">
+                1881 - 1938<i class="fa-solid fa-infinity ms-1"></i>
+            </a>
+            <div class="navbar-nav ms-auto align-items-center">
+                <a class="nav-link" href="index.html">Müze Ana Sayfa</a>
+                <a class="nav-link" href="defter.html"><i class="fa-solid fa-plus"></i> Yeni Mesaj Yaz</a>
+                <a class="btn btn-warning btn-sm fw-bold text-dark ms-3" href="anilar.html">
+                    Anı Duvarı (<span id="aniSayaci">0</span>)
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="bg-black p-4 rounded border border-altin mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 class="text-altin baslik-font mb-1">Cumhuriyet Gençliği Anı Duvarı</h3>
+                    <p class="text-secondary small mb-2">Okulumuzun hedefi olan 100 Anı Yaprağına ulaşma durumu (<code>&lt;progress&gt;</code>):</p>
+                    <progress id="hedefProgress" value="3" max="100" class="w-100" style="height: 20px;"></progress>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <a href="defter.html" class="btn btn-warning fw-bold text-dark">
+                        <i class="fa-solid fa-feather-pointed"></i> Sen de İmza At
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="ani-duvari-listesi" class="row g-4">
+            <!-- JS İLE DOLDURULACAK -->
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

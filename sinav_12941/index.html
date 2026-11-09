@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1294 - Bilal Demir - SiberAjans</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info fs-3" href="index.html">
+                <i class="fa-solid fa-user-secret"></i> SİBER<span class="text-white">AJANS</span>
+                <span class="text-secondary fs-6">(Bilal Demir)</span>
+            </a>
+            <div class="navbar-nav ms-auto align-items-center">
+                <a class="nav-link active" href="index.html"><i class="fa-solid fa-users"></i> Uzman Havuzu</a>
+                <a class="btn btn-info fw-bold ms-3 text-dark" href="ekibim.html">
+                    <i class="fa-solid fa-briefcase"></i> Proje Ekibim
+                    <span id="ekipSayaci" class="badge bg-danger ms-1">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-info text-dark text-center py-2 fw-bold">
+        <span>🚀 Genç Girişimci Teknoloji Teşviği Başladı!</span>
+        <button id="tesvikBtn" class="btn btn-sm btn-dark ms-3">Teşvik Kodunu Gör</button>
+    </div>
+    <div id="gizliTesvikKutusu" class="bg-secondary text-white text-center py-3" style="display: none;">
+        <h2 class="h5 mb-0">%30 Hibe Kodunuz: <span class="badge bg-warning text-dark">DEMİR</span></h2>
+    </div>
+
+    <main class="container my-4">
+        <header class="text-center mb-4 border-bottom border-secondary pb-3">
+            <h1 class="text-info">Serbest Yazılım ve Siber Güvenlik Uzmanları</h1>
+            <h2 class="text-secondary fs-5">Projeniz için <strong>küresel</strong> yetenekleri inceleyin ve ekibinize katın.</h2>
+        </header>
+        <div id="uzman-listesi" class="row g-4" aria-live="polite">
+            <p class="text-center text-secondary">Uzmanlar yükleniyor...</p>
+        </div>
+    </main>
+
+    <div class="modal fade text-light" id="cvModal" tabindex="-1" aria-labelledby="modalAdSoyad" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-black border-info">
+                <div class="modal-header border-secondary">
+                    <h2 class="modal-title h5 text-info fw-bold" id="modalAdSoyad">Uzman CV</h2>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalAvatar" src="" class="rounded-circle border border-info p-1 mb-3" width="110" alt="">
+                    <h3 id="modalUnvan" class="h6 text-warning fw-bold"></h3>
+                    <hr class="border-secondary">
+                    <div class="text-start bg-dark p-3 rounded border border-secondary small">
+                        <p class="mb-2"><i class="fa-solid fa-graduation-cap text-info"></i> <strong>Üniversite:</strong> <span id="modalUni"></span></p>
+                        <p class="mb-2"><i class="fa-solid fa-envelope text-info"></i> <strong>E-Posta:</strong> <span id="modalMail"></span></p>
+                        <p class="mb-0"><i class="fa-solid fa-network-wired text-info"></i> <strong>Sistem IP:</strong> <span id="modalIp" class="text-success"></span></p>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proje Ekibim ve Bütçe | SiberAjans</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info fs-3" href="index.html">
+                <i class="fa-solid fa-user-secret"></i> SİBER<span class="text-white">AJANS</span>
+                <span class="text-secondary fs-6">(Bilal Demir)</span>
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Uzman Havuzuna Dön</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row g-4">
+            <section class="col-12" id="canliCalisma" aria-labelledby="canliCalismaBaslik">
+                <div class="work-dashboard">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-2">
+                        <div>
+                            <p class="work-eyebrow mb-1">PROJE DURUMU</p>
+                            <h2 class="h3 text-info mb-0" id="canliCalismaBaslik"><i class="fa-solid fa-tower-broadcast"></i> Canlı Çalışma Simülasyonu</h2>
+                        </div>
+                        <span class="badge rounded-pill text-bg-success px-3 py-2"><span class="live-dot"></span> CANLI SİMÜLASYON</span>
+                    </div>
+                    <p class="text-secondary small mb-4">Ekibinizin görevleri, ilerlemesi ve tamamlanan işleri bu alanda anlık olarak güncellenir.</p>
+                    <div id="calismaKartlari" class="row g-3"></div>
+                    <div class="mt-4">
+                        <h3 class="h6 text-light"><i class="fa-solid fa-clock-rotate-left text-info"></i> Son çalışma hareketleri</h3>
+                        <ol id="calismaAkisi" class="activity-feed mb-0" aria-live="polite"></ol>
+                    </div>
+                </div>
+            </section>
+
+            <div class="col-lg-8">
+                <h1 class="h3 text-info mb-3"><i class="fa-solid fa-people-group"></i> Aldığım Uzmanlar — Proje Ekibim</h1>
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-hover table-bordered align-middle text-center">
+                        <thead class="table-info text-dark">
+                            <tr>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Uzman Adı</th>
+                                <th scope="col">Departman</th>
+                                <th scope="col">Yaş</th>
+                                <th scope="col">Günlük Ücret</th>
+                                <th scope="col">Çıkar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ekipTabloGovdesi"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-end fw-bold">TOPLAM MALİYET:</td>
+                                <td id="toplamYas" class="text-secondary small">0</td>
+                                <td colspan="2" id="toplamMaliyet" class="fw-bold text-info fs-4">$0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card bg-black text-light border-info p-3">
+                    <h2 class="h4 text-info mb-3"><i class="fa-solid fa-file-signature"></i> Proje Sözleşmesi</h2>
+                    <div class="input-group mb-2">
+                        <input type="text" id="hibeInput" class="form-control bg-dark text-light border-secondary" placeholder="Hibe Kodu (DEMİR)" aria-label="Hibe kodu">
+                        <button type="button" onclick="tesvikUygula()" class="btn btn-outline-info">Uygula</button>
+                    </div>
+                    <div id="hibeMesaj" class="mb-3" aria-live="polite"></div>
+                    <form onsubmit="sozlesmeOnayla(event)">
+                        <div class="mb-3">
+                            <label for="yoneticiAd" class="form-label">Proje Yöneticisi (Adınız):</label>
+                            <input type="text" id="yoneticiAd" class="form-control bg-dark text-light border-secondary" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kurumNo" class="form-label">Şirket / Okul Numaranız (Sadece Rakam):</label>
+                            <!-- Tarayıcı baloncuk hatası kaldırıldı, kontrolü app.js yapacak -->
+                            <input type="text" id="kurumNo" class="form-control bg-dark text-light border-secondary" placeholder="Örn: 1294" inputmode="numeric" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="projeTuru" class="form-label">Proje Türü:</label>
+                            <select id="projeTuru" class="form-select bg-dark text-light border-secondary">
+                                <option>Web Uygulaması Geliştirme</option>
+                                <option>Siber Güvenlik Testi</option>
+                                <option>Mobil Oyun Projesi</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-info w-100 fw-bold text-dark">SÖZLEŞMEYİ BAŞLAT</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
