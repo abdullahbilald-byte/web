@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kod Avcısı Final Projesi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="enUst" class="bg-dark text-light">
+
+    <!-- SABİT YAN HIZLI ERİŞİM MENÜSÜ (Kitap Sayfa 136) -->
+    <!-- 🛠️ GÖREV 1 (Bağlantı Parametresi): Aşağıdaki 3 linkin href ve target parametreleri bozuk veya eksik! -->
+    <div class="sabit-yan-bar">
+        <!-- 1.a: Kendi okul e-postanıza mail atacak şekilde mailto: ekleyin -->
+        <a href="mailto:abdullahbilaldemir@okul.k12.tr" class="yan-kutu kirmizi" title="Bana E-Posta Gönder"></a>
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+        <!-- 1.b: Tıklanınca YENİ SEKMEDE kendi GitHub profilinizi (veya meb.gov.tr) açacak şekilde düzeltin -->
+        <a href="https://github.com/abdullahbilald-byte?tab=repositories" target="_self" class="yan-kutu mavi" title="Dış Bağlantı (Yeni Sekme)">
+            <i class="fa-brands fa-github"></i>
+        </a>
+        <!-- 1.c: Tıklanınca aynı sayfadaki Uzman Kadrosu bölümüne (#kadroBolumu) kayarak gitsin -->
+        <a href="#kadroBolumu" class="yan-kutu sari" title="Kadroya Kaydır (Çıpa)">
+            <i class="fa-solid fa-angles-down"></i>
+        </a>
+    </div>
+
+    <!-- ÜST MENÜ -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-warning sticky-top">
+        <div class="container">
+            <!-- 🛠️ GÖREV 2.A: Ajans adını kendi seçtiğiniz konseptle ve Okul Numaranızla değiştirin -->
+            <a class="navbar-brand fw-bold text-warning fs-3" href="index.html">
+                <i class="fa-solid fa-code"></i> DEMİR E-SPOR [1294]
+            </a>
+            <div class="navbar-nav ms-auto align-items-center">
+                <a class="nav-link active" href="index.html">Vitrin</a>
+                <a class="nav-link" href="gorev-formu.html">Kayıt & Konfigüratör Formu</a>
+                <a class="btn btn-warning btn-sm fw-bold text-dark ms-3" href="kanit-paneli.html">
+                    <i class="fa-solid fa-shield-halved"></i> Kanıt Paneli (<span id="kayitSayaci">0</span>)
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- KARŞILAMA ALANI -->
+    <header class="container my-5 p-5 bg-black rounded border border-secondary text-center">
+        <!-- 🛠️ GÖREV 2.B: Kendi ajans/kulüp sloganınızı yazın. İlk harfi CSS ::first-letter ile devleşecek! -->
+        <h1 class="bolum-basligi text-warning fw-bold">Kilitli Proje Vitrini</h1>
+        <p class="konsept-aciklama text-secondary mx-auto mt-3" style="max-width: 700px;">
+            Bu paragrafı silip kendi seçtiğiniz konsepti (Örn: E-Spor Takımı, Siber Güvenlik Bürosu, Özel Araç Tasarım Stüdyosu vb.) anlatan en az 2 cümlelik özgün bir tanıtım metni yazınız. İçinde en az iki önemli kelimeyi <b>kalın</b> yapınız.
+        </p>
+        <a href="gorev-formu.html" class="btn btn-warning btn-lg fw-bold text-dark mt-3">
+            <i class="fa-solid fa-sliders"></i> Başvuru Formuna Geç
+        </a>
+    </header>
+
+    <!-- KUTU MODELİ HİZMET KARTLARI (Çocuk > ve Torun Seçici Testi) -->
+    <section class="container my-5">
+        <h2 class="bolum-basligi text-info mb-4">Sunduğumuz Özel Hizmetler</h2>
+        <div class="row g-4">
+            <!-- 🛠️ GÖREV 2.C: Bu 3 kutunun başlık ve açıklamalarını kendi konseptinize göre tamamen değiştirin! -->
+            <div class="col-md-4">
+                <div class="hizmet-kutusu">
+                    <h3>1. Hizmet Başlığınız</h3>
+                    <p>Buraya konseptinize uygun açıklama ve <b>vurgulu kelime</b> yazınız.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hizmet-kutusu">
+                    <h3>2. Hizmet Başlığınız</h3>
+                    <p>Buraya konseptinize uygun açıklama ve <b>vurgulu kelime</b> yazınız.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hizmet-kutusu">
+                    <h3>3. Hizmet Başlığınız</h3>
+                    <p>Buraya konseptinize uygun açıklama ve <b>vurgulu kelime</b> yazınız.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KİTAP SAYFA 136 (GÖRSEL 4.28): ÖZEL KART TASARIMI (ŞU AN BOZUK - RESİMLER UÇMUŞ DURUMDA!) -->
+    <section id="kadroBolumu" class="container my-5 py-4 text-center">
+        <h2 class="bolum-basligi text-warning mb-2">Kadro ve Uzmanlarımız</h2>
+        <p class="text-danger small mb-4">
+            ⚠️ <strong>TUZAK UYARISI:</strong> Aşağıdaki kartların yuvarlak profil resimleri <code>style.css</code>'teki bir <code>position</code> hatası yüzünden ekranın sol üst köşesine kaçmış! CSS dosyasından bulup düzeltin!
+        </p>
+        
+        <div id="uzman-vitrini" class="d-flex flex-wrap justify-content-center gap-4">
+            <!-- JS ile API'den gelecek -->
+        </div>
+    </section>
+
+    <a href="#enUst" id="yukariCikOk" title="En Üste Çık"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanıt ve Denetim Paneli</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-warning">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning fs-3" href="index.html">
+                <i class="fa-solid fa-shield-halved"></i> KANIT PANELİ
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">Vitrin</a>
+                <a class="nav-link" href="gorev-formu.html">Form Sayfası</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        
+        <!-- 👨‍🏫 ÖĞRETMEN OTOMATİK DENETİM MOTORU KUTUSU -->
+        <div class="bg-black p-4 rounded border border-info mb-5">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h3 class="text-info mb-1"><i class="fa-solid fa-magnifying-glass-chart"></i> Öğretmen Otomatik Kod Denetim Motoru</h3>
+                    <p class="text-secondary small mb-0">Bu buton; CSS, Form ve LocalStorage görevlerinizi canlı olarak tarar ve puanlar.</p>
+                </div>
+                <button onclick="ogretmenDenetimiBaslat()" class="btn btn-info fw-bold text-dark btn-lg">
+                    🔍 KODU DENETLE (KONTROL ET)
+                </button>
+            </div>
+            <div id="denetimRaporuAlani" class="mt-3"></div>
+        </div>
+
+        <!-- KAYDEDİLEN KARTLAR (<meter> ve <progress> ile) -->
+        <h3 class="text-warning mb-3">Üretilen Özel Kartlarım (LocalStorage)</h3>
+        <div id="uretilen-kartlar" class="row g-4 mb-5">
+            <!-- JS ile doldurulacak -->
+        </div>
+
+        <!-- 🛠️ GÖREV 10 (YAPAY ZEKA SAVAR TABLO): Öğrenci kendi cümleleriyle yaptığı değişiklikleri buraya yazmak zorundadır! -->
+        <div class="bg-black p-4 rounded border border-warning">
+            <h4 class="text-warning mb-3"><i class="fa-solid fa-pen-clip"></i> Öğrenci Kod Savunma ve Kanıt Tablosu (Zorunlu)</h4>
+            <p class="text-secondary small">Yaptığınız değişiklikleri kendi cümlelerinizle aşağıdaki tabloya yazınız (Boş bırakılan tablo puan alamaz!):</p>
+            
+            <table class="table table-dark table-bordered align-middle">
+                <thead class="table-warning text-dark">
+                    <tr>
+                        <th>Görev Konusu</th>
+                        <th>Hangi Dosyada, Hangi Kodu Değiştirdiniz? (Öğrenci Açıklaması)</th>
+                    </tr>
+                </thead>
+                <tbody id="savunmaTablosu">
+            <tr>
+            <td class="fw-bold text-info">1. Yuvarlak Resim Hatası (Position)</td>
+             <td>style.css dosyasındaki .uzman-ust-sablon sınıfına position: relative ekleyerek resimleri karta hapsettim.</>
+            </tr>
+            <tr>
+                <td class="fw-bold text-info">2. Kişisel Pattern Şifrem</td>
+                <td>gorev-formu.html içindeki inputa 1294[A-Z]{2} pattern kuralını ekledim.</td>
+            </tr>
+            <tr>
+                <td class="fw-bold text-info">3. Eklediğim Optgroup ve Datalist</td>
+                <td>Select içine ikinci optgroup ekledim ve datalist'e şehirler tanımladım.</td>
+            </tr>
+            <tr>
+                <td class="fw-bold text-info">4. CSS Kutu Modeli ve ::after İmzam</td>
+                <td>style.css dosyasında content alanına adımı ve numaramı yazdım, padding ve border'ı düzelttim.</td>
+            </tr>
+        </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

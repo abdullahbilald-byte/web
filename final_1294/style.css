@@ -1,0 +1,119 @@
+html { scroll-behavior: smooth; }
+
+/* 🛠️ GÖREV 3.A (Sözde Eleman ::after İmza Tuzağı): 
+   content içinde "[İMZASIZ KOD]" yazıyor! Orayı kendi "[ADINIZ SOYADINIZ - OKUL NO]" bilginizle değiştirin! */
+.bolum-basligi::after {
+    content: " [ABDULLAH BİLAL DEMİR - 1294]";
+    font-size: 0.45em;
+    color: #0dcaf0;
+    vertical-align: middle;
+}
+
+.konsept-aciklama::first-letter {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #ffc107;
+}
+
+/* 🛠️ GÖREV 3.B (Kutu Modeli ve Çocuk/Torun Seçici Tuzağı): 
+   .hizmet-kutusu'nun iç boşluğu (padding) 0px kalmış (yazılar kenara yapışık!) ve border-style: none olduğu için çerçevesi görünmüyor!
+   Padding'i 25px yapın, border-style'ı dashed (veya solid) yapın ve sol kenarlık kalınlığını (border-left-width) 8px yapın! */
+.hizmet-kutusu {
+    background-color: #111418;
+    padding: 25px;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #ffc107;
+    border-radius: 12px;
+    border-left-width: 8px;
+}
+
+.hizmet-kutusu > h3 { color: #ffc107; font-size: 1.3em; }
+.hizmet-kutusu b { color: #0dcaf0; text-decoration: underline; }
+
+/* =====================================================
+   🛠️ GÖREV 4 (POSITION RELATIVE & ABSOLUTE TUZAĞI - Kitap Sayfa 136):
+   Aşağıdaki .uzman-ust-sablon sınıfına "position: relative;" yazılmadığı için,
+   içindeki yuvarlak resimler (.uzman-yuvarlak-foto) karttan kaçıp sayfanın en tepesine üst üste yığılmış!
+   .uzman-ust-sablon içine position: relative; ekleyerek resimleri karta hapsedin!
+   ===================================================== */
+.uzman-kart-kutu {
+    width: 220px;
+    height: 250px;
+    background-color: #0b0e14;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.uzman-ust-sablon {
+    /* TUZAK BURADA: position: relative; eksik! */
+    position: relative;
+    width: 100%;
+    height: 95px;
+    background: linear-gradient(135deg, #ffc107, #fd7e14);
+}
+
+.uzman-yuvarlak-foto {
+    position: absolute;
+    left: 70px;
+    top: 50px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #000;
+    z-index: 5;
+}
+
+.uzman-alt-bilgi {
+    margin-top: 45px;
+    padding: 10px;
+}
+
+/* Sabit Yan Menü */
+.sabit-yan-bar {
+    position: fixed;
+    right: 0; top: 40%;
+    z-index: 1000;
+    display: flex; flex-direction: column; gap: 5px;
+}
+.yan-kutu {
+    width: 45px; height: 45px; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; border-radius: 8px 0 0 8px;
+}
+.yan-kutu.kirmizi { background: #dc3545; }
+.yan-kutu.mavi { background: #0d6efd; }
+.yan-kutu.sari { background: #ffc107; color: #000; }
+
+#yukariCikOk {
+    position: fixed; bottom: 25px; right: 25px;
+    width: 45px; height: 45px; background: #ffc107; color: #000;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 20px;
+}
+
+/* 🛠️ GÖREV 7 (FORM :focus TUZAĞI): 
+   Kullanıcı formdaki kutulara tıkladığında (.ozel-input:focus) arka plan bembeyaz, yazı da beyaz olduğu için yazılanlar OKUNMUYOR!
+   .ozel-input:focus içindeki background-color değerini #1f2937 (koyu lacivert), border-color değerini #0dcaf0 yapın! */
+.form-cerceve {
+    background-color: #0b0e14;
+    border: 2px solid #2c3038;
+    border-radius: 12px;
+    padding: 25px;
+}
+.form-cerceve legend { float: none; width: auto; padding: 0 10px; color: #ffc107; font-weight: bold; }
+
+.ozel-input {
+    background-color: #161b22 !important;
+    color: #ffffff !important;
+    border: 1px solid #30363d !important;
+}
+
+.ozel-input:focus {
+    background-color: #1f2937 !important; /* TUZAK: Beyaz üstüne beyaz yazı! */
+    border-color: #0dcaf0 !important;
+    color: #ffffff !important;
+}
