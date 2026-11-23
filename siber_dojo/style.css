@@ -1,0 +1,45 @@
+.dojo-kart {
+    background-color: #11141a;
+    border: 2px solid #2d3748;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.ipucu-kutusu {
+    background-color: #05070a;
+    border-left: 4px solid #0dcaf0;
+    padding: 10px 15px;
+    font-size: 0.85em;
+    color: #cbd5e1;
+}
+
+.insaat-alani {
+    background-color: #0b0e14;
+    border: 2px dashed #475569;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 70px;
+}
+
+/* GÖREV 8: .benim-ozel-kutum */
+.benim-ozel-kutum {
+    padding: 25px;
+    border: 3px dashed #ffc107;
+    border-radius: 15px;
+    background: linear-gradient(to right, #0f172a, #0284c7);
+}
+
+/* GÖREV 9: .zindan-kapsayici ve .kose-rozeti */
+.zindan-kapsayici {
+    position: relative;
+    height: 120px;
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.kose-rozeti {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}

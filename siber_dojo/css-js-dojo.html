@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Aşama: CSS, JS ve Sertifika | SiberDojo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-warning sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning fs-4" href="index.html">
+                <i class="fa-solid fa-user-ninja"></i> SİBER<span>DOJO</span>
+            </a>
+            <div class="d-flex align-items-center flex-grow-1 mx-lg-4 my-2 my-lg-0">
+                <span class="badge bg-warning text-dark me-2 fs-6" id="toplamPuanRozet">0 / 100 Puan</span>
+                <progress id="genelIlerlemeBari" value="0" max="100" class="w-100" style="height: 18px;"></progress>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">1. HTML & Tablo (40P)</a>
+                <a class="nav-link" href="form-dojo.html">2. Form Parametre (30P)</a>
+                <a class="nav-link active text-warning fw-bold" href="css-js-dojo.html">3. CSS, JS & Sertifika (30P)</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+
+        <div id="sertifikaKutusu" class="p-5 rounded text-center mb-5" style="display: none; background: linear-gradient(135deg, #0f172a, #1e3a8a); border: 4px double #ffc107;">
+            <i class="fa-solid fa-trophy display-1 text-warning mb-3"></i>
+            <h1 class="text-warning fw-bold">USTA WEB GELİŞTİRİCİ SERTİFİKASI</h1>
+            <p class="fs-5 text-light">Bu sertifika, SiberDojo'daki 10 kodlama aşamasını başarıyla tamamlayan:</p>
+            <h2 id="sertifikaOgrenciAdi" class="bg-black text-info d-inline-block px-5 py-2 rounded border border-info my-2">ÖĞRENCİ ADI</h2>
+            <p class="text-secondary mt-2 mb-0">Zonguldak MTAL Bilişim Teknolojileri Alanı | Doğrulama Kodu: #DOJO-100-OK</p>
+        </div>
+
+        <!-- GÖREV 8 -->
+        <section class="dojo-kart mb-4" id="kart-gorev8">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 8: Kutu Modeli ve Gradient Yaz (10 Puan)</h4>
+                <span id="durum-8" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-8" class="insaat-alani">
+                <div id="testKutu8" class="benim-ozel-kutum">
+                    Bu kutu style.css içindeki .benim-ozel-kutum sınıfıyla şekillendi!
+                </div>
+            </div>
+            <div id="mesaj-8" class="koc-mesaji mt-2"></div>
+        </section>
+
+        <!-- GÖREV 9 -->
+        <section class="dojo-kart mb-4" id="kart-gorev9">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 9: Position Relative & Absolute (10 Puan)</h4>
+                <span id="durum-9" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-9" class="insaat-alani">
+                <div id="testZindan9" class="zindan-kapsayici">
+                    <h5>Position Test Kutusu (Zindan)</h5>
+                    <span id="testRozet9" class="badge bg-danger kose-rozeti">VIP ROZET</span>
+                </div>
+            </div>
+            <div id="mesaj-9" class="koc-mesaji mt-2"></div>
+        </section>
+
+        <!-- GÖREV 10 -->
+        <section class="dojo-kart mb-4" id="kart-gorev10">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 10: app.js İçinde JS Fonksiyonu (10 Puan)</h4>
+                <span id="durum-10" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-10" class="insaat-alani">
+                <div class="input-group mb-2">
+                    <input type="text" id="ogrenciImzaInput" class="form-control bg-dark text-light border-info" placeholder="Adını ve Numaranı Yaz...">
+                    <button onclick="sertifikaImzala(); dojoKontrolEt();" class="btn btn-info fw-bold text-dark">
+                        İmzala ve Sertifikayı Aç!
+                    </button>
+                </div>
+                <h4 id="imzaSonucAlani" class="text-warning mt-2">Henüz İmzalanmadı</h4>
+            </div>
+            <div id="mesaj-10" class="koc-mesaji mt-2"></div>
+        </section>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

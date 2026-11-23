@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. Aşama: HTML5 ve Tablo Dojo'su | SiberDojo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-warning sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning fs-4" href="index.html">
+                <i class="fa-solid fa-user-ninja"></i> SİBER<span>DOJO</span>
+            </a>
+            <div class="d-flex align-items-center flex-grow-1 mx-lg-4 my-2 my-lg-0">
+                <span class="badge bg-warning text-dark me-2 fs-6" id="toplamPuanRozet">0 / 100 Puan</span>
+                <progress id="genelIlerlemeBari" value="0" max="100" class="w-100" style="height: 18px;"></progress>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link active text-warning fw-bold" href="index.html">1. HTML & Tablo (40P)</a>
+                <a class="nav-link" href="form-dojo.html">2. Form Parametre (30P)</a>
+                <a class="nav-link" href="css-js-dojo.html">3. CSS, JS & Sertifika (30P)</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="alert alert-info bg-black text-info border-info">
+            <i class="fa-solid fa-lightbulb"></i> <strong>Nasıl Çalışır?</strong> Kodlar direkt inşaat alanlarına yerleştirilmiştir. Kaydedip test edebilirsin!
+        </div>
+
+        <!-- GÖREV 1 -->
+        <section class="dojo-kart mb-4" id="kart-gorev1">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 1: Başlık ve Metin Etiketleri (10 Puan)</h4>
+                <span id="durum-1" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-1" class="insaat-alani">
+                <h2>Ahmet Yılmaz</h2>
+                <p>Bu ders <strong>çok önemli</strong> ve <mark>fosforlu</mark> bir <del>eski</del> konu barındırır. Su formülü H<sub>2</sub>O şeklindedir.</p>
+            </div>
+            <div id="mesaj-1" class="koc-mesaji mt-2"></div>
+        </section>
+
+        <!-- GÖREV 2 -->
+        <section class="dojo-kart mb-4" id="kart-gorev2">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 2: Liste ve Parametreleri (10 Puan)</h4>
+                <span id="durum-2" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-2" class="insaat-alani">
+                <ol type="A" start="3" reversed>
+                    <li>Üçüncü Eleman (C)</li>
+                    <li>İkinci Eleman (B)</li>
+                    <li>Birinci Eleman (A)</li>
+                </ol>
+                <ul type="square">
+                    <li>Kare Liste Elemanı 1</li>
+                    <li>Kare Liste Elemanı 2</li>
+                </ul>
+            </div>
+            <div id="mesaj-2" class="koc-mesaji mt-2"></div>
+        </section>
+
+        <!-- GÖREV 3 -->
+        <section class="dojo-kart mb-4" id="kart-gorev3">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 3: Bağlantı ve Görsel Parametreleri (10 Puan)</h4>
+                <span id="durum-3" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-3" class="insaat-alani">
+                <a href="https://www.meb.gov.tr" target="_blank">MEB Resmi Web Sitesi</a>
+                <br><br>
+                <a href="mailto:bilgi@meb.gov.tr">Bize E-Posta Gönder</a>
+                <br><br>
+                <img src="https://via.placeholder.com/150" alt="Örnek Placeholder Görseli" title="SiberDojo Test Görseli" width="150">
+            </div>
+            <div id="mesaj-3" class="koc-mesaji mt-2"></div>
+        </section>
+
+        <!-- GÖREV 4 -->
+        <section class="dojo-kart mb-4" id="kart-gorev4">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 4: Sıfırdan Tablo, Rowspan ve Colspan (10 Puan)</h4>
+                <span id="durum-4" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-4" class="insaat-alani">
+                <table border="2" cellpadding="10">
+                    <tr>
+                        <th colspan="3">3 Sütunu Birleştiren Başlık</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">2 Satırı Birleştiren Hücre</td>
+                        <td>Veri 1</td>
+                        <td>Veri 2</td>
+                    </tr>
+                    <tr>
+                        <td>Veri 3</td>
+                        <td>Veri 4</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="mesaj-4" class="koc-mesaji mt-2"></div>
+        </section>
+
+        <div class="text-end">
+            <a href="form-dojo.html" class="btn btn-warning btn-lg fw-bold text-dark">
+                2. Aşamaya Geç: Form Parametre Dojo'su <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

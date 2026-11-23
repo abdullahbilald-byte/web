@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. Aşama: Form Parametre Dojo'su | SiberDojo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-warning sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning fs-4" href="index.html">
+                <i class="fa-solid fa-user-ninja"></i> SİBER<span>DOJO</span>
+            </a>
+            <div class="d-flex align-items-center flex-grow-1 mx-lg-4 my-2 my-lg-0">
+                <span class="badge bg-warning text-dark me-2 fs-6" id="toplamPuanRozet">0 / 100 Puan</span>
+                <progress id="genelIlerlemeBari" value="0" max="100" class="w-100" style="height: 18px;"></progress>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">1. HTML & Tablo (40P)</a>
+                <a class="nav-link active text-warning fw-bold" href="form-dojo.html">2. Form Parametre (30P)</a>
+                <a class="nav-link" href="css-js-dojo.html">3. CSS, JS & Sertifika (30P)</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+
+        <!-- GÖREV 5 -->
+        <section class="dojo-kart mb-4" id="kart-gorev5">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 5: Fieldset ve Doğrulamalı Inputlar (10 Puan)</h4>
+                <span id="durum-5" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-5" class="insaat-alani">
+                <fieldset>
+                    <legend>Öğrenci Giriş Bilgileri</legend>
+                    <input type="text" required placeholder="Adınızı girin..." class="form-control mb-2">
+                    <input type="password" required pattern="[0-9]{4}" placeholder="4 haneli şifre" class="form-control mb-2">
+                    <input type="number" min="10" max="100" step="10" value="50" class="form-control">
+                </fieldset>
+            </div>
+            <div id="mesaj-5" class="koc-mesaji mt-2"></div>
+        </section>
+
+        <!-- GÖREV 6 -->
+        <section class="dojo-kart mb-4" id="kart-gorev6">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 6: Optgroup ve Datalist Yapısı (10 Puan)</h4>
+                <span id="durum-6" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-6" class="insaat-alani">
+                <select class="form-select mb-2">
+                    <optgroup label="Marmara Bölgesi">
+                        <option>İstanbul</option>
+                        <option>Kocaeli</option>
+                    </optgroup>
+                    <optgroup label="İç Anadolu Bölgesi">
+                        <option>Ankara</option>
+                        <option>Konya</option>
+                    </optgroup>
+                </select>
+                <input list="sehirler" placeholder="Şehir ara..." class="form-control">
+                <datalist id="sehirler">
+                    <option value="Zonguldak">
+                    <option value="Ankara">
+                    <option value="İstanbul">
+                </datalist>
+            </div>
+            <div id="mesaj-6" class="koc-mesaji mt-2"></div>
+        </section>
+
+        <!-- GÖREV 7 -->
+        <section class="dojo-kart mb-4" id="kart-gorev7">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
+                <h4 class="text-warning mb-0">Görev 7: Modern Inputlar, Meter ve Progress (10 Puan)</h4>
+                <span id="durum-7" class="badge bg-danger">Bekleniyor (0P)</span>
+            </div>
+            <div id="insa-7" class="insaat-alani">
+                <input type="color" value="#ffc107" class="form-control form-control-color mb-2">
+                <input type="date" value="2026-06-01" class="form-control mb-2">
+                <input type="range" min="0" max="100" value="50" class="form-range mb-2">
+                <div class="mb-2">Meter: <meter min="0" max="100" value="80"></meter></div>
+                <div>Progress: <progress max="100" value="60"></progress></div>
+            </div>
+            <div id="mesaj-7" class="koc-mesaji mt-2"></div>
+        </section>
+
+        <div class="d-flex justify-content-between">
+            <a href="index.html" class="btn btn-outline-light btn-lg"><i class="fa-solid fa-arrow-left"></i> 1. Aşamaya Dön</a>
+            <a href="css-js-dojo.html" class="btn btn-warning btn-lg fw-bold text-dark">
+                3. Aşamaya Geç: CSS, JS ve Sertifika <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
