@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChromaLab | RGB, Gradient ve Tipografi Stüdyosu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="ustNokta" class="bg-dark text-light">
+
+    <!-- 24 KASIM ÖĞRETMENLER GÜNÜ GEÇİŞLİ BANDI -->
+    <div class="ogretmenler-gunu-bari text-center py-2">
+        <i class="fa-solid fa-chalkboard-user text-warning"></i> 
+        <strong>24 Kasım Öğretmenler Günü:</strong> Başöğretmen Mustafa Kemal Atatürk başta olmak üzere geleceğimizi kodlayan tüm öğretmenlerimizin günü kutlu olsun!
+    </div>
+
+    <!-- SABİT POZİSYONLU HIZLI ERİŞİM BAR (Düzeltildi) -->
+    <div class="sabit-hizli-bar">
+        <a href="mailto:abdullahbilald@gmail.com" class="hizli-btn pembe" title="Tasarımcıya E-Posta Gönder">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a href="#mentorBolumu" class="hizli-btn turkuaz" title="Mentörlere Kaydır">
+            <i class="fa-solid fa-users-viewfinder"></i>
+        </a>
+        <a href="https://www.eba.gov.tr" target="_blank" class="hizli-btn mor" title="Dış Kaynak (Yeni Sekme)">
+            <i class="fa-solid fa-palette"></i>
+        </a>
+    </div>
+
+    <!-- ÜST MENÜ (NAVBAR) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info fs-3" href="index.html">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> CHROMA<span>LAB</span> [1294]
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Stüdyo Vitrini</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#spektrumBolumu">Gradient Barlar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#mentorBolumu">Tasarım Mentörleri</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-info btn-sm" href="atolye.html">
+                            <i class="fa-solid fa-sliders"></i> RGB & Form Atölyesi
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-info btn-sm fw-bold text-dark" href="dergi-ve-kanit.html">
+                            <i class="fa-solid fa-newspaper"></i> Tipografi Dergisi (<span id="temaSayaci">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- KARŞILAMA ALANI -->
+    <header class="container my-5 p-5 rounded text-center hero-gradient-kutu">
+        <h1 class="ana-vitrin-baslik">Dijital Renklerin ve Tipografinin Gücü</h1>
+        <p class="vitrin-alt-yazi mx-auto mt-3" style="max-width: 720px;">
+            Bilgisayar ekranlarında gördüğünüz 16 milyondan fazla renk; <b>Kırmızı (Red)</b>, <b>Yeşil (Green)</b> ve <b>Mavi (Blue)</b> ışıkların 0 ile 255 arasındaki karışımından doğar.
+        </p>
+        <div class="mt-4">
+            <a href="atolye.html" class="btn btn-warning btn-lg fw-bold text-dark me-2">
+                <i class="fa-solid fa-flask"></i> Canlı RGB Mikserine Git
+            </a>
+            <a href="dergi-ve-kanit.html" class="btn btn-outline-light btn-lg">
+                <i class="fa-solid fa-book-open"></i> Tipografi Makalelerini Gör
+            </a>
+        </div>
+    </header>
+
+    <!-- GEÇİŞLİ RENK VE TRANSİTİON BARLARI -->
+    <section id="spektrumBolumu" class="container my-5 py-3">
+        <h2 class="bolum-etiketi text-info mb-2">Geçişli Renk (Linear-Gradient) ve Transition Spektrumu</h2>
+        <p class="text-secondary small mb-4">
+            Kutuların üzerine fare ile geldiğinizde 0.5 saniye içinde animasyonlu olarak genişlediğini gözlemleyin!
+        </p>
+        <div class="bg-black p-4 rounded border border-secondary">
+            <div class="gecisli-kutu gecisli-1">1. Doğrusal Geçiş: Soldan Sağa — Üzerime Gel!</div>
+            <div class="gecisli-kutu gecisli-2">2. Doğrusal Geçiş: Sağdan Sola — Üzerime Gel!</div>
+            <div class="gecisli-kutu gecisli-3">3. Çapraz / Açılı Geçiş (135deg Üç Renkli) — Üzerime Gel!</div>
+        </div>
+    </section>
+
+    <!-- TASARIM MENTÖRLERİ -->
+    <section id="mentorBolumu" class="container my-5 py-4 text-center">
+        <h2 class="bolum-etiketi text-warning mb-2">Baş Tasarımcı ve Tipografi Mentörlerimiz</h2>
+        <p class="text-secondary small mb-4">Canlı API (fetch) ile oluşturulmuştur.</p>
+        <div id="mentor-vitrini" class="d-flex flex-wrap justify-content-center gap-4"></div>
+    </section>
+
+    <a href="#ustNokta" id="yukariOkBtn" title="Başa Dön"><i class="fa-solid fa-angle-up"></i></a>
+
+    <footer class="bg-black text-center py-4 text-secondary border-top border-secondary">
+        <p class="mb-0">&copy; 2026 ChromaLab Tasarım Stüdyosu | 11. Hafta Uygulaması</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

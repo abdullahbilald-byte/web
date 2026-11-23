@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipografi Dergisi ve Denetim | ChromaLab</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info fs-3" href="index.html">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> CHROMA<span>LAB</span>
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">Vitrin</a>
+                <a class="nav-link" href="atolye.html">RGB & Form Atölyesi</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+
+        <!-- ÖĞRETMEN OTOMATİK KOD DENETİM MOTORU -->
+        <div class="bg-black p-4 rounded border border-warning mb-5">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h3 class="text-warning mb-1"><i class="fa-solid fa-user-check"></i> 11. Hafta Öğretmen Otomatik Denetim Motoru</h3>
+                    <p class="text-secondary small mb-0">RGB, Linear-Gradient, Tipografi ve İlk 10 Hafta görevlerinizi tarar.</p>
+                </div>
+                <button onclick="hafta11Denetle()" class="btn btn-warning fw-bold text-dark btn-lg">
+                    🔍 11. HAFTA KODUNU DENETLE
+                </button>
+            </div>
+            <div id="denetimSonucKutusu" class="mt-3"></div>
+        </div>
+
+        <!-- ÖRNEK TİPOGRAFİ MAKALESİ -->
+        <section class="mb-5">
+            <h3 class="text-info mb-3"><i class="fa-solid fa-book-bookmark"></i> Kitap Sayfa 141 (Uygulama 22): Tipografi Makale Şablonu</h3>
+            <div class="kitap-makale-kutu">
+                <h2>Bugün siz de <span>yazılıma başlayarak hayatınızı değiştirin.</span></h2>
+                <div class="yazar-tarih">Konu Yazarı: <span>Abdullah Bilal</span> | 11. Hafta Tipografi Örneği</div>
+                <div class="makale-icerik">
+                    <p>Günümüzde yazılım, tüm dünyayı yakından ilgilendiren bir kavramdır. İlk paragrafın ilk satırı CSS sözde seçicileri ile kalınlaştırılmış ve italik yapılmıştır.</p>
+                    <p>Hiç düşündünüz mü, "hayatımızdan yazılımı çıkarsaydık ne olurdu?". Sanırım hareket kabiliyetimiz kısıtlanır, iletişim kurmada problemler yaşar ve daha birçok konuda sıkıntılı bir hayatımız olurdu.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ÜRETİLEN MAKALELER (LOCALSTORAGE) -->
+        <h3 class="text-warning mb-3"><i class="fa-solid fa-layer-group"></i> Öğrencinin Ürettiği RGB & Tipografi Kartları</h3>
+        <div id="uretilen-makaleler" class="row g-4 mb-5"></div>
+
+        <!-- ÖĞRENCİ KOD SAVUNMA TABLOSU (Doldurulmuş) -->
+        <div class="bg-black p-4 rounded border border-info">
+            <h4 class="text-info mb-3"><i class="fa-solid fa-table-list"></i> 11. Hafta Öğrenci Kod Savunma Tablosu</h4>
+            <table class="table table-dark table-bordered align-middle">
+                <thead class="table-info text-dark">
+                    <tr>
+                        <th>11. Hafta Konusu</th>
+                        <th>Kodda Neyi, Nasıl Değiştirdiniz?</th>
+                    </tr>
+                </thead>
+                <tbody id="savunmaTablosu11">
+                    <tr>
+                        <td class="fw-bold text-warning">1. RGB ve RGBA Farkı</td>
+                        <td>Mikser üzerindeki kaydırıcılarla 0-255 arası değerler vererek özel renkler oluşturdum ve alpha ile saydamlık ayarladım.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-warning">2. Linear-Gradient ve Transition</td>
+                        <td>Kutuların üzerine gelince genişliğin %100 olmasını sağladım ve geçiş süresini animasyonlu hale getirdim.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-warning">3. Tipografi</td>
+                        <td>Makale başlıklarına letter-spacing ve font-family uygulayarak dergi tasarımı elde ettim.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-warning">4. Kişisel Okul No Pattern Kilidim</td>
+                        <td>Input alanındaki pattern kodunu okul numaramla eşleşecek şekilde 1294-RGB olarak güncelledim.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

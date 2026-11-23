@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB Mikseri ve Form Atölyesi | ChromaLab</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info fs-3" href="index.html">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> CHROMA<span>LAB</span>
+            </a>
+            <div class="navbar-nav ms-auto align-items-center">
+                <a class="nav-link" href="index.html">Vitrin</a>
+                <a class="nav-link active" href="atolye.html">RGB & Form Atölyesi</a>
+                <a class="btn btn-info btn-sm fw-bold text-dark ms-3" href="dergi-ve-kanit.html">
+                    Tipografi Dergisi (<span id="temaSayaci">0</span>)
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5" style="max-width: 900px;">
+        
+        <!-- CANLI RGB / RGBA MİKSERİ -->
+        <section class="bg-black p-4 rounded border border-info mb-5">
+            <h3 class="text-info mb-3"><i class="fa-solid fa-sliders"></i> Canlı RGB / RGBA ve Hex Renk Laboratuvarı</h3>
+            <div class="row align-items-center g-4">
+                <div class="col-md-7">
+                    <div class="mb-2">
+                        <label class="d-flex justify-content-between small fw-bold text-danger">
+                            <span>🔴 Kırmızı (Red):</span> <span id="rDeger">231</span>
+                        </label>
+                        <input type="range" id="rRange" class="form-range" min="0" max="255" value="231" oninput="rgbMikserGuncelle()">
+                    </div>
+                    <div class="mb-2">
+                        <label class="d-flex justify-content-between small fw-bold text-success">
+                            <span>🟢 Yeşil (Green):</span> <span id="gDeger">62</span>
+                        </label>
+                        <input type="range" id="gRange" class="form-range" min="0" max="255" value="62" oninput="rgbMikserGuncelle()">
+                    </div>
+                    <div class="mb-2">
+                        <label class="d-flex justify-content-between small fw-bold text-primary">
+                            <span>🔵 Mavi (Blue):</span> <span id="bDeger">46</span>
+                        </label>
+                        <input type="range" id="bRange" class="form-range" min="0" max="255" value="46" oninput="rgbMikserGuncelle()">
+                    </div>
+                    <div class="mb-2">
+                        <label class="d-flex justify-content-between small fw-bold text-warning">
+                            <span>💧 Alpha / Saydamlık:</span> <span id="aDeger">1</span>
+                        </label>
+                        <input type="range" id="aRange" class="form-range" min="0.1" max="1.0" step="0.1" value="1.0" oninput="rgbMikserGuncelle()">
+                    </div>
+                </div>
+                <div class="col-md-5 text-center">
+                    <div id="canliRenkKutusu" class="p-4 rounded border border-light d-flex flex-column justify-content-center align-items-center" style="height: 180px; background-color: rgba(231, 62, 46, 1);">
+                        <h5 class="fw-bold bg-black bg-opacity-75 px-3 py-1 rounded" id="rgbaMetni">rgba(231, 62, 46, 1)</h5>
+                        <span class="badge bg-warning text-dark fs-6 mt-2" id="hexMetni">#E73E2E</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KAPSAMLI HTML5 FORMU (Okul No: 1294 eklendi) -->
+        <form id="atolyeFormu" onsubmit="makaleKaydet(event)" autocomplete="on">
+            <fieldset class="atolye-fieldset mb-4">
+                <legend>1. Yazar Kimliği ve Kişisel Öğrenci Kilidi</legend>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Yazar (Öğrenci) Adı Soyadı (*):</label>
+                        <input type="text" id="yazarAd" class="form-control atolye-input" required autofocus placeholder="Adınız Soyadınız">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-warning fw-bold">Kişisel Okul No Kilidi (Pattern *):</label>
+                        <input type="text" id="okulKilit" class="form-control atolye-input" required pattern="1294-RGB" title="1294-RGB şeklinde giriniz" value="1294-RGB">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Tasarım Alanı (Datalist *):</label>
+                        <input list="tasarimAlanlari" id="alanSecim" class="form-control atolye-input" required placeholder="Alan seçin...">
+                        <datalist id="tasarimAlanlari">
+                            <option value="Web Arayüz (UI/UX) Tasarımı">
+                            <option value="Siber Güvenlik Arayüzleri">
+                            <option value="Yapay Zeka Grafik Tasarımı">
+                            <option value="Mobil Oyun Arayüzleri">
+                            <option value="Veri Görselleştirme">
+                        </datalist>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Yayın Tarihi (Date *):</label>
+                        <input type="date" id="yayinTarihi" class="form-control atolye-input" value="2026-11-24" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="atolye-fieldset mb-4">
+                <legend>2. Tipografi Ayarları ve Makale İçeriği</legend>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Makale Ana Başlığı (*):</label>
+                        <input type="text" id="makaleBaslik" class="form-control atolye-input" required placeholder="Örn: Renklerin Dünyası">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Yazı Tipi Ailesi (Font-Family *):</label>
+                        <select id="fontSecim" class="form-select atolye-input" required>
+                            <optgroup label="Sans-Serif (Tırnaksız)">
+                                <option value="Verdana, sans-serif">Verdana</option>
+                                <option value="'Segoe UI', Arial, sans-serif">Segoe UI / Arial</option>
+                            </optgroup>
+                            <optgroup label="Serif (Tırnaklı)">
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="'Times New Roman', serif">Times New Roman</option>
+                            </optgroup>
+                            <optgroup label="El Yazısı / Özel Fontlar">
+                                <option value="'Courier New', monospace">Courier New (Kod Fontu)</option>
+                                <option value="Impact, sans-serif">Impact (Kalın Başlık)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Harf Aralığı (px):</label>
+                        <input type="number" id="harfAraligi" class="form-control atolye-input" min="0" max="10" step="1" value="1" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Başlık Harf Dönüşümü:</label>
+                        <select id="harfDonusum" class="form-select atolye-input">
+                            <option value="capitalize">Sadece Baş Harfler Büyük (capitalize)</option>
+                            <option value="uppercase">TÜM HARFLER BÜYÜK (uppercase)</option>
+                            <option value="lowercase">tüm harfler küçük (lowercase)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Okunabilirlik Hedef Skoru (10-100):</label>
+                        <input type="number" id="okumaSkoru" class="form-control atolye-input" min="10" max="100" step="10" value="90" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Makale Paragrafı (*):</label>
+                        <textarea id="makaleMetni" rows="3" class="form-control atolye-input" required placeholder="Günümüzde yazılım ve tasarım hayatımızın merkezindedir..."></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-info btn-lg fw-bold text-dark flex-grow-1">
+                    <i class="fa-solid fa-wand-magic"></i> RGB TEMASIYLA DERGİYE BAS
+                </button>
+                <button type="reset" class="btn btn-outline-danger btn-lg">Sıfırla</button>
+            </div>
+        </form>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
