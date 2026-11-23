@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modül 1: HTML5, Tablo ve Medya | NEXUS-OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info sticky-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold text-info fs-4" href="index.html">
+                <i class="fa-solid fa-atom"></i> NEXUS<span>-OS</span>
+            </a>
+            <div class="navbar-nav me-auto ms-3">
+                <a class="nav-link active text-info fw-bold" href="index.html">1. Etiket & Tablo (G1-G7)</a>
+                <a class="nav-link" href="form-merkezi.html">2. Form & Parametre (G8-G14)</a>
+                <a class="nav-link" href="css-js-merkezi.html">3. CSS3 & JS Beyni (G15-G20)</a>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-warning text-dark fs-6" id="ustPuanRozet">Puan: 0 / 100</span>
+                <button onclick="tumProjeyiTekTiklaDenetle()" class="btn btn-warning fw-bold text-dark">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i> ÖĞRETMEN TEK TIK DENETİM (20 GÖREV)
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="alert alert-info bg-black text-info border-info small">
+            <i class="fa-solid fa-terminal"></i> <strong>Maraton Kuralı:</strong> Aşağıdaki 7 inşaat kutusunun içi boştur. İstenen HTML5 etiketlerini ve parametrelerini VS Code'da kendi elinizle yazıp <code>Ctrl + S</code> yapın.
+        </div>
+
+        <!-- GÖREV 1 (5 Puan): Metin Biçimlendirme -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-info">Görev 1: Başlık ve Metin Biçimlendirme Etiketleri (5 Puan)</h5>
+                <span id="rozet-g1" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <p class="small text-secondary mb-2">
+                <code>id="gorev1-alan"</code> içine kendi elinizle şunları yazın:
+            </p>
+            <div id="gorev1-alan" class="kod-insaat">
+                <h2>Bilal Demir - 1294</h2>
+                <p>
+                    <strong>Sistem Güncellemesi:</strong> 
+                    <mark>Önemli Duyuru</mark> 
+                    <del>Eski Sistem</del> 
+                    <ins>Yeni Sistem</ins> aktif edildi. 
+                    Bileşik Formül: H<sub>2</sub>O, Maksimum Kapasite: 10<sup>6</sup> birim.
+                </p>
+            </div>
+        </section>
+
+        <!-- GÖREV 2 (5 Puan): Gelişmiş Listeler -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-info">Görev 2: Roma Rakamlı Ters Liste ve Tanım Listesi (5 Puan)</h5>
+                <span id="rozet-g2" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <div id="gorev2-alan" class="kod-insaat">
+                <ol type="I" start="4" reversed>
+                    <li>Birinci Sınama Adımı</li>
+                    <li>İkinci Sınama Adımı</li>
+                    <li>Üçüncü Sınama Adımı</li>
+                </ol>
+                <dl>
+                    <dt>Nexus Protokolü</dt>
+                    <dd>Sistemler arası veri akışını denetleyen ana çatı.</dd>
+                    <dt>Firewall Kilidi</dt>
+                    <dd>Yetkisiz ağ erişimlerini engelleyen güvenlik katmanı.</dd>
+                </dl>
+            </div>
+        </section>
+
+        <!-- GÖREV 3 (5 Puan) -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-info">Görev 3: Açılır Detay ve Görsel Gruplama (5 Puan)</h5>
+                <span id="rozet-g3" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <div id="gorev3-alan" class="kod-insaat">
+                <details>
+                    <summary>Sistem Bilgilerini Görüntüle</summary>
+                    <p>Bu alan gizli modül parametrelerini gösterir.</p>
+                </details>
+                <figure>
+                    <img src="https://via.placeholder.com/180" alt="Sunucu Görseli" title="Nexus Sunucu" width="180">
+                    <figcaption>Şekil 1: Ana Sunucu Birimi</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- GÖREV 4 (5 Puan) -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-info">Görev 4: Çıpa, E-Posta ve İndirme Bağlantıları (5 Puan)</h5>
+                <span id="rozet-g4" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <div id="gorev4-alan" class="kod-insaat">
+                <a href="#tabloBolumu">Tablo Bölümüne Git</a><br>
+                <a href="mailto:destek@nexusos.local">Sistem Yetkilisine E-Posta Gönder</a><br>
+                <a href="https://example.com/dosya.zip" target="_blank" download>Sistem Raporunu İndir</a>
+            </div>
+        </section>
+
+        <!-- GÖREV 5 ve GÖREV 6 (10 Puan) -->
+        <section id="tabloBolumu" class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-warning">Görev 5 & Görev 6: Tam Yapılı Tablo, Colspan ve Rowspan (10 Puan)</h5>
+                <div>
+                    <span id="rozet-g5" class="badge bg-secondary me-1">G5: Bekliyor</span>
+                    <span id="rozet-g6" class="badge bg-secondary">G6: Bekliyor</span>
+                </div>
+            </div>
+            <div id="gorev56-alan" class="kod-insaat">
+                <table border="3" cellpadding="12">
+                    <caption>Nexus Sunucu Performans Matrisi</caption>
+                    <thead>
+                        <tr>
+                            <th colspan="4">Ana Sunucu Kontrol Paneli</th>
+                        </tr>
+                        <tr>
+                            <th>Modül ID</th>
+                            <th>Durum</th>
+                            <th>Yük Oranı</th>
+                            <th>Yetki</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="3">Modül-A</td>
+                            <td>Aktif</td>
+                            <td>%45</td>
+                            <td>Tam</td>
+                        </tr>
+                        <tr>
+                            <td>Beklemede</td>
+                            <td>%12</td>
+                            <td>Kısıtlı</td>
+                        </tr>
+                        <tr>
+                            <td>Senkronize</td>
+                            <td>%88</td>
+                            <td>Tam</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Durum: Tüm alt sistemler kararlı çalışıyor.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- GÖREV 7 (5 Puan) -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-info">Görev 7: HTML5 Video ve Parametreleri (5 Puan)</h5>
+                <span id="rozet-g7" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <div id="gorev7-alan" class="kod-insaat">
+                <video width="320" controls autoplay muted loop>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Tarayıcınız video etiketini desteklemiyor.
+                </video>
+            </div>
+        </section>
+
+        <div class="text-end">
+            <a href="form-merkezi.html" class="btn btn-info btn-lg fw-bold text-dark">
+                2. Sayfaya Geç: Form ve Parametre Merkezi (Görev 8 - 14) <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <div class="modal fade text-light" id="denetimModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content bg-dark border-warning">
+                <div class="modal-header bg-black border-secondary">
+                    <h4 class="modal-title text-warning fw-bold"><i class="fa-solid fa-clipboard-check"></i> NEXUS-OS 20 Görevlik Tek Tık Denetim Raporu</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="denetimModalGovde"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

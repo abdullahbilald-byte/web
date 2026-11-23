@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modül 3: CSS3 ve JS Merkezi | NEXUS-OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-info sticky-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold text-info fs-4" href="index.html">
+                <i class="fa-solid fa-atom"></i> NEXUS<span>-OS</span>
+            </a>
+            <div class="navbar-nav me-auto ms-3">
+                <a class="nav-link" href="index.html">1. Etiket & Tablo (G1-G7)</a>
+                <a class="nav-link" href="form-merkezi.html">2. Form & Parametre (G8-G14)</a>
+                <a class="nav-link active text-info fw-bold" href="css-js-merkezi.html">3. CSS3 & JS Beyni (G15-G20)</a>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-warning text-dark fs-6" id="ustPuanRozet">Puan: 0 / 100</span>
+                <button onclick="tumProjeyiTekTiklaDenetle()" class="btn btn-warning fw-bold text-dark">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i> ÖĞRETMEN TEK TIK DENETİM (20 GÖREV)
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="alert alert-warning bg-black text-warning border-warning small">
+            <strong>Modül 3 Yönergesi:</strong> Aşağıdaki Görev 15, 16, 17, 18 ve 19'u <strong><code>style.css</code></strong> dosyasının en altına; Görev 20'yi ise <strong><code>app.js</code></strong> dosyasının en altına kendi elinizle kodlayın!
+        </div>
+
+        <!-- GÖREV 15 (5 Puan): Kutu Modeli ve Linear-Gradient -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-warning">Görev 15 (<code>style.css</code>): Kutu Modeli ve <code>linear-gradient</code> (5 Puan)</h5>
+                <span id="rozet-g15" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <p class="small text-secondary">
+                <code>style.css</code> içinde <strong><code>.ozel-komuta-karti</code></strong> sınıfını açın: <code>padding: 25px;</code>, <code>border: 3px dashed #0dcaf0;</code>, <code>border-radius: 15px;</code> ve <code>background: linear-gradient(135deg, #0f172a, #1e3a8a);</code> kurallarını yazın!
+            </p>
+            <div id="testG15" class="ozel-komuta-karti">
+                Bu kutu Görev 15 CSS kodunuzla şekillenecektir.
+            </div>
+        </section>
+
+        <!-- GÖREV 16 (5 Puan): Uygulama 21 Transition ile Uzayan Bar -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-warning">Görev 16 (<code>style.css</code>): Uygulama 21 Geçişli Bar ve <code>transition</code> (5 Puan)</h5>
+                <span id="rozet-g16" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <p class="small text-secondary">
+                <code>style.css</code> içinde <strong><code>.enerji-bari</code></strong> sınıfına <code>width: 40%; height: 50px; background: linear-gradient(to right, #ff0055, #ffcc00); transition-duration: 0.5s;</code> yazın ve <strong><code>.enerji-bari:hover</code></strong> durumunda <code>width: 100%;</code> olmasını sağlayın!
+            </p>
+            <div id="testG16" class="enerji-bari d-flex align-items-center px-3 fw-bold text-dark rounded">
+                Üzerime Gelince %100 Uzamalıyım!
+            </div>
+        </section>
+
+        <!-- GÖREV 17 (5 Puan): Tipografi ve ::after İmzası -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-warning">Görev 17 (<code>style.css</code>): Tipografi ve <code>::after</code> Öğrenci İmzası (5 Puan)</h5>
+                <span id="rozet-g17" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <p class="small text-secondary">
+                <code>style.css</code> içinde:<br>
+                1. <strong><code>.komuta-baslik</code></strong> için <code>letter-spacing: 3px; text-transform: uppercase;</code> yazın.<br>
+                2. <strong><code>.komuta-baslik::after</code></strong> sözde elemanına <code>content: " [KENDİ ADINIZ VE OKUL NO]";</code> (Örn: <code>content: " [AHMET - 452]";</code>) kodlayın!
+            </p>
+            <h4 id="testG17" class="komuta-baslik text-info">Sistem Komuta Başlığı</h4>
+        </section>
+
+        <!-- GÖREV 18 (5 Puan): Position Relative, Absolute ve Z-Index -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-warning">Görev 18 (<code>style.css</code>): <code>position: relative/absolute</code> ve <code>z-index</code> (5 Puan)</h5>
+                <span id="rozet-g18" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <p class="small text-secondary">
+                Aşağıdaki yuvarlak avatar resmi dışarı uçmasın diye <code>style.css</code> içinde:<br>
+                1. <strong><code>.ajan-kapak</code></strong> sınıfına <code>position: relative; height: 90px; background: #0284c7;</code> yazın.<br>
+                2. <strong><code>.ajan-avatar</code></strong> sınıfına <code>position: absolute; top: 45px; left: 70px; width: 80px; height: 80px; border-radius: 50%; z-index: 5;</code> kodlayın!
+            </p>
+            <div class="ajan-kart-dis">
+                <div id="testG18Kapak" class="ajan-kapak">
+                    <img id="testG18Avatar" src="https://dummyjson.com/icon/emilys/128" class="ajan-avatar" alt="Ajan">
+                </div>
+                <div style="margin-top: 50px;" class="p-2 text-center">
+                    <strong class="text-info">Kıdemli Siber Ajan</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- GÖREV 19 (5 Puan): Input :focus Seçicisi -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-warning">Görev 19 (<code>style.css</code>): Sözde Sınıf <code>.odak-test:focus</code> (5 Puan)</h5>
+                <span id="rozet-g19" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <p class="small text-secondary">
+                <code>style.css</code> içinde <strong><code>.odak-test:focus</code></strong> kuralı yazarak kutuya tıklandığında arka plan rengini <code>rgb(30, 58, 138)</code> ve kenarlık rengini <code>#ffc107</code> yapın!
+            </p>
+            <input type="text" id="testG19" class="form-control bg-black text-light odak-test" placeholder="Tıkladığınızda (:focus) rengim değişmeli...">
+        </section>
+
+        <!-- GÖREV 20 (5 Puan): JavaScript Yetki Hesaplama Fonksiyonu -->
+        <section class="gorev-kutu mb-4">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-warning">Görev 20 (<code>app.js</code>): JavaScript <code>yetkiHesapla()</code> Fonksiyonu (5 Puan)</h5>
+                <span id="rozet-g20" class="badge bg-secondary">Kontrol Bekliyor</span>
+            </div>
+            <p class="small text-secondary">
+                <code>app.js</code> dosyasının en altındaki <strong><code>yetkiHesapla()</code></strong> fonksiyonunu kodlayın:<br>
+                1. <code>id="seviyeKutusu"</code> değerini okuyup <strong>15 ile çarpın</strong>.<br>
+                2. Eğer çarpım sonucu <strong>500'den büyükse</strong> <code>id="yetkiEkran"</code> içine <code>"ÜST DÜZEY YETKİ: " + sonuc</code>, değilse <code>"STANDART YETKİ: " + sonuc</code> yazdırın ve butona basıp test edin!
+            </p>
+            <div class="input-group">
+                <input type="number" id="seviyeKutusu" class="form-control bg-black text-light" value="40">
+                <button onclick="yetkiHesapla(); maratonCanliKontrol();" class="btn btn-info fw-bold text-dark">Yetkiyi Hesapla ve Kaydet</button>
+            </div>
+            <h4 id="yetkiEkran" class="text-warning mt-2">Bekleniyor...</h4>
+        </section>
+
+    </main>
+
+    <!-- ÖĞRETMEN TEK TIK DENETİM MODALI -->
+    <div class="modal fade text-light" id="denetimModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content bg-dark border-warning">
+                <div class="modal-header bg-black border-secondary">
+                    <h4 class="modal-title text-warning fw-bold"><i class="fa-solid fa-clipboard-check"></i> NEXUS-OS 20 Görevlik Tek Tık Denetim Raporu</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="denetimModalGovde"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

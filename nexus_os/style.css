@@ -1,0 +1,79 @@
+html { scroll-behavior: smooth; }
+
+.gorev-kutu {
+    background-color: #11141c;
+    border: 1px solid #2d3748;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.kod-insaat {
+    background-color: #07090e;
+    border: 2px dashed #3b82f6;
+    border-radius: 8px;
+    padding: 18px;
+    min-height: 65px;
+}
+
+.ajan-kart-dis {
+    width: 220px;
+    height: 210px;
+    background: #07090e;
+    border: 1px solid #444;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* =================================================================
+   ✍️ ÖĞRENCİ CSS KODLAMA ALANI (GÖREV 15, 16, 17, 18 ve 19)
+   ================================================================= */
+
+/* GÖREV 15 */
+.ozel-komuta-karti {
+    padding: 25px;
+    border: 3px dashed #0dcaf0;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+}
+
+/* GÖREV 16 */
+.enerji-bari {
+    width: 40%;
+    height: 50px;
+    background: linear-gradient(to right, #ff0055, #ffcc00);
+    transition-duration: 0.5s;
+}
+.enerji-bari:hover {
+    width: 100%;
+}
+
+/* GÖREV 17 */
+.komuta-baslik {
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+.komuta-baslik::after {
+    content: " [1294]";
+}
+
+/* GÖREV 18 */
+.ajan-kapak {
+    position: relative;
+    height: 90px;
+    background: #0284c7;
+}
+.ajan-avatar {
+    position: absolute;
+    top: 45px;
+    left: 70px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+/* GÖREV 19 */
+.odak-test:focus {
+    background-color: rgb(30, 58, 138) !important;
+    border-color: #ffc107 !important;
+}
